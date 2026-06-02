@@ -1,0 +1,19 @@
+# Visual Studio
+.vs/
+
+# Build
+bin/
+obj/
+
+# User files
+*.user
+*.suo
+
+# NuGet
+packages/
+
+# Logs
+*.log
+
+# Test results
+TestResults/
