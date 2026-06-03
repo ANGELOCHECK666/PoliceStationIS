@@ -141,9 +141,10 @@ namespace PoliceStationIS.Forms.Authorization.RegistrationPages
     EventArgs e)
         {
             calendar.Location =
-                new Point(
-                    btnCalendar.Left,
-                    btnCalendar.Bottom + 5);
+    new Point(
+        btnCalendar.Left - 20,
+        btnCalendar.Top - 160);
+            calendar.BringToFront();
 
             calendar.Visible =
                 !calendar.Visible;
