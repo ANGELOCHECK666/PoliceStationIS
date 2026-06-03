@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace PoliceStationIS.Forms.Authorization.RegistrationPages
 {
-    public partial class PassportDataPage : UserControl
+    public partial class ContactDataPage : UserControl
     {
-        public PassportDataPage()
+        public ContactDataPage()
         {
             InitializeComponent();
         }

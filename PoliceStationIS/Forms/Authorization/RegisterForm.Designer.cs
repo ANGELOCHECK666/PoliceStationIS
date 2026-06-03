@@ -664,6 +664,9 @@
                 "Назад";
 
             this.btnBack.UseVisualStyleBackColor = false;
+            this.btnBack.Click +=
+    new System.EventHandler(
+        this.btnBack_Click);
 
 
             //
@@ -707,6 +710,9 @@
                 "Далее";
 
             this.btnNext.UseVisualStyleBackColor = false;
+            this.btnNext.Click +=
+    new System.EventHandler(
+        this.btnNext_Click);
             this.Controls.Add(this.panelHeader);
 
             this.Controls.Add(this.lblTitle);
