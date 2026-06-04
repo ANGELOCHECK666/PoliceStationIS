@@ -18,7 +18,8 @@
 
         private void InitializeComponent()
         {
-            this.lblTitle = new System.Windows.Forms.Label();
+            this.lblTitle =
+                new System.Windows.Forms.Label();
 
             this.lblPassportSeries =
                 new System.Windows.Forms.Label();
@@ -59,17 +60,45 @@
             this.txtRegistrationAddress =
                 new System.Windows.Forms.TextBox();
 
+            this.picPassport =
+                new System.Windows.Forms.PictureBox();
+
+            this.panelGoldLine =
+                new System.Windows.Forms.Panel();
+
+            ((System.ComponentModel.ISupportInitialize)
+                (this.picPassport)).BeginInit();
+
             this.SuspendLayout();
-            // ======================================
-            // Заголовок страницы
-            // ======================================
+
+            // =====================================
+            // PAGE
+            // =====================================
+
+            this.BackColor =
+                System.Drawing.Color.FromArgb(
+                    31,
+                    59,
+                    105);
+
+            this.Name =
+                "PassportDataPage";
+
+            this.Size =
+                new System.Drawing.Size(
+                    770,
+                    500);
+
+            // =====================================
+            // TITLE
+            // =====================================
 
             this.lblTitle.AutoSize = true;
 
             this.lblTitle.Font =
                 new System.Drawing.Font(
                     "Segoe UI",
-                    14F,
+                    16F,
                     System.Drawing.FontStyle.Bold);
 
             this.lblTitle.ForeColor =
@@ -77,16 +106,15 @@
 
             this.lblTitle.Location =
                 new System.Drawing.Point(
-                    20,
-                    15);
+                    35,
+                    25);
 
             this.lblTitle.Text =
                 "Регистрация нового пользователя";
 
-
-            // ======================================
-            // Подзаголовок
-            // ======================================
+            // =====================================
+            // SECTION
+            // =====================================
 
             System.Windows.Forms.Label lblSection =
                 new System.Windows.Forms.Label();
@@ -104,16 +132,55 @@
 
             lblSection.Location =
                 new System.Drawing.Point(
-                    20,
-                    55);
+                    38,
+                    75);
 
             lblSection.Text =
                 "Паспортные данные";
 
+            // =====================================
+            // GOLD LINE
+            // =====================================
 
-            // ======================================
-            // Серия паспорта
-            // ======================================
+            this.panelGoldLine.BackColor =
+                System.Drawing.Color.FromArgb(
+                    214,
+                    170,
+                    74);
+
+            this.panelGoldLine.Location =
+                new System.Drawing.Point(
+                    40,
+                    105);
+
+            this.panelGoldLine.Size =
+                new System.Drawing.Size(
+                    120,
+                    3);
+
+            // =====================================
+            // PICTURE
+            // =====================================
+
+            this.picPassport.Location =
+                new System.Drawing.Point(
+                    20,
+                    110);
+
+            this.picPassport.Size =
+                new System.Drawing.Size(
+                    230,
+                    290);
+
+            this.picPassport.SizeMode =
+                System.Windows.Forms.PictureBoxSizeMode.Zoom;
+
+            this.picPassport.Image =
+                global::PoliceStationIS.Properties.Resources.ww_2;
+
+            // =====================================
+            // СЕРИЯ ПАСПОРТА
+            // =====================================
 
             this.lblPassportSeries.AutoSize = true;
 
@@ -127,28 +194,27 @@
 
             this.lblPassportSeries.Location =
                 new System.Drawing.Point(
-                    20,
-                    105);
+                    270,
+                    90);
 
             this.lblPassportSeries.Text =
                 "Серия паспорта";
 
-
             this.txtPassportSeries.Location =
                 new System.Drawing.Point(
-                    180,
-                    100);
+                    410,
+                    85);
 
             this.txtPassportSeries.Size =
                 new System.Drawing.Size(
-                    430,
+                    260,
                     27);
 
             this.txtPassportSeries.BackColor =
                 System.Drawing.Color.FromArgb(
-                    31,
-                    59,
-                    105);
+                    39,
+                    69,
+                    120);
 
             this.txtPassportSeries.ForeColor =
                 System.Drawing.Color.White;
@@ -161,10 +227,9 @@
                     "Segoe UI",
                     10F);
 
-
-            // ======================================
-            // Номер паспорта
-            // ======================================
+            // =====================================
+            // НОМЕР ПАСПОРТА
+            // =====================================
 
             this.lblPassportNumber.AutoSize = true;
 
@@ -178,28 +243,27 @@
 
             this.lblPassportNumber.Location =
                 new System.Drawing.Point(
-                    20,
-                    145);
+                    270,
+                    125);
 
             this.lblPassportNumber.Text =
                 "Номер паспорта";
 
-
             this.txtPassportNumber.Location =
                 new System.Drawing.Point(
-                    180,
-                    140);
+                    410,
+                    120);
 
             this.txtPassportNumber.Size =
                 new System.Drawing.Size(
-                    430,
+                    260,
                     27);
 
             this.txtPassportNumber.BackColor =
                 System.Drawing.Color.FromArgb(
-                    31,
-                    59,
-                    105);
+                    39,
+                    69,
+                    120);
 
             this.txtPassportNumber.ForeColor =
                 System.Drawing.Color.White;
@@ -211,9 +275,11 @@
                 new System.Drawing.Font(
                     "Segoe UI",
                     10F);
-            // ======================================
-            // Код подразделения
-            // ======================================
+
+
+            // =====================================
+            // КОД ПОДРАЗДЕЛЕНИЯ
+            // =====================================
 
             this.lblDepartmentCode.AutoSize = true;
 
@@ -227,21 +293,20 @@
 
             this.lblDepartmentCode.Location =
                 new System.Drawing.Point(
-                    20,
-                    185);
+                    270,
+                    170);
 
             this.lblDepartmentCode.Text =
                 "Код подразделения";
 
-
             this.cmbDepartmentCode.Location =
                 new System.Drawing.Point(
-                    180,
-                    180);
+                    410,
+                    165);
 
             this.cmbDepartmentCode.Size =
                 new System.Drawing.Size(
-                    430,
+                    260,
                     28);
 
             this.cmbDepartmentCode.FlatStyle =
@@ -249,9 +314,9 @@
 
             this.cmbDepartmentCode.BackColor =
                 System.Drawing.Color.FromArgb(
-                    31,
-                    59,
-                    105);
+                    39,
+                    69,
+                    120);
 
             this.cmbDepartmentCode.ForeColor =
                 System.Drawing.Color.White;
@@ -265,9 +330,9 @@
                 System.Windows.Forms.ComboBoxStyle.DropDownList;
 
 
-            // ======================================
-            // Кем выдан
-            // ======================================
+            // =====================================
+            // КЕМ ВЫДАН
+            // =====================================
 
             this.lblIssuedBy.AutoSize = true;
 
@@ -281,21 +346,20 @@
 
             this.lblIssuedBy.Location =
                 new System.Drawing.Point(
-                    20,
-                    225);
+                    270,
+                    215);
 
             this.lblIssuedBy.Text =
                 "Кем выдан";
 
-
             this.cmbIssuedBy.Location =
                 new System.Drawing.Point(
-                    180,
-                    220);
+                    410,
+                    210);
 
             this.cmbIssuedBy.Size =
                 new System.Drawing.Size(
-                    430,
+                    260,
                     28);
 
             this.cmbIssuedBy.FlatStyle =
@@ -303,9 +367,9 @@
 
             this.cmbIssuedBy.BackColor =
                 System.Drawing.Color.FromArgb(
-                    31,
-                    59,
-                    105);
+                    39,
+                    69,
+                    120);
 
             this.cmbIssuedBy.ForeColor =
                 System.Drawing.Color.White;
@@ -319,9 +383,9 @@
                 System.Windows.Forms.ComboBoxStyle.DropDownList;
 
 
-            // ======================================
-            // Дата выдачи
-            // ======================================
+            // =====================================
+            // ДАТА ВЫДАЧИ
+            // =====================================
 
             this.lblIssueDate.AutoSize = true;
 
@@ -335,28 +399,27 @@
 
             this.lblIssueDate.Location =
                 new System.Drawing.Point(
-                    20,
-                    265);
+                    270,
+                    260);
 
             this.lblIssueDate.Text =
                 "Дата выдачи";
 
-
             this.txtIssueDate.Location =
                 new System.Drawing.Point(
-                    180,
-                    260);
+                    410,
+                    255);
 
             this.txtIssueDate.Size =
                 new System.Drawing.Size(
-                    390,
+                    220,
                     27);
 
             this.txtIssueDate.BackColor =
                 System.Drawing.Color.FromArgb(
-                    31,
-                    59,
-                    105);
+                    39,
+                    69,
+                    120);
 
             this.txtIssueDate.ForeColor =
                 System.Drawing.Color.White;
@@ -370,14 +433,14 @@
                     10F);
 
 
-            // ======================================
-            // Кнопка календаря
-            // ======================================
+            // =====================================
+            // КАЛЕНДАРЬ
+            // =====================================
 
             this.btnCalendar.Location =
                 new System.Drawing.Point(
-                    570,
-                    260);
+                    630,
+                    255);
 
             this.btnCalendar.Size =
                 new System.Drawing.Size(
@@ -394,9 +457,9 @@
 
             this.btnCalendar.BackColor =
                 System.Drawing.Color.FromArgb(
-                    31,
-                    59,
-                    105);
+                    39,
+                    69,
+                    120);
 
             this.btnCalendar.ForeColor =
                 System.Drawing.Color.White;
@@ -408,10 +471,13 @@
 
             this.btnCalendar.Text = "📅";
 
-            this.btnCalendar.UseVisualStyleBackColor = false;
-            // ======================================
-            // Адрес регистрации
-            // ======================================
+            this.btnCalendar.UseVisualStyleBackColor =
+                false;
+
+
+            // =====================================
+            // АДРЕС РЕГИСТРАЦИИ
+            // =====================================
 
             this.lblRegistrationAddress.AutoSize = true;
 
@@ -425,28 +491,30 @@
 
             this.lblRegistrationAddress.Location =
                 new System.Drawing.Point(
-                    20,
+                    270,
                     305);
 
             this.lblRegistrationAddress.Text =
                 "Адрес регистрации";
 
-
             this.txtRegistrationAddress.Location =
                 new System.Drawing.Point(
-                    180,
+                    410,
                     300);
 
             this.txtRegistrationAddress.Size =
                 new System.Drawing.Size(
-                    430,
-                    27);
+                    260,
+                    90);
+
+            this.txtRegistrationAddress.Multiline =
+                true;
 
             this.txtRegistrationAddress.BackColor =
                 System.Drawing.Color.FromArgb(
-                    31,
-                    59,
-                    105);
+                    39,
+                    69,
+                    120);
 
             this.txtRegistrationAddress.ForeColor =
                 System.Drawing.Color.White;
@@ -460,13 +528,17 @@
                     10F);
 
 
-            // ======================================
-            // Добавляем элементы на страницу
-            // ======================================
+            // =====================================
+            // ДОБАВЛЕНИЕ ЭЛЕМЕНТОВ
+            // =====================================
 
             this.Controls.Add(this.lblTitle);
 
             this.Controls.Add(lblSection);
+
+            this.Controls.Add(this.panelGoldLine);
+
+            this.Controls.Add(this.picPassport);
 
             this.Controls.Add(this.lblPassportSeries);
             this.Controls.Add(this.txtPassportSeries);
@@ -488,28 +560,11 @@
             this.Controls.Add(this.lblRegistrationAddress);
             this.Controls.Add(this.txtRegistrationAddress);
 
-
-            // ======================================
-            // Настройка страницы
-            // ======================================
-
-            this.BackColor =
-                System.Drawing.Color.FromArgb(
-                    31,
-                    59,
-                    105);
-
-            this.Name =
-                "PassportDataPage";
-
-            this.Size =
-                new System.Drawing.Size(
-                    770,
-                    430);
-
-            this.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)
+                (this.picPassport)).EndInit();
 
             this.ResumeLayout(false);
+            this.PerformLayout();
         }
 
         private System.Windows.Forms.Label lblTitle;
@@ -532,6 +587,9 @@
         private System.Windows.Forms.Button btnCalendar;
 
         private System.Windows.Forms.TextBox txtRegistrationAddress;
+        private System.Windows.Forms.PictureBox picPassport;
+
+        private System.Windows.Forms.Panel panelGoldLine;
 
         #endregion
     }

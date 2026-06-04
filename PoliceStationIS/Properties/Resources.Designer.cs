@@ -63,6 +63,36 @@ namespace PoliceStationIS.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap e_1 {
+            get {
+                object obj = ResourceManager.GetObject("e_1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap e_2 {
+            get {
+                object obj = ResourceManager.GetObject("e_2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap e_3 {
+            get {
+                object obj = ResourceManager.GetObject("e_3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap gerb_mvd {
             get {
                 object obj = ResourceManager.GetObject("gerb_mvd", resourceCulture);
@@ -76,6 +106,56 @@ namespace PoliceStationIS.Properties {
         internal static System.Drawing.Bitmap police_building_dark {
             get {
                 object obj = ResourceManager.GetObject("police_building_dark", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap star_icon {
+            get {
+                object obj = ResourceManager.GetObject("star_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ww_1 {
+            get {
+                object obj = ResourceManager.GetObject("ww_1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ww_2 {
+            get {
+                object obj = ResourceManager.GetObject("ww_2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ww_3 {
+            get {
+                object obj = ResourceManager.GetObject("ww_3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ww_4 {
+            get {
+                object obj = ResourceManager.GetObject("ww_4", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

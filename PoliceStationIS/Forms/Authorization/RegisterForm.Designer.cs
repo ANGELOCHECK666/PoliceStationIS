@@ -18,33 +18,71 @@
 
         private void InitializeComponent()
         {
-            this.panelHeader = new System.Windows.Forms.Panel();
+            this.panelHeader =
+                new System.Windows.Forms.Panel();
 
-            this.picBuilding = new System.Windows.Forms.PictureBox();
-            this.picLogo = new System.Windows.Forms.PictureBox();
+            this.panelMenu =
+                new System.Windows.Forms.Panel();
 
-            this.lblSystemName = new System.Windows.Forms.Label();
-            this.lblTitle = new System.Windows.Forms.Label();
+            this.panelContent =
+                new System.Windows.Forms.Panel();
 
-            this.panelMenu = new System.Windows.Forms.Panel();
-            this.panelContent = new System.Windows.Forms.Panel();
+            this.picBuilding =
+                new System.Windows.Forms.PictureBox();
 
-            this.btnPersonalData = new System.Windows.Forms.Button();
-            this.btnPassportData = new System.Windows.Forms.Button();
-            this.btnContacts = new System.Windows.Forms.Button();
-            this.btnAccount = new System.Windows.Forms.Button();
-            this.btnConfirmation = new System.Windows.Forms.Button();
-            this.lblStep1 = new System.Windows.Forms.Label();
-            this.lblStep2 = new System.Windows.Forms.Label();
-            this.lblStep3 = new System.Windows.Forms.Label();
-            this.lblStep4 = new System.Windows.Forms.Label();
-            this.lblStep5 = new System.Windows.Forms.Label();
+            this.picLogo =
+                new System.Windows.Forms.PictureBox();
 
-            this.btnBack = new System.Windows.Forms.Button();
-            this.btnNext = new System.Windows.Forms.Button();
+            this.picStar =
+                new System.Windows.Forms.PictureBox();
+
+            this.lblSystemName =
+                new System.Windows.Forms.Label();
+
+            this.lblTitle =
+                new System.Windows.Forms.Label();
+
+            this.btnPersonalData =
+                new System.Windows.Forms.Button();
+
+            this.btnPassportData =
+                new System.Windows.Forms.Button();
+
+            this.btnContacts =
+                new System.Windows.Forms.Button();
+
+            this.btnAccount =
+                new System.Windows.Forms.Button();
+
+            this.btnConfirmation =
+                new System.Windows.Forms.Button();
+
+            this.lblStep1 =
+                new System.Windows.Forms.Label();
+
+            this.lblStep2 =
+                new System.Windows.Forms.Label();
+
+            this.lblStep3 =
+                new System.Windows.Forms.Label();
+
+            this.lblStep4 =
+                new System.Windows.Forms.Label();
+
+            this.lblStep5 =
+                new System.Windows.Forms.Label();
+
+            this.btnBack =
+                new System.Windows.Forms.Button();
+
+            this.btnNext =
+                new System.Windows.Forms.Button();
 
             this.SuspendLayout();
-            // RegisterForm
+
+            // =====================================
+            // FORM
+            // =====================================
 
             this.AutoScaleMode =
                 System.Windows.Forms.AutoScaleMode.Font;
@@ -57,8 +95,8 @@
 
             this.ClientSize =
                 new System.Drawing.Size(
-                    1180,
-                    680);
+                    1080,
+                    650);
 
             this.FormBorderStyle =
                 System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -68,25 +106,22 @@
             this.StartPosition =
                 System.Windows.Forms.FormStartPosition.CenterScreen;
 
-            this.Name = "RegisterForm";
+            this.Text =
+                "Регистрация пользователя";
 
-            this.Text = "Регистрация пользователя";
-            //
-            // panelHeader
-            //
+            // =====================================
+            // HEADER
+            // =====================================
 
             this.panelHeader.Location =
                 new System.Drawing.Point(
                     0,
                     0);
 
-            this.panelHeader.Name =
-                "panelHeader";
-
             this.panelHeader.Size =
                 new System.Drawing.Size(
-                    1180,
-                    120);
+                    1080,
+                    105);
 
             this.panelHeader.BackColor =
                 System.Drawing.Color.FromArgb(
@@ -94,10 +129,9 @@
                     24,
                     48);
 
-
-            //
-            // picBuilding
-            //
+            // =====================================
+            // BUILDING
+            // =====================================
 
             this.picBuilding.Dock =
                 System.Windows.Forms.DockStyle.Fill;
@@ -108,23 +142,19 @@
             this.picBuilding.SizeMode =
                 System.Windows.Forms.PictureBoxSizeMode.StretchImage;
 
-
-            //
-            // picLogo
-            //
+            // =====================================
+            // GERB
+            // =====================================
 
             this.picLogo.Location =
                 new System.Drawing.Point(
-                    20,
-                    20);
-
-            this.picLogo.Name =
-                "picLogo";
+                    18,
+                    12);
 
             this.picLogo.Size =
                 new System.Drawing.Size(
-                    85,
-                    85);
+                    75,
+                    75);
 
             this.picLogo.SizeMode =
                 System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -132,10 +162,9 @@
             this.picLogo.Image =
                 global::PoliceStationIS.Properties.Resources.gerb_mvd;
 
-
-            //
-            // lblSystemName
-            //
+            // =====================================
+            // SYSTEM NAME
+            // =====================================
 
             this.lblSystemName.AutoSize = true;
 
@@ -145,7 +174,7 @@
             this.lblSystemName.Font =
                 new System.Drawing.Font(
                     "Segoe UI",
-                    15F,
+                    14F,
                     System.Drawing.FontStyle.Bold);
 
             this.lblSystemName.ForeColor =
@@ -153,26 +182,22 @@
 
             this.lblSystemName.Location =
                 new System.Drawing.Point(
-                    110,
-                    25);
-
-            this.lblSystemName.Name =
-                "lblSystemName";
+                    100,
+                    15);
 
             this.lblSystemName.Text =
                 "Информационная система\r\nполицейского участка";
 
-
-            //
-            // lblTitle
-            //
+            // =====================================
+            // TITLE
+            // =====================================
 
             this.lblTitle.AutoSize = true;
 
             this.lblTitle.Font =
                 new System.Drawing.Font(
                     "Segoe UI",
-                    18F,
+                    14F,
                     System.Drawing.FontStyle.Bold);
 
             this.lblTitle.ForeColor =
@@ -180,90 +205,89 @@
 
             this.lblTitle.Location =
                 new System.Drawing.Point(
-                    515,
-                    150);
-
-            this.lblTitle.Name =
-                "lblTitle";
+                    420,
+                    112);
 
             this.lblTitle.Text =
                 "Регистрация пользователя";
-            this.panelHeader.Controls.Add(this.picBuilding);
 
-            this.panelHeader.Controls.Add(this.picLogo);
+            // =====================================
+            // STAR
+            // =====================================
 
-            this.panelHeader.Controls.Add(this.lblSystemName);
+            this.picStar.Location =
+                new System.Drawing.Point(
+                    490,
+                    95);
 
-            this.picBuilding.SendToBack();
+            this.picStar.Size =
+                new System.Drawing.Size(
+                    120,
+                    100);
 
-            this.picLogo.BringToFront();
+            this.picStar.SizeMode =
+                System.Windows.Forms.PictureBoxSizeMode.Zoom;
 
-            this.lblSystemName.BringToFront();
-            //
-            // panelMenu
-            //
+            this.picStar.Image =
+                global::PoliceStationIS.Properties.Resources.star_icon;
 
-            this.panelMenu.BackColor =
-                System.Drawing.Color.FromArgb(
-                    26,
-                    53,
-                    96);
+            // =====================================
+            // MENU
+            // =====================================
 
             this.panelMenu.Location =
                 new System.Drawing.Point(
                     30,
-                    200);
-
-            this.panelMenu.Name =
-                "panelMenu";
+                    160);
 
             this.panelMenu.Size =
                 new System.Drawing.Size(
-                    330,
-                    400);
+                    230,
+                    350);
 
-
-            //
-            // panelContent
-            //
-
-            this.panelContent.BackColor =
+            this.panelMenu.BackColor =
                 System.Drawing.Color.FromArgb(
-                    26,
-                    53,
-                    96);
+                    8,
+                    24,
+                    48);
 
-            this.panelContent.BorderStyle =
-                System.Windows.Forms.BorderStyle.FixedSingle;
+            // =====================================
+            // CONTENT PANEL
+            // =====================================
 
             this.panelContent.Location =
                 new System.Drawing.Point(
-                    390,
-                    200);
-
-            this.panelContent.Name =
-                "panelContent";
+                    270,
+                    160);
 
             this.panelContent.Size =
                 new System.Drawing.Size(
-                    730,
-                    400);
+                    770,
+                    410);
 
-            //
-            // lblStep1
-            //
+            this.panelContent.BackColor =
+                System.Drawing.Color.FromArgb(
+                    31,
+                    59,
+                    105);
 
-            this.lblStep1.AutoSize = false;
+            this.panelContent.BorderStyle =
+    System.Windows.Forms.BorderStyle.None;
+
+
+            // =====================================
+            // STEP 1
+            // =====================================
 
             this.lblStep1.Size =
                 new System.Drawing.Size(
-                    32,
-                    32);
+                    34,
+                    34);
 
             this.lblStep1.Location =
                 new System.Drawing.Point(
-                    22,
-                    20);
+                    5,
+                    10);
 
             this.lblStep1.Text = "1";
 
@@ -273,7 +297,7 @@
             this.lblStep1.Font =
                 new System.Drawing.Font(
                     "Segoe UI",
-                   11F,
+                    11F,
                     System.Drawing.FontStyle.Bold);
 
             this.lblStep1.ForeColor =
@@ -281,83 +305,24 @@
 
             this.lblStep1.BackColor =
                 System.Drawing.Color.FromArgb(
-                    66,
-                    113,
-                    198);
+                    8,
+                    24,
+                    48);
 
-            this.lblStep1.BorderStyle =
-                System.Windows.Forms.BorderStyle.FixedSingle;
-
-            //
-            // lblStep2
-            //
-
-            this.lblStep2.AutoSize = false;
-            this.lblStep2.Size = new System.Drawing.Size(32, 32);
-            this.lblStep2.Location = new System.Drawing.Point(22, 75);
-            this.lblStep2.Text = "2";
-            this.lblStep2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblStep2.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
-            this.lblStep2.ForeColor = System.Drawing.Color.White;
-            this.lblStep2.BackColor = System.Drawing.Color.FromArgb(15, 35, 70);
-            this.lblStep2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-
-            //
-            // lblStep3
-            //
-
-            this.lblStep3.AutoSize = false;
-            this.lblStep3.Size = new System.Drawing.Size(32, 32);
-            this.lblStep3.Location = new System.Drawing.Point(22, 130);
-            this.lblStep3.Text = "3";
-            this.lblStep3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblStep3.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
-            this.lblStep3.ForeColor = System.Drawing.Color.White;
-            this.lblStep3.BackColor = System.Drawing.Color.FromArgb(15, 35, 70);
-            this.lblStep3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-
-            //
-            // lblStep4
-            //
-
-            this.lblStep4.AutoSize = false;
-            this.lblStep4.Size = new System.Drawing.Size(32, 32);
-            this.lblStep4.Location = new System.Drawing.Point(22, 185);
-            this.lblStep4.Text = "4";
-            this.lblStep4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblStep4.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
-            this.lblStep4.ForeColor = System.Drawing.Color.White;
-            this.lblStep4.BackColor = System.Drawing.Color.FromArgb(15, 35, 70);
-            this.lblStep4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-
-            //
-            // lblStep5
-            //
-
-            this.lblStep5.AutoSize = false;
-            this.lblStep5.Size = new System.Drawing.Size(32, 32);
-            this.lblStep5.Location = new System.Drawing.Point(22, 240);
-            this.lblStep5.Text = "5";
-            this.lblStep5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblStep5.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
-            this.lblStep5.ForeColor = System.Drawing.Color.White;
-            this.lblStep5.BackColor = System.Drawing.Color.FromArgb(15, 35, 70);
-            this.lblStep5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-
-            //
-            // btnPersonalData
-            //
-
-            this.btnPersonalData.BackColor =
-                System.Drawing.Color.FromArgb(
-                    26,
-                    53,
-                    96);
-
-            this.btnPersonalData.FlatAppearance.BorderSize = 0;
 
             this.btnPersonalData.FlatStyle =
                 System.Windows.Forms.FlatStyle.Flat;
+
+            this.btnPersonalData.FlatAppearance.BorderSize = 0;
+
+            this.btnPersonalData.BackColor =
+                System.Drawing.Color.FromArgb(
+                    8,
+                    24,
+                    48);
+
+            this.btnPersonalData.ForeColor =
+                System.Drawing.Color.White;
 
             this.btnPersonalData.Font =
                 new System.Drawing.Font(
@@ -365,50 +330,78 @@
                     10F,
                     System.Drawing.FontStyle.Bold);
 
-            this.btnPersonalData.ForeColor =
-                System.Drawing.Color.White;
-
             this.btnPersonalData.Location =
                 new System.Drawing.Point(
-                    10,
-                    15);
-
-            this.btnPersonalData.Name =
-                "btnPersonalData";
+                    0,
+                    0);
 
             this.btnPersonalData.Size =
                 new System.Drawing.Size(
-                    260,
-                    58);
-
-            this.btnPersonalData.Text =
-                "Личные данные";
-
-            this.btnPersonalData.TextAlign =
-    System.Drawing.ContentAlignment.MiddleLeft;
+                    220,
+                    50);
 
             this.btnPersonalData.Padding =
                 new System.Windows.Forms.Padding(
-                    50,
+                    48,
                     0,
                     0,
                     0);
 
-            this.btnPersonalData.UseVisualStyleBackColor = false;
-            //
-            // btnPassportData
-            //
+            this.btnPersonalData.TextAlign =
+                System.Drawing.ContentAlignment.MiddleLeft;
 
-            this.btnPassportData.BackColor =
+            this.btnPersonalData.Text =
+                "Личные данные";
+
+
+            // =====================================
+            // STEP 2
+            // =====================================
+
+            this.lblStep2.Size =
+                new System.Drawing.Size(
+                    34,
+                    34);
+
+            this.lblStep2.Location =
+                new System.Drawing.Point(
+                    5,
+                    60);
+
+            this.lblStep2.Text = "2";
+
+            this.lblStep2.TextAlign =
+                System.Drawing.ContentAlignment.MiddleCenter;
+
+            this.lblStep2.Font =
+                new System.Drawing.Font(
+                    "Segoe UI",
+                    11F,
+                    System.Drawing.FontStyle.Bold);
+
+            this.lblStep2.ForeColor =
+                System.Drawing.Color.White;
+
+            this.lblStep2.BackColor =
                 System.Drawing.Color.FromArgb(
-                    26,
-                    53,
-                    96);
+                    8,
+                    24,
+                    48);
 
-            this.btnPassportData.FlatAppearance.BorderSize = 0;
 
             this.btnPassportData.FlatStyle =
                 System.Windows.Forms.FlatStyle.Flat;
+
+            this.btnPassportData.FlatAppearance.BorderSize = 0;
+
+            this.btnPassportData.BackColor =
+                System.Drawing.Color.FromArgb(
+                    8,
+                    24,
+                    48);
+
+            this.btnPassportData.ForeColor =
+                System.Drawing.Color.White;
 
             this.btnPassportData.Font =
                 new System.Drawing.Font(
@@ -416,50 +409,77 @@
                     10F,
                     System.Drawing.FontStyle.Bold);
 
-            this.btnPassportData.ForeColor =
-                System.Drawing.Color.White;
-
             this.btnPassportData.Location =
                 new System.Drawing.Point(
-                    10,
-                    70);
-
-            this.btnPassportData.Name =
-                "btnPassportData";
+                    0,
+                    50);
 
             this.btnPassportData.Size =
                 new System.Drawing.Size(
-                    260,
-                    58);
-
-            this.btnPassportData.Text =
-                "Паспортные данные";
-
-            this.btnPassportData.TextAlign =
-     System.Drawing.ContentAlignment.MiddleLeft;
+                    220,
+                    50);
 
             this.btnPassportData.Padding =
                 new System.Windows.Forms.Padding(
-                    50,
+                    48,
                     0,
                     0,
                     0);
 
-            this.btnPassportData.UseVisualStyleBackColor = false;
-            //
-            // btnContacts
-            //
+            this.btnPassportData.TextAlign =
+                System.Drawing.ContentAlignment.MiddleLeft;
 
-            this.btnContacts.BackColor =
+            this.btnPassportData.Text =
+                "Паспортные данные";
+
+            // =====================================
+            // STEP 3
+            // =====================================
+
+            this.lblStep3.Size =
+                new System.Drawing.Size(
+                    34,
+                    34);
+
+            this.lblStep3.Location =
+                new System.Drawing.Point(
+                    5,
+                    110);
+
+            this.lblStep3.Text = "3";
+
+            this.lblStep3.TextAlign =
+                System.Drawing.ContentAlignment.MiddleCenter;
+
+            this.lblStep3.Font =
+                new System.Drawing.Font(
+                    "Segoe UI",
+                    11F,
+                    System.Drawing.FontStyle.Bold);
+
+            this.lblStep3.ForeColor =
+                System.Drawing.Color.White;
+
+            this.lblStep3.BackColor =
                 System.Drawing.Color.FromArgb(
-                    26,
-                    53,
-                    96);
+                    8,
+                    24,
+                    48);
 
-            this.btnContacts.FlatAppearance.BorderSize = 0;
 
             this.btnContacts.FlatStyle =
                 System.Windows.Forms.FlatStyle.Flat;
+
+            this.btnContacts.FlatAppearance.BorderSize = 0;
+
+            this.btnContacts.BackColor =
+                System.Drawing.Color.FromArgb(
+                    8,
+                    24,
+                    48);
+
+            this.btnContacts.ForeColor =
+                System.Drawing.Color.White;
 
             this.btnContacts.Font =
                 new System.Drawing.Font(
@@ -467,52 +487,78 @@
                     10F,
                     System.Drawing.FontStyle.Bold);
 
-            this.btnContacts.ForeColor =
-                System.Drawing.Color.White;
-
             this.btnContacts.Location =
                 new System.Drawing.Point(
-                    10,
-                    125);
-
-            this.btnContacts.Name =
-                "btnContacts";
+                    0,
+                    100);
 
             this.btnContacts.Size =
                 new System.Drawing.Size(
-                    260,
-                    58);
-
-            this.btnContacts.Text =
-                "Контактные данные";
-
-            this.btnContacts.TextAlign =
-    System.Drawing.ContentAlignment.MiddleLeft;
+                    220,
+                    50);
 
             this.btnContacts.Padding =
                 new System.Windows.Forms.Padding(
-                    50,
+                    48,
                     0,
                     0,
                     0);
 
-            this.btnContacts.UseVisualStyleBackColor = false;
+            this.btnContacts.TextAlign =
+                System.Drawing.ContentAlignment.MiddleLeft;
+
+            this.btnContacts.Text =
+                "Контактные данные";
 
 
-            //
-            // btnAccount
-            //
+            // =====================================
+            // STEP 4
+            // =====================================
 
-            this.btnAccount.BackColor =
+            this.lblStep4.Size =
+                new System.Drawing.Size(
+                    34,
+                    34);
+
+            this.lblStep4.Location =
+                new System.Drawing.Point(
+                    5,
+                    160);
+
+            this.lblStep4.Text = "4";
+
+            this.lblStep4.TextAlign =
+                System.Drawing.ContentAlignment.MiddleCenter;
+
+            this.lblStep4.Font =
+                new System.Drawing.Font(
+                    "Segoe UI",
+                    11F,
+                    System.Drawing.FontStyle.Bold);
+
+            this.lblStep4.ForeColor =
+                System.Drawing.Color.White;
+
+            this.lblStep4.BackColor =
                 System.Drawing.Color.FromArgb(
-                    26,
-                    53,
-                    96);
+                    8,
+                    24,
+                    48);
 
-            this.btnAccount.FlatAppearance.BorderSize = 0;
 
             this.btnAccount.FlatStyle =
                 System.Windows.Forms.FlatStyle.Flat;
+
+            this.btnAccount.FlatAppearance.BorderSize = 0;
+
+            this.btnAccount.BackColor =
+                System.Drawing.Color.FromArgb(
+                    8,
+                    24,
+                    48);
+
+            this.btnAccount.ForeColor =
+                System.Drawing.Color.White;
 
             this.btnAccount.Font =
                 new System.Drawing.Font(
@@ -520,52 +566,78 @@
                     10F,
                     System.Drawing.FontStyle.Bold);
 
-            this.btnAccount.ForeColor =
-                System.Drawing.Color.White;
-
             this.btnAccount.Location =
                 new System.Drawing.Point(
-                    10,
-                    180);
-
-            this.btnAccount.Name =
-                "btnAccount";
+                    0,
+                    150);
 
             this.btnAccount.Size =
                 new System.Drawing.Size(
-                    260,
-                    58);
-
-            this.btnAccount.Text =
-                "Учётная запись";
-
-            this.btnAccount.TextAlign =
-    System.Drawing.ContentAlignment.MiddleLeft;
+                    220,
+                    50);
 
             this.btnAccount.Padding =
                 new System.Windows.Forms.Padding(
-                    50,
+                    48,
                     0,
                     0,
                     0);
 
-            this.btnAccount.UseVisualStyleBackColor = false;
+            this.btnAccount.TextAlign =
+                System.Drawing.ContentAlignment.MiddleLeft;
+
+            this.btnAccount.Text =
+                "Учётная запись";
 
 
-            //
-            // btnConfirmation
-            //
+            // =====================================
+            // STEP 5
+            // =====================================
 
-            this.btnConfirmation.BackColor =
+            this.lblStep5.Size =
+                new System.Drawing.Size(
+                    34,
+                    34);
+
+            this.lblStep5.Location =
+                new System.Drawing.Point(
+                    5,
+                    210);
+
+            this.lblStep5.Text = "5";
+
+            this.lblStep5.TextAlign =
+                System.Drawing.ContentAlignment.MiddleCenter;
+
+            this.lblStep5.Font =
+                new System.Drawing.Font(
+                    "Segoe UI",
+                    11F,
+                    System.Drawing.FontStyle.Bold);
+
+            this.lblStep5.ForeColor =
+                System.Drawing.Color.White;
+
+            this.lblStep5.BackColor =
                 System.Drawing.Color.FromArgb(
-                    26,
-                    53,
-                    96);
+                    8,
+                    24,
+                    48);
 
-            this.btnConfirmation.FlatAppearance.BorderSize = 0;
 
             this.btnConfirmation.FlatStyle =
                 System.Windows.Forms.FlatStyle.Flat;
+
+            this.btnConfirmation.FlatAppearance.BorderSize = 0;
+
+            this.btnConfirmation.BackColor =
+                System.Drawing.Color.FromArgb(
+                    8,
+                    24,
+                    48);
+
+            this.btnConfirmation.ForeColor =
+                System.Drawing.Color.White;
 
             this.btnConfirmation.Font =
                 new System.Drawing.Font(
@@ -573,70 +645,57 @@
                     10F,
                     System.Drawing.FontStyle.Bold);
 
-            this.btnConfirmation.ForeColor =
-                System.Drawing.Color.White;
-
             this.btnConfirmation.Location =
                 new System.Drawing.Point(
-                    10,
-                    235);
-
-            this.btnConfirmation.Name =
-                "btnConfirmation";
+                    0,
+                    200);
 
             this.btnConfirmation.Size =
                 new System.Drawing.Size(
-                    260,
-                    58);
-
-            this.btnConfirmation.Text =
-                "Подтверждение";
-
-            this.btnConfirmation.TextAlign =
-    System.Drawing.ContentAlignment.MiddleLeft;
+                    220,
+                    50);
 
             this.btnConfirmation.Padding =
                 new System.Windows.Forms.Padding(
-                    50,
+                    48,
                     0,
                     0,
                     0);
 
-            this.btnConfirmation.UseVisualStyleBackColor = false;
+            this.btnConfirmation.TextAlign =
+                System.Drawing.ContentAlignment.MiddleLeft;
+
+            this.btnConfirmation.Text =
+                "Подтверждение";
+
 
             this.panelMenu.Controls.Add(this.lblStep1);
             this.panelMenu.Controls.Add(this.lblStep2);
             this.panelMenu.Controls.Add(this.lblStep3);
             this.panelMenu.Controls.Add(this.lblStep4);
             this.panelMenu.Controls.Add(this.lblStep5);
-            this.panelMenu.Controls.Add(
-    this.btnPersonalData);
 
-            this.panelMenu.Controls.Add(
-                this.btnPassportData);
+            this.panelMenu.Controls.Add(this.btnPersonalData);
+            this.panelMenu.Controls.Add(this.btnPassportData);
+            this.panelMenu.Controls.Add(this.btnContacts);
+            this.panelMenu.Controls.Add(this.btnAccount);
+            this.panelMenu.Controls.Add(this.btnConfirmation);
 
-            this.panelMenu.Controls.Add(
-                this.btnContacts);
 
-            this.panelMenu.Controls.Add(
-                this.btnAccount);
-
-            this.panelMenu.Controls.Add(
-                this.btnConfirmation);
-            //
-            // btnBack
-            //
+            // =====================================
+            // BACK BUTTON
+            // =====================================
 
             this.btnBack.BackColor =
                 System.Drawing.Color.FromArgb(
-                    26,
-                    53,
-                    96);
-
-            this.btnBack.FlatAppearance.BorderSize = 0;
+                    18,
+                    35,
+                    68);
 
             this.btnBack.FlatStyle =
                 System.Windows.Forms.FlatStyle.Flat;
+
+            this.btnBack.FlatAppearance.BorderSize = 0;
 
             this.btnBack.Font =
                 new System.Drawing.Font(
@@ -649,40 +708,37 @@
 
             this.btnBack.Location =
                 new System.Drawing.Point(
-                    770,
-                    615);
-
-            this.btnBack.Name =
-                "btnBack";
+                    740,
+                    590);
 
             this.btnBack.Size =
                 new System.Drawing.Size(
-                    170,
+                    140,
                     40);
 
             this.btnBack.Text =
                 "Назад";
 
             this.btnBack.UseVisualStyleBackColor = false;
+
             this.btnBack.Click +=
-    new System.EventHandler(
-        this.btnBack_Click);
+                new System.EventHandler(
+                    this.btnBack_Click);
 
-
-            //
-            // btnNext
-            //
+            // =====================================
+            // NEXT BUTTON
+            // =====================================
 
             this.btnNext.BackColor =
                 System.Drawing.Color.FromArgb(
-                    40,
-                    78,
-                    145);
-
-            this.btnNext.FlatAppearance.BorderSize = 0;
+                    214,
+                    170,
+                    74);
 
             this.btnNext.FlatStyle =
                 System.Windows.Forms.FlatStyle.Flat;
+
+            this.btnNext.FlatAppearance.BorderSize = 0;
 
             this.btnNext.Font =
                 new System.Drawing.Font(
@@ -691,31 +747,58 @@
                     System.Drawing.FontStyle.Bold);
 
             this.btnNext.ForeColor =
-                System.Drawing.Color.White;
+                System.Drawing.Color.FromArgb(
+                    8,
+                    24,
+                    48);
 
             this.btnNext.Location =
                 new System.Drawing.Point(
-                    950,
-                    615);
-
-            this.btnNext.Name =
-                "btnNext";
+                    900,
+                    590);
 
             this.btnNext.Size =
                 new System.Drawing.Size(
-                    170,
+                    140,
                     40);
 
             this.btnNext.Text =
                 "Далее";
 
             this.btnNext.UseVisualStyleBackColor = false;
+
             this.btnNext.Click +=
-    new System.EventHandler(
-        this.btnNext_Click);
+                new System.EventHandler(
+                    this.btnNext_Click);
+
+            // =====================================
+            // HEADER CONTROLS
+            // =====================================
+
+            this.panelHeader.Controls.Add(
+                this.picBuilding);
+
+            this.panelHeader.Controls.Add(
+                this.picLogo);
+
+            this.panelHeader.Controls.Add(
+                this.lblSystemName);
+
+            this.picBuilding.SendToBack();
+
+            this.picLogo.BringToFront();
+
+            this.lblSystemName.BringToFront();
+
+            // =====================================
+            // ADD CONTROLS
+            // =====================================
+
             this.Controls.Add(this.panelHeader);
 
             this.Controls.Add(this.lblTitle);
+
+            this.Controls.Add(this.picStar);
 
             this.Controls.Add(this.panelMenu);
 
@@ -724,14 +807,20 @@
             this.Controls.Add(this.btnBack);
 
             this.Controls.Add(this.btnNext);
+            this.panelContent.BringToFront();
+
+            this.picStar.SendToBack();
+
             this.ResumeLayout(false);
 
             this.PerformLayout();
         }
+
         private System.Windows.Forms.Panel panelHeader;
 
         private System.Windows.Forms.PictureBox picBuilding;
         private System.Windows.Forms.PictureBox picLogo;
+        private System.Windows.Forms.PictureBox picStar;
 
         private System.Windows.Forms.Label lblSystemName;
         private System.Windows.Forms.Label lblTitle;
@@ -744,6 +833,7 @@
         private System.Windows.Forms.Button btnContacts;
         private System.Windows.Forms.Button btnAccount;
         private System.Windows.Forms.Button btnConfirmation;
+
         private System.Windows.Forms.Label lblStep1;
         private System.Windows.Forms.Label lblStep2;
         private System.Windows.Forms.Label lblStep3;
@@ -752,6 +842,7 @@
 
         private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.Button btnNext;
+
         #endregion
     }
 }

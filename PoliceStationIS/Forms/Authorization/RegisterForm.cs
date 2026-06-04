@@ -9,12 +9,15 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 using PoliceStationIS.Forms.Authorization.RegistrationPages;
+using PoliceStationIS.Models;
+using PoliceStationIS.Services;
 
 namespace PoliceStationIS.Forms.Authorization
 {
     public partial class RegisterForm : Form
     {
         private int currentStep = 0;
+        private RegistrationData registrationData;
 
         private PersonalDataPage personalPage;
         private PassportDataPage passportPage;
@@ -48,6 +51,50 @@ namespace PoliceStationIS.Forms.Authorization
                 new Region(path);
         }
 
+        private void ConfigureStepCircle(
+            Label label)
+        {
+            label.BackColor =
+                Color.FromArgb(
+                    8,
+                    24,
+                    48);
+
+            label.ForeColor =
+                Color.White;
+
+            label.Paint +=
+                StepCircle_Paint;
+        }
+
+        private void StepCircle_Paint(
+            object sender,
+            PaintEventArgs e)
+        {
+            Label lbl =
+                sender as Label;
+
+            e.Graphics.SmoothingMode =
+                SmoothingMode.AntiAlias;
+
+            using (Pen pen =
+                   new Pen(
+                       Color.FromArgb(
+                           214,
+                           170,
+                           74),
+                       2))
+            {
+                e.Graphics.DrawEllipse(
+                    pen,
+                    1,
+                    1,
+                    lbl.Width - 3,
+                    lbl.Height - 3);
+            }
+        }
+
+
         public RegisterForm()
         {
             InitializeComponent();
@@ -57,11 +104,19 @@ namespace PoliceStationIS.Forms.Authorization
             MakeCircle(lblStep3);
             MakeCircle(lblStep4);
             MakeCircle(lblStep5);
+            ConfigureStepCircle(lblStep1);
+            ConfigureStepCircle(lblStep2);
+            ConfigureStepCircle(lblStep3);
+            ConfigureStepCircle(lblStep4);
+            ConfigureStepCircle(lblStep5);
             personalPage = new PersonalDataPage();
             passportPage = new PassportDataPage();
             contactPage = new ContactDataPage();
             accountPage = new AccountDataPage();
             confirmationPage = new ConfirmationPage();
+            registrationData = new RegistrationData();
+            confirmationPage.RegisterClicked +=
+    ConfirmationPage_RegisterClicked;
 
             ShowStep(0);
         }
@@ -98,53 +153,226 @@ namespace PoliceStationIS.Forms.Authorization
         }
         private void UpdateStepButtons()
         {
-            btnPersonalData.BackColor =
-                Color.FromArgb(26, 53, 96);
+            lblStep1.BackColor =
+                Color.FromArgb(
+                    8,
+                    24,
+                    48);
 
-            btnPassportData.BackColor =
-                Color.FromArgb(26, 53, 96);
+            lblStep2.BackColor =
+                Color.FromArgb(
+                    8,
+                    24,
+                    48);
 
-            btnContacts.BackColor =
-                Color.FromArgb(26, 53, 96);
+            lblStep3.BackColor =
+                Color.FromArgb(
+                    8,
+                    24,
+                    48);
 
-            btnAccount.BackColor =
-                Color.FromArgb(26, 53, 96);
+            lblStep4.BackColor =
+                Color.FromArgb(
+                    8,
+                    24,
+                    48);
 
-            btnConfirmation.BackColor =
-                Color.FromArgb(26, 53, 96);
+            lblStep5.BackColor =
+                Color.FromArgb(
+                    8,
+                    24,
+                    48);
+
+
+            lblStep1.ForeColor =
+                Color.White;
+
+            lblStep2.ForeColor =
+                Color.White;
+
+            lblStep3.ForeColor =
+                Color.White;
+
+            lblStep4.ForeColor =
+                Color.White;
+
+            lblStep5.ForeColor =
+                Color.White;
+
 
             switch (currentStep)
             {
                 case 0:
-                    btnPersonalData.BackColor =
-                        Color.FromArgb(70, 115, 200);
+
+                    lblStep1.BackColor =
+                        Color.FromArgb(
+                            214,
+                            170,
+                            74);
+
+                    lblStep1.ForeColor =
+                        Color.FromArgb(
+                            8,
+                            24,
+                            48);
+
                     break;
 
                 case 1:
-                    btnPassportData.BackColor =
-                        Color.FromArgb(70, 115, 200);
+
+                    lblStep2.BackColor =
+                        Color.FromArgb(
+                            214,
+                            170,
+                            74);
+
+                    lblStep2.ForeColor =
+                        Color.FromArgb(
+                            8,
+                            24,
+                            48);
+
                     break;
 
                 case 2:
-                    btnContacts.BackColor =
-                        Color.FromArgb(70, 115, 200);
+
+                    lblStep3.BackColor =
+                        Color.FromArgb(
+                            214,
+                            170,
+                            74);
+
+                    lblStep3.ForeColor =
+                        Color.FromArgb(
+                            8,
+                            24,
+                            48);
+
                     break;
 
                 case 3:
-                    btnAccount.BackColor =
-                        Color.FromArgb(70, 115, 200);
+
+                    lblStep4.BackColor =
+                        Color.FromArgb(
+                            214,
+                            170,
+                            74);
+
+                    lblStep4.ForeColor =
+                        Color.FromArgb(
+                            8,
+                            24,
+                            48);
+
                     break;
 
                 case 4:
-                    btnConfirmation.BackColor =
-                        Color.FromArgb(70, 115, 200);
+
+                    lblStep5.BackColor =
+                        Color.FromArgb(
+                            214,
+                            170,
+                            74);
+
+                    lblStep5.ForeColor =
+                        Color.FromArgb(
+                            8,
+                            24,
+                            48);
+
                     break;
             }
+
+
+            lblStep1.Invalidate();
+            lblStep2.Invalidate();
+            lblStep3.Invalidate();
+            lblStep4.Invalidate();
+            lblStep5.Invalidate();
+        }
+
+        private void CollectRegistrationData()
+        {
+            // Личные данные
+
+            registrationData.LastName =
+                personalPage.LastName;
+
+            registrationData.FirstName =
+                personalPage.FirstName;
+
+            registrationData.MiddleName =
+                personalPage.MiddleName;
+
+            registrationData.BirthDate =
+                personalPage.BirthDate;
+
+            registrationData.Gender =
+                personalPage.Gender;
+
+            registrationData.Position =
+                personalPage.Position;
+
+            registrationData.Department =
+                personalPage.Department;
+
+            registrationData.Rank =
+                personalPage.Rank;
+
+
+            // Паспорт
+
+            registrationData.PassportSeries =
+                passportPage.PassportSeries;
+
+            registrationData.PassportNumber =
+                passportPage.PassportNumber;
+
+            registrationData.DepartmentCode =
+                passportPage.DepartmentCode;
+
+            registrationData.IssuedBy =
+                passportPage.IssuedBy;
+
+            registrationData.IssueDate =
+                passportPage.IssueDate;
+
+            registrationData.RegistrationAddress =
+                passportPage.RegistrationAddress;
+
+
+            // Контакты
+
+            registrationData.Phone =
+                contactPage.Phone;
+
+            registrationData.ResidentialAddress =
+                contactPage.ResidentialAddress;
+
+
+            // Аккаунт
+
+            registrationData.Login =
+                accountPage.Login;
+
+            registrationData.Email =
+                accountPage.Email;
+
+            registrationData.Password =
+                accountPage.Password;
         }
         private void btnNext_Click(
     object sender,
     EventArgs e)
         {
+            if (currentStep == 3)
+            {
+                CollectRegistrationData();
+
+                confirmationPage.LoadData(
+                    registrationData);
+            }
+
             if (currentStep < 4)
             {
                 ShowStep(currentStep + 1);
@@ -158,6 +386,32 @@ namespace PoliceStationIS.Forms.Authorization
             if (currentStep > 0)
             {
                 ShowStep(currentStep - 1);
+            }
+        }
+    private void ConfirmationPage_RegisterClicked(
+    object sender,
+    EventArgs e)
+        {
+            try
+            {
+                RegistrationService.Register(
+                    registrationData);
+
+                MessageBox.Show(
+                    "Регистрация успешно завершена.",
+                    "Успех",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    ex.Message,
+                    "Ошибка регистрации",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
     }

@@ -14,6 +14,29 @@ namespace PoliceStationIS.Forms.Authorization.RegistrationPages
 {
     public partial class PersonalDataPage : UserControl
     {
+        public string LastName =>
+    txtSurname.Text;
+
+        public string FirstName =>
+            txtName.Text;
+
+        public string MiddleName =>
+            txtPatronymic.Text;
+
+        public string BirthDate =>
+            txtBirthDate.Text;
+
+        public string Gender =>
+            cmbGender.Text;
+
+        public string Position =>
+            cmbPosition.Text;
+
+        public string Department =>
+            cmbDepartment.Text;
+
+        public string Rank =>
+            cmbRank.Text;
         private MonthCalendar calendar;
         public PersonalDataPage()
         {

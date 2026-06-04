@@ -14,6 +14,23 @@ namespace PoliceStationIS.Forms.Authorization.RegistrationPages
 {
     public partial class PassportDataPage : UserControl
     {
+        public string PassportSeries =>
+    txtPassportSeries.Text;
+
+        public string PassportNumber =>
+            txtPassportNumber.Text;
+
+        public string DepartmentCode =>
+            cmbDepartmentCode.Text;
+
+        public string IssuedBy =>
+            cmbIssuedBy.Text;
+
+        public string IssueDate =>
+            txtIssueDate.Text;
+
+        public string RegistrationAddress =>
+            txtRegistrationAddress.Text;
         private MonthCalendar calendar;
         public PassportDataPage()
         {

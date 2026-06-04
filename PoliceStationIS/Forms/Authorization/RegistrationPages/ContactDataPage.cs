@@ -12,9 +12,15 @@ namespace PoliceStationIS.Forms.Authorization.RegistrationPages
 {
     public partial class ContactDataPage : UserControl
     {
+        public string Phone =>
+    txtPhone.Text;
+
+        public string ResidentialAddress =>
+            txtAddress.Text;
         public ContactDataPage()
         {
             InitializeComponent();
         }
+
     }
 }
