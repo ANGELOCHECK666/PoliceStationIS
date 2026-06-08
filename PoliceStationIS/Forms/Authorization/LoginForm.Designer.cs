@@ -26,6 +26,7 @@
         private System.Windows.Forms.Button btnLogin;
 
         private System.Windows.Forms.LinkLabel lnkForgotPassword;
+        private System.Windows.Forms.LinkLabel lnkRegister;
 
         protected override void Dispose(bool disposing)
         {
@@ -52,6 +53,7 @@
             this.chkRemember = new System.Windows.Forms.CheckBox();
             this.btnLogin = new System.Windows.Forms.Button();
             this.lnkForgotPassword = new System.Windows.Forms.LinkLabel();
+            this.lnkRegister = new System.Windows.Forms.LinkLabel();
             this.panelHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picBuilding)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
@@ -123,10 +125,12 @@
             this.panelLogin.Controls.Add(this.chkRemember);
             this.panelLogin.Controls.Add(this.btnLogin);
             this.panelLogin.Controls.Add(this.lnkForgotPassword);
-            this.panelLogin.Location = new System.Drawing.Point(410, 300);
+            this.panelLogin.Controls.Add(
+    this.lnkRegister);
+            this.panelLogin.Location = new System.Drawing.Point(410, 260);
             this.panelLogin.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.panelLogin.Name = "panelLogin";
-            this.panelLogin.Size = new System.Drawing.Size(700, 640);
+            this.panelLogin.Size = new System.Drawing.Size(700, 700);
             this.panelLogin.TabIndex = 0;
             // 
             // lblLoginTitle
@@ -146,7 +150,7 @@
             this.lblLogin.AutoSize = true;
             this.lblLogin.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblLogin.ForeColor = System.Drawing.Color.White;
-            this.lblLogin.Location = new System.Drawing.Point(70, 150);
+            this.lblLogin.Location = new System.Drawing.Point(70, 125);
             this.lblLogin.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblLogin.Name = "lblLogin";
             this.lblLogin.Size = new System.Drawing.Size(93, 37);
@@ -159,7 +163,7 @@
             this.txtLogin.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtLogin.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtLogin.ForeColor = System.Drawing.Color.Gray;
-            this.txtLogin.Location = new System.Drawing.Point(70, 200);
+            this.txtLogin.Location = new System.Drawing.Point(70, 175);
             this.txtLogin.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.txtLogin.Name = "txtLogin";
             this.txtLogin.Size = new System.Drawing.Size(558, 43);
@@ -171,7 +175,7 @@
             this.lblPassword.AutoSize = true;
             this.lblPassword.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblPassword.ForeColor = System.Drawing.Color.White;
-            this.lblPassword.Location = new System.Drawing.Point(70, 290);
+            this.lblPassword.Location = new System.Drawing.Point(70, 255);
             this.lblPassword.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblPassword.Name = "lblPassword";
             this.lblPassword.Size = new System.Drawing.Size(110, 37);
@@ -184,7 +188,7 @@
             this.txtPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtPassword.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtPassword.ForeColor = System.Drawing.Color.Gray;
-            this.txtPassword.Location = new System.Drawing.Point(70, 340);
+            this.txtPassword.Location = new System.Drawing.Point(70, 305);
             this.txtPassword.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(558, 43);
@@ -196,7 +200,7 @@
             this.chkRemember.AutoSize = true;
             this.chkRemember.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.chkRemember.ForeColor = System.Drawing.Color.White;
-            this.chkRemember.Location = new System.Drawing.Point(70, 409);
+            this.chkRemember.Location = new System.Drawing.Point(70, 420);
             this.chkRemember.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
             this.chkRemember.Name = "chkRemember";
             this.chkRemember.Size = new System.Drawing.Size(229, 36);
@@ -226,7 +230,7 @@
             this.lnkForgotPassword.AutoSize = true;
             this.lnkForgotPassword.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.lnkForgotPassword.LinkColor = System.Drawing.Color.DeepSkyBlue;
-            this.lnkForgotPassword.Location = new System.Drawing.Point(248, 581);
+            this.lnkForgotPassword.Location = new System.Drawing.Point(250, 360);
             this.lnkForgotPassword.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lnkForgotPassword.Name = "lnkForgotPassword";
             this.lnkForgotPassword.Size = new System.Drawing.Size(194, 32);
@@ -235,6 +239,46 @@
             this.lnkForgotPassword.Text = "Забыли пароль?";
             this.lnkForgotPassword.VisitedLinkColor = System.Drawing.Color.DeepSkyBlue;
             this.lnkForgotPassword.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lnkForgotPassword_LinkClicked);
+
+            // =====================================
+            // REGISTER LINK
+            // =====================================
+
+            this.lnkRegister.ActiveLinkColor =
+                System.Drawing.Color.White;
+
+            this.lnkRegister.AutoSize = true;
+
+            this.lnkRegister.Font =
+                new System.Drawing.Font(
+                    "Segoe UI",
+                    9F);
+
+            this.lnkRegister.LinkColor =
+                System.Drawing.Color.Gold;
+
+            this.lnkRegister.Location =
+                new System.Drawing.Point(
+                    170,
+                    590);
+
+            this.lnkRegister.Name =
+                "lnkRegister";
+
+            this.lnkRegister.Size =
+                new System.Drawing.Size(
+                    250,
+                    32);
+
+            this.lnkRegister.TabStop = true;
+
+            this.lnkRegister.Text =
+                "Нет аккаунта? Зарегистрироваться";
+
+            this.lnkRegister.LinkClicked +=
+                new System.Windows.Forms.LinkLabelLinkClickedEventHandler(
+                    this.lnkRegister_LinkClicked);
+
             // 
             // LoginForm
             // 

@@ -63,6 +63,26 @@ namespace PoliceStationIS.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap account_icon {
+            get {
+                object obj = ResourceManager.GetObject("account_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap contacts_icon {
+            get {
+                object obj = ResourceManager.GetObject("contacts_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap e_1 {
             get {
                 object obj = ResourceManager.GetObject("e_1", resourceCulture);
@@ -96,6 +116,26 @@ namespace PoliceStationIS.Properties {
         internal static System.Drawing.Bitmap gerb_mvd {
             get {
                 object obj = ResourceManager.GetObject("gerb_mvd", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap passport_icon {
+            get {
+                object obj = ResourceManager.GetObject("passport_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap personal_icon {
+            get {
+                object obj = ResourceManager.GetObject("personal_icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

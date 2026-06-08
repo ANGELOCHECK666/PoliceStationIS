@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using PoliceStationIS.Services;
+using PoliceStationIS.Models;
+
 
 namespace PoliceStationIS.Forms.Authorization
 {
@@ -146,34 +149,42 @@ namespace PoliceStationIS.Forms.Authorization
                 return;
             }
 
-            MessageBox.Show(
-                "Авторизация пока не подключена к базе данных.",
-                "Информация",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
+            try
+            {
+                AuthorizedUser user =
+                    AuthorizationService.Login(
+                        login,
+                        password);
 
-            /*
-             
-            Здесь позже будет:
+                if (user == null)
+                {
+                    MessageBox.Show(
+                        "Неверный логин или пароль.",
+                        "Ошибка",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
 
-            UserService.Login(
-                login,
-                password);
+                    return;
+                }
 
-            И открытие нужной
-            главной формы по роли:
+                MessageBox.Show(
+                    $"Добро пожаловать, {user.Login}!\nРоль: {user.RoleName}",
+                    "Успешный вход",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
 
-            Генерал
-            Начальник отдела
-            Администратор БД
-            Следователь
-            Криминалист
-            Кинолог
-            Инспектор
-            Дежурный
-            Специалист материального обеспечения
+                // Здесь позже будет открытие главной формы
 
-            */
+                this.Hide();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    ex.Message,
+                    "Ошибка",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
         }
 
         private void lnkForgotPassword_LinkClicked(
@@ -186,5 +197,19 @@ namespace PoliceStationIS.Forms.Authorization
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information);
         }
+        private void lnkRegister_LinkClicked(
+    object sender,
+    LinkLabelLinkClickedEventArgs e)
+        {
+            this.Hide();
+
+            RegisterForm registerForm =
+                new RegisterForm();
+
+            registerForm.ShowDialog();
+
+            this.Show();
+        }
     }
+
 }

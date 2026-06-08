@@ -281,8 +281,81 @@ namespace PoliceStationIS.Forms.Authorization
                             48);
 
                     break;
+
             }
 
+            // ======================================
+            // Настройка кнопок
+            // ======================================
+
+            if (currentStep == 4)
+            {
+                // Текст кнопки
+
+                btnNext.Text =
+                    "Зарегистрироваться";
+
+                // Зелёный цвет
+
+                btnNext.BackColor =
+                    Color.FromArgb(
+                        67,
+                        160,
+                        71);
+
+                // Кнопка Назад немного левее
+
+                btnBack.Location =
+                    new Point(
+                        670,
+                        590);
+
+                // Кнопка Регистрация немного левее
+
+                btnNext.Location =
+                    new Point(
+                        830,
+                        590);
+
+                // Увеличиваем ТОЛЬКО на последнем шаге
+
+                btnNext.Size =
+                    new Size(
+                        210,
+                        40);
+            }
+            else
+            {
+                // Обычная кнопка Далее
+
+                btnNext.Text =
+                    "Далее";
+
+                btnNext.BackColor =
+                    Color.FromArgb(
+                        214,
+                        170,
+                        74);
+
+                // Возвращаем стандартное положение
+
+                btnBack.Location =
+                    new Point(
+                        740,
+                        590);
+
+                btnNext.Location =
+                    new Point(
+                        900,
+                        590);
+
+                // Возвращаем стандартный размер
+
+                btnNext.Size =
+                    new Size(
+                        140,
+                        40);
+            }
 
             lblStep1.Invalidate();
             lblStep2.Invalidate();
@@ -373,10 +446,16 @@ namespace PoliceStationIS.Forms.Authorization
                     registrationData);
             }
 
-            if (currentStep < 4)
+            if (currentStep == 4)
             {
-                ShowStep(currentStep + 1);
+                ConfirmationPage_RegisterClicked(
+                    this,
+                    EventArgs.Empty);
+
+                return;
             }
+
+            ShowStep(currentStep + 1);
         }
 
         private void btnBack_Click(

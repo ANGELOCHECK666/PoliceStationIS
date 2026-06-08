@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace PoliceStationIS.Models
 {
-    public class User
+    public class AuthorizedUser
     {
         public int UserId { get; set; }
 
         public int EmployeeId { get; set; }
 
+        public int RoleId { get; set; }
+
         public string Login { get; set; }
 
-        public string Role { get; set; }
-
-        public string Post { get; set; }
+        public string RoleName { get; set; }
     }
 }
