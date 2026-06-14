@@ -103,6 +103,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\RoundedPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Core\UserSession.cs" />
     <Compile Include="Database\DatabaseConnection.cs" />
     <Compile Include="Database\DatabaseTester.cs" />
     <Compile Include="Forms\Authorization\LoginForm.cs">
@@ -147,6 +151,24 @@
     <Compile Include="Forms\Authorization\RegistrationPages\PersonalDataPage.Designer.cs">
       <DependentUpon>PersonalDataPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Employees\EmployeesPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Employees\EmployeesPage.Designer.cs">
+      <DependentUpon>EmployeesPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Main\HRDashboardPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Main\HRDashboardPage.Designer.cs">
+      <DependentUpon>HRDashboardPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Main\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Main\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\PasswordHelper.cs" />
     <Compile Include="Models\RegisterUserModel.cs" />
     <Compile Include="Models\RegistrationData.cs" />
@@ -185,11 +207,9 @@
   <ItemGroup>
     <Folder Include="Forms\Citizens\" />
     <Folder Include="Forms\CriminalCases\" />
-    <Folder Include="Forms\Employees\" />
     <Folder Include="Forms\Equipment\" />
     <Folder Include="Forms\Evidence\" />
     <Folder Include="Forms\Inspections\" />
-    <Folder Include="Forms\MainForms\" />
     <Folder Include="Forms\Protocols\" />
     <Folder Include="Forms\Reports\" />
     <Folder Include="Forms\ServiceDogs\" />

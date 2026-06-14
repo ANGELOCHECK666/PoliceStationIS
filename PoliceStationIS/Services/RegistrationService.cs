@@ -198,15 +198,16 @@ namespace PoliceStationIS.Services
             string query =
                 @"
         INSERT INTO Employee
-        (
-            sex_id,
-            passport_issuance_id,
-            department_id,
-            post_id,
-            rank_id,
+(
+    sex_id,
+    passport_issuance_id,
+    department_id,
+    post_id,
+    rank_id,
+    employment_status_id,
 
-            passport_series,
-            passport_number,
+    passport_series,
+    passport_number,
 
             last_name,
             name_,
@@ -222,13 +223,14 @@ namespace PoliceStationIS.Services
         )
         VALUES
         (
-            @sex_id,
-            @passport_issuance_id,
-            @department_id,
-            @post_id,
-            @rank_id,
+    @sex_id,
+    @passport_issuance_id,
+    @department_id,
+    @post_id,
+    @rank_id,
+    @employment_status_id,
 
-            @passport_series,
+    @passport_series,
             @passport_number,
 
             @last_name,
@@ -270,6 +272,9 @@ namespace PoliceStationIS.Services
                 command.Parameters.AddWithValue(
                     "@rank_id",
                     rankId);
+                command.Parameters.AddWithValue(
+    "@employment_status_id",
+    1);
 
                 command.Parameters.AddWithValue(
                     "@passport_series",

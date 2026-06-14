@@ -17,5 +17,9 @@ namespace PoliceStationIS.Models
         public string Login { get; set; }
 
         public string RoleName { get; set; }
+
+        public string FullName { get; set; }
+
+        public string PostName { get; set; }
     }
 }

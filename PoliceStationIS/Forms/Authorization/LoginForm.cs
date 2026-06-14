@@ -1,8 +1,10 @@
-﻿using System;
+﻿using PoliceStationIS.Core;
+using PoliceStationIS.Forms.Main;
+using PoliceStationIS.Models;
+using PoliceStationIS.Services;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
-using PoliceStationIS.Services;
-using PoliceStationIS.Models;
 
 
 namespace PoliceStationIS.Forms.Authorization
@@ -167,6 +169,18 @@ namespace PoliceStationIS.Forms.Authorization
                     return;
                 }
 
+                UserSession.EmployeeId =
+    user.EmployeeId;
+
+                UserSession.FullName =
+                    user.FullName;
+
+                UserSession.PostName =
+                    user.PostName;
+
+                UserSession.RoleName =
+                    user.RoleName;
+
                 MessageBox.Show(
                     $"Добро пожаловать, {user.Login}!\nРоль: {user.RoleName}",
                     "Успешный вход",
@@ -176,6 +190,11 @@ namespace PoliceStationIS.Forms.Authorization
                 // Здесь позже будет открытие главной формы
 
                 this.Hide();
+
+                MainForm mainForm =
+                    new MainForm();
+
+                mainForm.Show();
             }
             catch (Exception ex)
             {
