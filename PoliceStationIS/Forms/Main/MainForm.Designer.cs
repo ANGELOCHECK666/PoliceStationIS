@@ -27,9 +27,14 @@ namespace PoliceStationIS.Forms.Main
 
         private Panel panelBorder;
         private Panel panelHeaderBorder;
+        private Panel panelGoldSeparator;
         private Panel panelExitSeparator;
 
         private PictureBox picLogo;
+        private PictureBox picUserIcon;
+        private PictureBox picRoleIcon;
+        private PictureBox picClockIcon;
+        private PictureBox picCalendarIcon;
 
         private Label lblSystemName;
 
@@ -68,10 +73,21 @@ namespace PoliceStationIS.Forms.Main
             this.panelHeaderBorder =
                 new Panel();
 
+            this.panelGoldSeparator =
+    new Panel();
+
             this.panelExitSeparator =
                 new Panel();
 
             this.picLogo =
+                new PictureBox();
+            this.picUserIcon =
+    new PictureBox();
+
+            this.picRoleIcon =
+                new PictureBox();
+
+            this.picClockIcon =
                 new PictureBox();
 
             this.lblSystemName =
@@ -150,16 +166,34 @@ namespace PoliceStationIS.Forms.Main
             // =====================================
 
             this.panelHeaderBorder.BackColor =
-                Color.FromArgb(
-                    45,
-                    60,
-                    85);
+    Color.FromArgb(
+        201,
+        155,
+        59);
 
             this.panelHeaderBorder.Dock =
                 DockStyle.Top;
 
             this.panelHeaderBorder.Height =
-                1;
+                2;
+
+            // GOLD SEPARATOR
+
+            this.panelGoldSeparator.BackColor =
+                Color.FromArgb(
+                    201,
+                    155,
+                    59);
+
+            this.panelGoldSeparator.Location =
+                new Point(
+                    950,
+                    15);
+
+            this.panelGoldSeparator.Size =
+                new Size(
+                    1,
+                    60);
 
             // =====================================
             // LOGO
@@ -180,6 +214,59 @@ namespace PoliceStationIS.Forms.Main
                 new Size(
                     90,
                     90);
+
+            // USER ICON
+
+            this.picUserIcon.Image =
+                Properties.Resources.user_gold_icon;
+
+            this.picUserIcon.SizeMode =
+                PictureBoxSizeMode.Zoom;
+
+            this.picUserIcon.Size =
+                new Size(32, 32);
+
+            this.picUserIcon.Location =
+                new Point(1015, 16);
+
+            this.picUserIcon.BackColor =
+                Color.Transparent;
+
+            // ROLE ICON
+
+            this.picRoleIcon.Image =
+                Properties.Resources.role_gold_icon;
+
+            this.picRoleIcon.SizeMode =
+                PictureBoxSizeMode.Zoom;
+
+            this.picRoleIcon.Size =
+                new Size(32, 32);
+
+            this.picRoleIcon.Location =
+                new Point(1015, 50);
+
+            this.picRoleIcon.BackColor =
+                Color.Transparent;
+
+            // CLOCK ICON
+
+            this.picClockIcon.Image =
+                Properties.Resources.clock_gold_icon;
+
+            this.picClockIcon.SizeMode =
+                PictureBoxSizeMode.Zoom;
+
+            this.picClockIcon.Size =
+                new Size(52, 52);
+
+            this.picClockIcon.Location =
+                new Point(1375, 18);
+
+            this.picClockIcon.BackColor =
+                Color.Transparent;
+
+            
 
             // =====================================
             // SYSTEM NAME
@@ -216,14 +303,15 @@ namespace PoliceStationIS.Forms.Main
                 Color.White;
 
             this.lblUserName.Font =
-                new Font(
-                    "Segoe UI",
-                    10F);
+    new Font(
+        "Segoe UI",
+        11F,
+        FontStyle.Regular);
 
             this.lblUserName.Location =
     new Point(
-        1080,
-        20);
+        1060,
+        24);
 
             this.lblUserName.Text =
                 "Пользователь:";
@@ -237,14 +325,15 @@ namespace PoliceStationIS.Forms.Main
                 Color.White;
 
             this.lblPosition.Font =
-                new Font(
-                    "Segoe UI",
-                    10F);
+    new Font(
+        "Segoe UI",
+        11F,
+        FontStyle.Regular);
 
             this.lblPosition.Location =
                 new Point(
-                    1080,
-                    55);
+                    1060,
+                    58);
 
             this.lblPosition.Text =
                 "Должность:";
@@ -264,8 +353,8 @@ namespace PoliceStationIS.Forms.Main
 
             this.lblDate.Location =
                 new Point(
-                    1500,
-                    50);
+                    1435,
+                    52);
 
             this.lblDate.Text =
                 "00.00.0000";
@@ -285,9 +374,13 @@ namespace PoliceStationIS.Forms.Main
                     FontStyle.Bold);
 
             this.lblTime.Location =
-                new Point(
-                    1500,
-                    15);
+    new Point(1430, 12);
+
+            this.lblTime.Font =
+                new Font(
+                    "Segoe UI",
+                    18F,
+                    FontStyle.Bold);
 
             this.lblTime.Text =
                 "00:00";
@@ -301,6 +394,14 @@ namespace PoliceStationIS.Forms.Main
 
             this.panelHeader.Controls.Add(
                 this.lblSystemName);
+            this.panelHeader.Controls.Add(
+    this.picUserIcon);
+
+            this.panelHeader.Controls.Add(
+                this.picRoleIcon);
+
+            this.panelHeader.Controls.Add(
+                this.picClockIcon);
 
             this.panelHeader.Controls.Add(
                 this.lblUserName);
@@ -336,9 +437,9 @@ namespace PoliceStationIS.Forms.Main
 
             this.panelBorder.BackColor =
                 Color.FromArgb(
-                    45,
-                    60,
-                    85);
+                    201,
+        155,
+        59);
 
             this.panelBorder.Dock =
                 DockStyle.Left;
@@ -365,9 +466,9 @@ namespace PoliceStationIS.Forms.Main
 
             this.panelExitSeparator.BackColor =
                 Color.FromArgb(
-                    45,
-                    60,
-                    85);
+                    201,
+        155,
+        59);
 
             this.panelExitSeparator.Size =
                 new Size(
@@ -386,73 +487,73 @@ namespace PoliceStationIS.Forms.Main
             this.btnDashboard =
                 CreateMenuButton(
                     "Главная",
-                    Properties.Resources.home_icon,
+                    Properties.Resources.home_gold_icon,
                     15);
 
             this.btnEmployees =
                 CreateMenuButton(
                     "Сотрудники",
-                    Properties.Resources.employees_icon,
+                    Properties.Resources.employees_gold_icon,
                     60);
 
             this.btnCases =
                 CreateMenuButton(
                     "Дела",
-                    Properties.Resources.cases_icon,
+                    Properties.Resources.cases_gold_icon,
                     105);
 
             this.btnCitizens =
                 CreateMenuButton(
                     "Граждане",
-                    Properties.Resources.citizens_icon,
+                    Properties.Resources.citizens_gold_icon,
                     150);
 
             this.btnProtocols =
                 CreateMenuButton(
                     "Протоколы",
-                    Properties.Resources.protocols_icon,
+                    Properties.Resources.protocols_gold_icon,
                     195);
 
             this.btnEvidence =
                 CreateMenuButton(
                     "Доказательства",
-                    Properties.Resources.evidence_icon,
+                    Properties.Resources.evidence_gold_icon,
                     240);
 
             this.btnExpertise =
                 CreateMenuButton(
                     "Экспертизы",
-                    Properties.Resources.expertise_icon,
+                    Properties.Resources.expertise_gold_icon,
                     285);
 
             this.btnDuty =
                 CreateMenuButton(
                     "Наряды",
-                    Properties.Resources.duty_icon,
+                    Properties.Resources.patrol_gold_icon,
                     330);
 
             this.btnEquipment =
                 CreateMenuButton(
                     "Экипировка",
-                    Properties.Resources.equipment_icon,
+                    Properties.Resources.equipment_gold_icon,
                     375);
 
             this.btnDogs =
                 CreateMenuButton(
                     "Служебные собаки",
-                    Properties.Resources.dogs_icon,
+                    Properties.Resources.dogs_gold_icon,
                     420);
 
             this.btnReports =
                 CreateMenuButton(
                     "Отчеты",
-                    Properties.Resources.reports_icon,
+                    Properties.Resources.reports_gold_icon,
                     465);
 
             this.btnExit =
                 CreateMenuButton(
                     "Выход",
-                    Properties.Resources.logout_icon,
+                    Properties.Resources.logout_gold_icon,
                     755);
 
             // =====================================
@@ -514,6 +615,8 @@ namespace PoliceStationIS.Forms.Main
 
             this.Controls.Add(
                 this.panelHeaderBorder);
+            this.panelHeader.Controls.Add(
+    this.panelGoldSeparator);
 
             this.Controls.Add(
                 this.panelHeader);
@@ -539,8 +642,8 @@ namespace PoliceStationIS.Forms.Main
                 new Bitmap(
                     icon,
                     new Size(
-                        24,
-                        24));
+                        28,
+                        28));
 
             button.TextImageRelation =
                 TextImageRelation.ImageBeforeText;
@@ -553,7 +656,7 @@ namespace PoliceStationIS.Forms.Main
 
             button.Padding =
                 new Padding(
-                    35,
+                    18,
                     0,
                     0,
                     0);

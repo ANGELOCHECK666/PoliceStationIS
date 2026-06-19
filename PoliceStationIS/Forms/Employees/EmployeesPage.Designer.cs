@@ -60,6 +60,16 @@ namespace PoliceStationIS.Forms.Employees
         private PictureBox picChangePost;
         private PictureBox picHeaderImage;
 
+        private PictureBox picHeaderEmblem;
+
+        private PictureBox picSearchUser;
+        private PictureBox picSearchDepartment;
+        private PictureBox picSearchPost;
+        private PictureBox picSearchRank;
+        private PictureBox picSearchStatus;
+
+        private PictureBox picEmployeesTitle;
+
         private Label lblEmployees;
 
         private DataGridView dgvEmployees;
@@ -113,6 +123,18 @@ namespace PoliceStationIS.Forms.Employees
             this.picSickLeave = new PictureBox();
             this.picChangePost = new PictureBox();
             this.picHeaderImage = new PictureBox();
+
+            this.picHeaderEmblem =
+    new PictureBox();
+
+            this.picEmployeesTitle =
+    new PictureBox();
+
+            this.picSearchUser = new PictureBox();
+            this.picSearchDepartment = new PictureBox();
+            this.picSearchPost = new PictureBox();
+            this.picSearchRank = new PictureBox();
+            this.picSearchStatus = new PictureBox();
 
             this.lblEmployees = new Label();
 
@@ -197,6 +219,20 @@ namespace PoliceStationIS.Forms.Employees
             this.lblTitle.Text =
                 "Сотрудники";
 
+            Panel pnlTitleLine = new Panel();
+
+            pnlTitleLine.BackColor =
+                Color.FromArgb(212, 160, 23);
+
+            pnlTitleLine.Size =
+                new Size(24, 3);
+
+            pnlTitleLine.Location =
+                new Point(30, 52);
+
+            this.pnlHeader.Controls.Add(
+                pnlTitleLine);
+
 
             // =====================================
             // SUBTITLE
@@ -229,6 +265,11 @@ namespace PoliceStationIS.Forms.Employees
             this.pnlHeader.Controls.Add(
     this.picHeaderImage);
 
+            this.pnlHeader.Controls.Add(
+    this.picHeaderEmblem);
+
+            this.picHeaderEmblem.BringToFront();
+
             // HEADER IMAGE
 
             this.picHeaderImage.Image =
@@ -241,12 +282,55 @@ namespace PoliceStationIS.Forms.Employees
                 Color.Transparent;
 
             this.picHeaderImage.Size =
-                new Size(650, 140);
+                new Size(560, 140);
 
             this.picHeaderImage.Location =
                 new Point(
-                    620,
+                    600,
                     0);
+
+            this.picHeaderEmblem.Image =
+    Properties.Resources.section_emblem_gold;
+
+            this.picHeaderEmblem.SizeMode =
+                PictureBoxSizeMode.Zoom;
+
+            this.picHeaderEmblem.BackColor =
+                Color.Transparent;
+
+            this.picHeaderEmblem.Size =
+    new Size(95, 95);
+
+            this.picHeaderEmblem.Location =
+                new Point(
+                    1145,
+                    2);
+
+            this.picHeaderEmblem.Anchor =
+                AnchorStyles.Top |
+                AnchorStyles.Right;
+
+            this.pnlHeader.Controls.Add(
+                this.picHeaderEmblem);
+
+            this.picHeaderEmblem.BringToFront();
+
+
+
+            this.picEmployeesTitle.Image =
+    Properties.Resources.citizens_gold_icon;
+
+            this.picEmployeesTitle.SizeMode =
+                PictureBoxSizeMode.Zoom;
+
+            this.picEmployeesTitle.BackColor =
+                Color.Transparent;
+
+            this.picEmployeesTitle.Size =
+    new Size(28, 28);
+
+            this.picEmployeesTitle.Location =
+                new Point(18, 88);
 
 
             // =====================================
@@ -284,18 +368,123 @@ namespace PoliceStationIS.Forms.Employees
                 System.Drawing.Color.White;
 
             this.lblSearch.Font =
-                new System.Drawing.Font(
-                    "Segoe UI",
-                    11F,
-                    System.Drawing.FontStyle.Bold);
+                new Font(
+    "Segoe UI",
+    12F,
+    FontStyle.Bold);
 
             this.lblSearch.Location =
                 new System.Drawing.Point(
                     25,
-                    8);
+                    12);
 
             this.lblSearch.Text =
                 "Поиск сотрудника";
+
+            Panel pnlSearchLine =
+    new Panel();
+
+            pnlSearchLine.BackColor =
+                Color.FromArgb(
+                    212,
+                    160,
+                    23);
+
+            pnlSearchLine.Size =
+                new Size(
+                    3,
+                    22);
+
+            pnlSearchLine.Location =
+                new Point(
+                    18,
+                    12);
+
+            this.pnlEmployees.Controls.Add(
+                pnlSearchLine);
+
+            // =====================================
+            // SEARCH ICONS
+            // =====================================
+
+            this.picSearchUser.Image =
+                Properties.Resources.employee_search_gold_icon;
+
+            this.picSearchUser.SizeMode =
+                PictureBoxSizeMode.Zoom;
+
+            this.picSearchUser.BackColor =
+                Color.Transparent;
+
+            this.picSearchUser.Size =
+    new Size(22, 22);
+
+            this.picSearchUser.Location =
+                new Point(25, 38);
+
+
+            this.picSearchDepartment.Image =
+                Properties.Resources.department_gold_icon;
+
+            this.picSearchDepartment.SizeMode =
+                PictureBoxSizeMode.Zoom;
+
+            this.picSearchDepartment.BackColor =
+                Color.Transparent;
+
+            this.picSearchDepartment.Size =
+    new Size(22, 22);
+
+            this.picSearchDepartment.Location =
+                new Point(260, 38);
+
+
+            this.picSearchPost.Image =
+                Properties.Resources.position_gold_icon;
+
+            this.picSearchPost.SizeMode =
+                PictureBoxSizeMode.Zoom;
+
+            this.picSearchPost.BackColor =
+                Color.Transparent;
+
+            this.picSearchPost.Size =
+    new Size(22, 22);
+
+            this.picSearchPost.Location =
+                new Point(455, 38);
+
+
+            this.picSearchRank.Image =
+                Properties.Resources.rank_gold_icon;
+
+            this.picSearchRank.SizeMode =
+                PictureBoxSizeMode.Zoom;
+
+            this.picSearchRank.BackColor =
+                Color.Transparent;
+
+            this.picSearchRank.Size =
+    new Size(22, 22);
+
+            this.picSearchRank.Location =
+                new Point(650, 38);
+
+
+            this.picSearchStatus.Image =
+                Properties.Resources.status_gold_icon;
+
+            this.picSearchStatus.SizeMode =
+                PictureBoxSizeMode.Zoom;
+
+            this.picSearchStatus.BackColor =
+                Color.Transparent;
+
+            this.picSearchStatus.Size =
+    new Size(22, 22);
+
+            this.picSearchStatus.Location =
+                new Point(845, 38);
 
 
             // =====================================
@@ -309,8 +498,8 @@ namespace PoliceStationIS.Forms.Employees
 
             this.lblDepartment.Location =
                 new System.Drawing.Point(
-                    260,
-                    30);
+                    283,
+                    45);
 
             this.lblDepartment.Text =
                 "Отдел";
@@ -327,8 +516,8 @@ namespace PoliceStationIS.Forms.Employees
 
             this.lblPost.Location =
                 new System.Drawing.Point(
-                    455,
-                    30);
+                    478,
+                    45);
 
             this.lblPost.Text =
                 "Должность";
@@ -345,8 +534,8 @@ namespace PoliceStationIS.Forms.Employees
 
             this.lblRank.Location =
                 new System.Drawing.Point(
-                    650,
-                    30);
+                    673,
+                    45);
 
             this.lblRank.Text =
                 "Звание";
@@ -363,8 +552,8 @@ namespace PoliceStationIS.Forms.Employees
 
             this.lblStatus.Location =
                 new System.Drawing.Point(
-                    845,
-                    30);
+                    868,
+                    45);
 
             this.lblStatus.Text =
                 "Статус";
@@ -380,8 +569,8 @@ namespace PoliceStationIS.Forms.Employees
 
             this.lblSearchField.Location =
                 new System.Drawing.Point(
-                    25,
-                    30);
+                    47,
+                    45);
 
             this.lblSearchField.Text =
                 "ФИО сотрудника";
@@ -393,7 +582,7 @@ namespace PoliceStationIS.Forms.Employees
             this.txtSearch.Location =
     new System.Drawing.Point(
         25,
-        47);
+        65);
 
             this.txtSearch.Size =
                 new System.Drawing.Size(
@@ -419,7 +608,7 @@ namespace PoliceStationIS.Forms.Employees
             this.cmbDepartment.Location =
                 new System.Drawing.Point(
                     260,
-                    47);
+                    65);
 
             this.cmbDepartment.Size =
                 new System.Drawing.Size(
@@ -445,7 +634,7 @@ namespace PoliceStationIS.Forms.Employees
             this.cmbPost.Location =
                 new System.Drawing.Point(
                     455,
-                    47);
+                    65);
 
             this.cmbPost.Size =
                 new System.Drawing.Size(
@@ -472,7 +661,7 @@ namespace PoliceStationIS.Forms.Employees
             this.cmbRank.Location =
                 new System.Drawing.Point(
                     650,
-                    47);
+                    65);
 
             this.cmbRank.Size =
                 new System.Drawing.Size(
@@ -499,7 +688,7 @@ namespace PoliceStationIS.Forms.Employees
             this.cmbStatus.Location =
                 new System.Drawing.Point(
                     845,
-                    47);
+                    65);
 
             this.cmbStatus.Size =
                 new System.Drawing.Size(
@@ -530,10 +719,25 @@ namespace PoliceStationIS.Forms.Employees
                 0;
 
             this.btnSearch.BackColor =
-                System.Drawing.Color.FromArgb(
-                    24,
-                    90,
-                    169);
+    Color.FromArgb(
+        196,
+        145,
+        35);
+
+            this.btnSearch.FlatAppearance.BorderSize =
+                1;
+
+            this.btnSearch.FlatAppearance.BorderColor =
+                Color.FromArgb(
+                    230,
+                    190,
+                    80);
+
+            this.btnSearch.Font =
+    new Font(
+        "Segoe UI",
+        9F,
+        FontStyle.Bold);
 
             this.btnSearch.ForeColor =
                 System.Drawing.Color.White;
@@ -541,7 +745,7 @@ namespace PoliceStationIS.Forms.Employees
             this.btnSearch.Location =
                 new System.Drawing.Point(
                     1040,
-                    45);
+                    60);
 
             this.btnSearch.Size =
                 new System.Drawing.Size(
@@ -559,14 +763,19 @@ namespace PoliceStationIS.Forms.Employees
             this.btnReset.FlatStyle =
                 FlatStyle.Flat;
 
-            this.btnReset.FlatAppearance.BorderSize =
-                0;
+            this.btnReset.FlatAppearance.BorderSize = 1;
+
+            this.btnReset.FlatAppearance.BorderColor =
+                Color.FromArgb(
+                    212,
+                    160,
+                    23);
 
             this.btnReset.BackColor =
                 System.Drawing.Color.FromArgb(
-                    68,
-                    84,
-                    120);
+                    45,
+                    63,
+                    105);
 
             this.btnReset.ForeColor =
                 System.Drawing.Color.White;
@@ -574,7 +783,7 @@ namespace PoliceStationIS.Forms.Employees
             this.btnReset.Location =
                 new System.Drawing.Point(
                     1140,
-                    45);
+                    60);
 
             this.btnReset.Size =
                 new System.Drawing.Size(
@@ -588,6 +797,21 @@ namespace PoliceStationIS.Forms.Employees
             // =====================================
             // SEARCH CONTROLS
             // =====================================
+
+            this.pnlEmployees.Controls.Add(
+    this.picSearchUser);
+
+            this.pnlEmployees.Controls.Add(
+                this.picSearchDepartment);
+
+            this.pnlEmployees.Controls.Add(
+                this.picSearchPost);
+
+            this.pnlEmployees.Controls.Add(
+                this.picSearchRank);
+
+            this.pnlEmployees.Controls.Add(
+                this.picSearchStatus);
 
             this.pnlEmployees.Controls.Add(
     this.lblSearch);
@@ -657,7 +881,13 @@ namespace PoliceStationIS.Forms.Employees
                 FlatStyle.Flat;
 
             this.btnAddEmployee.FlatAppearance.BorderSize =
-                0;
+    1;
+
+            this.btnAddEmployee.FlatAppearance.BorderColor =
+                Color.FromArgb(
+                    212,
+                    160,
+                    23);
 
             this.btnAddEmployee.BackColor =
                 System.Drawing.Color.FromArgb(
@@ -698,7 +928,13 @@ namespace PoliceStationIS.Forms.Employees
                 FlatStyle.Flat;
 
             this.btnEditEmployee.FlatAppearance.BorderSize =
-                0;
+    1;
+
+            this.btnEditEmployee.FlatAppearance.BorderColor =
+                Color.FromArgb(
+                    212,
+                    160,
+                    23);
 
             this.btnEditEmployee.BackColor =
                 System.Drawing.Color.FromArgb(
@@ -741,7 +977,13 @@ namespace PoliceStationIS.Forms.Employees
                 FlatStyle.Flat;
 
             this.btnChangeStatus.FlatAppearance.BorderSize =
-                0;
+    1;
+
+            this.btnChangeStatus.FlatAppearance.BorderColor =
+                Color.FromArgb(
+                    212,
+                    160,
+                    23);
 
             this.btnChangeStatus.BackColor =
                 System.Drawing.Color.FromArgb(
@@ -782,7 +1024,13 @@ namespace PoliceStationIS.Forms.Employees
                 FlatStyle.Flat;
 
             this.btnVacation.FlatAppearance.BorderSize =
-                0;
+    1;
+
+            this.btnVacation.FlatAppearance.BorderColor =
+                Color.FromArgb(
+                    212,
+                    160,
+                    23);
 
             this.btnVacation.BackColor =
                 System.Drawing.Color.FromArgb(
@@ -823,7 +1071,13 @@ namespace PoliceStationIS.Forms.Employees
                 FlatStyle.Flat;
 
             this.btnSickLeave.FlatAppearance.BorderSize =
-                0;
+    1;
+
+            this.btnSickLeave.FlatAppearance.BorderColor =
+                Color.FromArgb(
+                    212,
+                    160,
+                    23);
 
             this.btnSickLeave.BackColor =
                 System.Drawing.Color.FromArgb(
@@ -864,7 +1118,13 @@ namespace PoliceStationIS.Forms.Employees
                 FlatStyle.Flat;
 
             this.btnChangePost.FlatAppearance.BorderSize =
-                0;
+    1;
+
+            this.btnChangePost.FlatAppearance.BorderColor =
+                Color.FromArgb(
+                    212,
+                    160,
+                    23);
 
             this.btnChangePost.BackColor =
                 System.Drawing.Color.FromArgb(
@@ -900,7 +1160,7 @@ namespace PoliceStationIS.Forms.Employees
             // ADD EMPLOYEE ICON
 
             this.picAddEmployee.Image =
-                Properties.Resources.employee_add_icon;
+                Properties.Resources.employee_add_gold_icon;
 
             this.picAddEmployee.SizeMode =
                 PictureBoxSizeMode.Zoom;
@@ -922,7 +1182,7 @@ namespace PoliceStationIS.Forms.Employees
             // EDIT ICON
 
             this.picEditEmployee.Image =
-                Properties.Resources.pencil_icon;
+                Properties.Resources.edit_gold_icon;
 
             this.picEditEmployee.SizeMode =
                 PictureBoxSizeMode.Zoom;
@@ -944,7 +1204,7 @@ namespace PoliceStationIS.Forms.Employees
             // STATUS ICON
 
             this.picChangeStatus.Image =
-                Properties.Resources.reverse_icon;
+                Properties.Resources.status_change_gold_icon;
 
             this.picChangeStatus.SizeMode =
                 PictureBoxSizeMode.Zoom;
@@ -966,7 +1226,7 @@ namespace PoliceStationIS.Forms.Employees
             // VACATION ICON
 
             this.picVacation.Image =
-                Properties.Resources.p_3;
+                Properties.Resources.vacation_gold_icon;
 
             this.picVacation.SizeMode =
                 PictureBoxSizeMode.Zoom;
@@ -988,7 +1248,7 @@ namespace PoliceStationIS.Forms.Employees
             // SICK ICON
 
             this.picSickLeave.Image =
-                Properties.Resources.p_4;
+                Properties.Resources.sick_leave_gold_icon;
 
             this.picSickLeave.SizeMode =
                 PictureBoxSizeMode.Zoom;
@@ -1010,7 +1270,7 @@ namespace PoliceStationIS.Forms.Employees
             // POST ICON
 
             this.picChangePost.Image =
-                Properties.Resources.post_icon;
+                Properties.Resources.change_position_gold_icon;
 
             this.picChangePost.SizeMode =
                 PictureBoxSizeMode.Zoom;
@@ -1063,6 +1323,10 @@ namespace PoliceStationIS.Forms.Employees
             this.picChangePost.Parent =
     this.btnChangePost;
 
+
+            this.pnlEmployees.Controls.Add(
+    this.picEmployeesTitle);
+
             this.pnlActions.Controls.Add(
                 this.btnAddEmployee);
 
@@ -1094,12 +1358,12 @@ namespace PoliceStationIS.Forms.Employees
             this.pnlEmployees.Location =
                 new System.Drawing.Point(
                     20,
-                    240);
+                    225);
 
             this.pnlEmployees.Size =
                 new System.Drawing.Size(
                     1260,
-                    520);
+                    535);
 
             this.pnlEmployees.BorderStyle =
     BorderStyle.FixedSingle;
@@ -1123,11 +1387,33 @@ namespace PoliceStationIS.Forms.Employees
 
             this.lblEmployees.Location =
                 new System.Drawing.Point(
-                    25,
-                    72);
+                    55,
+                    90);
 
             this.lblEmployees.Text =
                 "Список сотрудников";
+
+            Panel pnlEmployeesLine =
+    new Panel();
+
+            pnlEmployeesLine.BackColor =
+                Color.FromArgb(
+                    212,
+                    160,
+                    23);
+
+            pnlEmployeesLine.Size =
+                new Size(
+                    3,
+                    22);
+
+            pnlEmployeesLine.Location =
+                new Point(
+                    18,
+                    88);
+
+            this.pnlEmployees.Controls.Add(
+                pnlEmployeesLine);
 
 
             // =====================================
@@ -1137,7 +1423,9 @@ namespace PoliceStationIS.Forms.Employees
             this.dgvEmployees.Location =
                 new System.Drawing.Point(
                     25,
-                    100);
+                    125);
+            this.dgvEmployees.BorderStyle =
+    BorderStyle.FixedSingle;
 
             this.dgvEmployees.Size =
                 new System.Drawing.Size(
@@ -1145,6 +1433,27 @@ namespace PoliceStationIS.Forms.Employees
                     400);
 
             this.dgvEmployees.ColumnCount = 8;
+
+            this.dgvEmployees.EnableHeadersVisualStyles =
+    false;
+
+            this.dgvEmployees.ColumnHeadersDefaultCellStyle.BackColor =
+                Color.FromArgb(
+                    42,
+                    73,
+                    133);
+
+            this.dgvEmployees.ColumnHeadersDefaultCellStyle.ForeColor =
+                Color.FromArgb(
+                    212,
+                    160,
+                    23);
+
+            this.dgvEmployees.ColumnHeadersDefaultCellStyle.Font =
+                new Font(
+                    "Segoe UI",
+                    10F,
+                    FontStyle.Bold);
             this.dgvEmployees.AutoGenerateColumns = false;
 
             this.dgvEmployees.Columns[0].Name =

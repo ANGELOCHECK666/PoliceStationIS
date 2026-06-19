@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using Npgsql;
 
 using PoliceStationIS.Database;
+using PoliceStationIS.Forms.Employees;
 
 namespace PoliceStationIS.Forms.Employees
 {
@@ -18,6 +19,8 @@ namespace PoliceStationIS.Forms.Employees
 
             ConfigureGrid();
 
+            dgvEmployees.CellPainting += DgvEmployees_CellPainting;
+
             LoadDepartments();
             LoadPosts();
             LoadRanks();
@@ -27,11 +30,36 @@ namespace PoliceStationIS.Forms.Employees
 
             btnSearch.Click += BtnSearch_Click;
             btnReset.Click += BtnReset_Click;
+            btnAddEmployee.Click += BtnAddEmployee_Click;
         }
 
         private void ConfigureGrid()
         {
             dgvEmployees.EnableHeadersVisualStyles = false;
+
+            dgvEmployees.AdvancedColumnHeadersBorderStyle.Left =
+    DataGridViewAdvancedCellBorderStyle.Single;
+
+            dgvEmployees.AdvancedColumnHeadersBorderStyle.Right =
+                DataGridViewAdvancedCellBorderStyle.Single;
+
+            dgvEmployees.AdvancedColumnHeadersBorderStyle.Top =
+                DataGridViewAdvancedCellBorderStyle.Single;
+
+            dgvEmployees.AdvancedColumnHeadersBorderStyle.Bottom =
+                DataGridViewAdvancedCellBorderStyle.Single;
+
+            dgvEmployees.ColumnHeadersDefaultCellStyle.SelectionBackColor =
+    Color.FromArgb(
+        42,
+        73,
+        133);
+
+            dgvEmployees.ColumnHeadersDefaultCellStyle.SelectionForeColor =
+                Color.FromArgb(
+                    212,
+                    160,
+                    23);
             dgvEmployees.AutoGenerateColumns = false;
 
             dgvEmployees.BackgroundColor =
@@ -41,7 +69,7 @@ namespace PoliceStationIS.Forms.Employees
                 BorderStyle.None;
 
             dgvEmployees.GridColor =
-                Color.FromArgb(60, 90, 150);
+                Color.FromArgb(212, 160, 23);
             dgvEmployees.AlternatingRowsDefaultCellStyle.BackColor =
     Color.FromArgb(
         45,
@@ -75,7 +103,7 @@ namespace PoliceStationIS.Forms.Employees
             dgvEmployees.AutoSizeColumnsMode =
                 DataGridViewAutoSizeColumnsMode.Fill;
 
-            dgvEmployees.ColumnHeadersHeight = 40;
+            dgvEmployees.ColumnHeadersHeight = 45;
 
             dgvEmployees.RowTemplate.Height = 36;
 
@@ -83,7 +111,10 @@ namespace PoliceStationIS.Forms.Employees
                 Color.FromArgb(42, 73, 133);
 
             dgvEmployees.ColumnHeadersDefaultCellStyle.ForeColor =
-                Color.White;
+    Color.FromArgb(
+        212,
+        160,
+        23);
 
             dgvEmployees.ColumnHeadersDefaultCellStyle.Font =
                 new Font(
@@ -112,7 +143,7 @@ namespace PoliceStationIS.Forms.Employees
                 DataGridViewHeaderBorderStyle.Single;
 
             dgvEmployees.CellBorderStyle =
-                DataGridViewCellBorderStyle.SingleHorizontal;
+    DataGridViewCellBorderStyle.Single;
         }
 
         private void LoadEmployees()
@@ -188,6 +219,7 @@ ORDER BY
                         dgvEmployees.Columns[5].DataPropertyName = "Статус";
                         dgvEmployees.Columns[6].DataPropertyName = "Телефон";
                         dgvEmployees.Columns[7].DataPropertyName = "Дата приема";
+                        dgvEmployees.Columns["Телефон"].Visible = false;
 
                         dgvEmployees.Columns["ФИО"].Width = 280;
 
@@ -199,9 +231,7 @@ ORDER BY
 
                         dgvEmployees.Columns["Звание"].Width = 220;
 
-                        dgvEmployees.Columns["Статус"].Width = 140;
-
-                        dgvEmployees.Columns["Телефон"].Width = 150;
+                        dgvEmployees.Columns["Статус"].Width = 180;
 
                         dgvEmployees.Columns["Дата приема"].Width = 120;
 
@@ -444,6 +474,86 @@ ORDER BY
 
             employeesTable.DefaultView.RowFilter =
                 "";
+        }
+
+        private void DgvEmployees_CellPainting(
+    object sender,
+    DataGridViewCellPaintingEventArgs e)
+        {
+            if (e.RowIndex < 0)
+                return;
+
+            if (e.ColumnIndex != 5)
+                return;
+
+            e.Handled = true;
+
+            e.PaintBackground(
+                e.CellBounds,
+                true);
+
+            string status =
+                e.FormattedValue?.ToString();
+
+            Color circleColor =
+     Color.FromArgb(108, 184, 125);
+
+            if (status == "На больничном")
+            {
+                circleColor =
+                    Color.FromArgb(210, 110, 110);
+            }
+            else if (status == "В отпуске")
+            {
+                circleColor =
+                    Color.FromArgb(225, 190, 90);
+            }
+            else if (status == "Отстранен")
+            {
+                circleColor =
+                    Color.FromArgb(170, 170, 170);
+            }
+            else if (status == "Уволен")
+            {
+                circleColor =
+                    Color.FromArgb(115, 115, 115);
+            }
+
+            using (SolidBrush brush =
+                new SolidBrush(circleColor))
+            {
+                e.Graphics.FillEllipse(
+                    brush,
+                    e.CellBounds.X + 10,
+                    e.CellBounds.Y + 10,
+                    12,
+                    12);
+            }
+
+            TextRenderer.DrawText(
+                e.Graphics,
+                status,
+                dgvEmployees.Font,
+                new Rectangle(
+                    e.CellBounds.X + 30,
+                    e.CellBounds.Y,
+                    e.CellBounds.Width - 25,
+                    e.CellBounds.Height),
+                Color.White,
+                TextFormatFlags.VerticalCenter |
+                TextFormatFlags.Left);
+        }
+
+        private void BtnAddEmployee_Click(
+    object sender,
+    EventArgs e)
+        {
+            AddEmployeeForm form =
+                new AddEmployeeForm();
+
+            form.ShowDialog();
+
+            LoadEmployees();
         }
     }
 }

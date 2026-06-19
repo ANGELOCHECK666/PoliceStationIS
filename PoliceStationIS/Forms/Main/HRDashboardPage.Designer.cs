@@ -807,32 +807,32 @@ namespace PoliceStationIS.Forms.Main
 
             ConfigureActionIcon(
     this.picAddEmployee,
-    Properties.Resources.employee_add_icon,
+    Properties.Resources.employee_add_gold_icon,
     55);
 
             ConfigureActionIcon(
                 this.picViewEmployeesAction,
-                Properties.Resources.employeess_icon,
+                Properties.Resources.employee_search_gold_icon,
                 105);
 
             ConfigureActionIcon(
                 this.picVacationAction,
-                Properties.Resources.vacation_icon,
+                Properties.Resources.vacation_gold_icon,
                 155);
 
             ConfigureActionIcon(
                 this.picSickLeaveAction,
-                Properties.Resources.sick_icon,
+                Properties.Resources.sick_leave_gold_icon,
                 205);
 
             ConfigureActionIcon(
                 this.picChangePosition,
-                Properties.Resources.post_icon,
+                Properties.Resources.position_gold_icon,
                 255);
 
             ConfigureActionIcon(
                 this.picReport,
-                Properties.Resources.report_icon,
+                Properties.Resources.reports_gold_icon,
                 305);
 
             ConfigureArrowIcon(this.picArrowAdd, 55);
@@ -1129,7 +1129,7 @@ namespace PoliceStationIS.Forms.Main
     int y)
         {
             picture.Image =
-                Properties.Resources.arrow_right;
+                Properties.Resources.arrow_gold_icon;
 
             picture.BackColor =
                 Color.FromArgb(

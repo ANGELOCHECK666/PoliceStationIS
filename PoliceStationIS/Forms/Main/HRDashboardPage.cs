@@ -1,6 +1,7 @@
 ﻿using Npgsql;
 using System;
 using System.Windows.Forms;
+using PoliceStationIS.Forms.Employees;
 
 namespace PoliceStationIS.Forms.Main
 {
@@ -19,6 +20,7 @@ namespace PoliceStationIS.Forms.Main
 
             LoadStatistics();
             LoadRecentChanges();
+            btnAddEmployee.Click += BtnAddEmployee_Click;
         }
 
         private void LoadStatistics()
@@ -217,6 +219,19 @@ namespace PoliceStationIS.Forms.Main
                 lblSickCount.Text =
                     command.ExecuteScalar().ToString();
             }
+        }
+
+        private void BtnAddEmployee_Click(
+    object sender,
+    EventArgs e)
+        {
+            AddEmployeeForm form =
+                new AddEmployeeForm();
+
+            form.ShowDialog();
+
+            LoadStatistics();
+            LoadRecentChanges();
         }
     }
 }

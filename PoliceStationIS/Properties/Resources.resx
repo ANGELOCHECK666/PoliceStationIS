@@ -121,38 +121,77 @@
   <data name="account_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\account_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="arrow_right" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\arrow_right.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="arrow_gold_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\arrow_gold_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="calendar_gold_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\calendar_gold_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cases_gold_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cases_gold_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="cases_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\cases_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="change_position_gold_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\change_position_gold_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="citizens_gold_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\citizens_gold_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="citizens_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\citizens_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="clock_gold_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\clock_gold_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="contacts_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\contacts_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="dogs_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\dogs_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="department_gold_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\department_gold_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dogs_gold_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\dogs_gold_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="duty_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\duty_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="edit_gold_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\edit_gold_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="employeess_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\citizens_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="employees_gold_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\employees_gold_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="employees_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\employees_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="employee_add_gold_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\employee_add_gold_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="employee_add_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\p_2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="employee_search_gold_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\employee_search_gold_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="equipment_gold_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\equipment_gold_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="equipment_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\equipment_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="evidence_gold_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\evidence_gold_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="evidence_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\evidence_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="expertise_gold_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\expertise_gold_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="expertise_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\expertise_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -169,14 +208,23 @@
   <data name="gerb_mvd" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\gerb-mvd.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="home_gold_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\home_gold_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="home_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\home_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="logout_gold_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\logout_gold_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="logout_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\logout_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="passport_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\passport_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="patrol_gold_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\patrol_gold_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="pencil_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\pencil_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -190,8 +238,14 @@
   <data name="police_building_dark" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ChatGPT Image 2 июн. 2026 г., 17_45_53.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="position_gold_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\position_gold_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="post_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\post_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="protocols_gold_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\protocols_gold_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="protocols_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\protocols_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -208,6 +262,12 @@
   <data name="p_4" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\p_4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="rank_gold_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\rank_gold_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="reports_gold_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\reports_gold_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="reports_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\reports_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -217,14 +277,47 @@
   <data name="reverse_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\reverse_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="role_gold_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\role_gold_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="section_emblem_gold" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\section_emblem_gold.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="sick_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\sick_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="sick_leave_gold_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\sick_leave_gold_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="staff_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\staff_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="star_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\star_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="status_active_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\status_active_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="status_change_gold_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\status_change_gold_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="status_fired_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\status_fired_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="status_gold_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\status_gold_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="status_sick_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\status_sick_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="status_vacation_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\status_vacation_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="user_gold_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\user_gold_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="vacation_gold_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\vacation_gold_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="vacation_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\vacation_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
