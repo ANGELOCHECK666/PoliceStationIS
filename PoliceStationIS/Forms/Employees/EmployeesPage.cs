@@ -31,6 +31,12 @@ namespace PoliceStationIS.Forms.Employees
             btnSearch.Click += BtnSearch_Click;
             btnReset.Click += BtnReset_Click;
             btnAddEmployee.Click += BtnAddEmployee_Click;
+            btnEditEmployee.Click += BtnEditEmployee_Click;
+            btnChangeStatus.Click += BtnChangeStatus_Click;
+            btnVacation.Click += BtnVacation_Click;
+            btnSickLeave.Click += BtnSickLeave_Click;
+            btnChangePost.Click +=
+    BtnChangePost_Click;
         }
 
         private void ConfigureGrid()
@@ -208,6 +214,8 @@ ORDER BY
 
                         adapter.Fill(
                             employeesTable);
+
+
 
                         dgvEmployees.DataSource =
                             employeesTable;
@@ -554,6 +562,169 @@ ORDER BY
             form.ShowDialog();
 
             LoadEmployees();
+        }
+
+        private void BtnEditEmployee_Click(
+    object sender,
+    EventArgs e)
+        {
+            if (dgvEmployees.CurrentRow == null)
+            {
+                MessageBox.Show(
+                    "Выберите сотрудника.");
+                return;
+            }
+
+            DataRowView row =
+                (DataRowView)
+                dgvEmployees.CurrentRow.DataBoundItem;
+
+            int employeeId =
+                Convert.ToInt32(
+                    row["employee_id"]);
+
+            AddEmployeeForm form =
+                new AddEmployeeForm(
+                    employeeId);
+
+            form.ShowDialog();
+
+            LoadEmployees();
+        }
+        private void BtnChangeStatus_Click(
+    object sender,
+    EventArgs e)
+        {
+            if (dgvEmployees.CurrentRow == null)
+            {
+                MessageBox.Show(
+                    "Выберите сотрудника.",
+                    "Внимание",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                return;
+            }
+
+            DataRowView row =
+                (DataRowView)
+                dgvEmployees.CurrentRow.DataBoundItem;
+
+            int employeeId =
+                Convert.ToInt32(
+                    row["employee_id"]);
+
+            EmployeeStatusForm form =
+                new EmployeeStatusForm(
+                    employeeId);
+
+            if (form.ShowDialog() ==
+                DialogResult.OK)
+            {
+                LoadEmployees();
+            }
+        }
+
+        private void BtnVacation_Click(
+    object sender,
+    EventArgs e)
+        {
+            if (dgvEmployees.CurrentRow == null)
+            {
+                MessageBox.Show(
+                    "Выберите сотрудника.",
+                    "Информация",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+
+                return;
+            }
+
+            DataRowView row =
+                (DataRowView)
+                dgvEmployees.CurrentRow.DataBoundItem;
+
+            int employeeId =
+                Convert.ToInt32(
+                    row["employee_id"]);
+
+            using (EmployeeVacationForm form =
+                new EmployeeVacationForm(employeeId))
+            {
+                if (form.ShowDialog() ==
+                    DialogResult.OK)
+                {
+                    LoadEmployees();
+                }
+            }
+        }
+
+        private void BtnSickLeave_Click(
+    object sender,
+    EventArgs e)
+        {
+            if (dgvEmployees.CurrentRow == null)
+            {
+                MessageBox.Show(
+                    "Выберите сотрудника.",
+                    "Информация",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+
+                return;
+            }
+
+            DataRowView row =
+                (DataRowView)
+                dgvEmployees.CurrentRow.DataBoundItem;
+
+            int employeeId =
+                Convert.ToInt32(
+                    row["employee_id"]);
+
+            using (EmployeeSickLeaveForm form =
+                new EmployeeSickLeaveForm(employeeId))
+            {
+                if (form.ShowDialog() ==
+                    DialogResult.OK)
+                {
+                    LoadEmployees();
+                }
+            }
+        }
+
+        private void BtnChangePost_Click(
+    object sender,
+    EventArgs e)
+        {
+            if (dgvEmployees.CurrentRow == null)
+            {
+                MessageBox.Show(
+                    "Выберите сотрудника.",
+                    "Информация",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+
+                return;
+            }
+
+            DataRowView row =
+                 (DataRowView)
+                 dgvEmployees.CurrentRow.DataBoundItem;
+
+            int employeeId =
+                Convert.ToInt32(
+                    row["employee_id"]);
+
+            using (EmployeePositionForm form =
+                new EmployeePositionForm(employeeId))
+            {
+                if (form.ShowDialog() ==
+                    DialogResult.OK)
+                {
+                    LoadEmployees();
+                }
+            }
         }
     }
 }

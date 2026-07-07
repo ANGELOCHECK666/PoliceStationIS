@@ -473,6 +473,16 @@ namespace PoliceStationIS.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap people_gold_icon {
+            get {
+                object obj = ResourceManager.GetObject("people_gold_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap personal_icon {
             get {
                 object obj = ResourceManager.GetObject("personal_icon", resourceCulture);

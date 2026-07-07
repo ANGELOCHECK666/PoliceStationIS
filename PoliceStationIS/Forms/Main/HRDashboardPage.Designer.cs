@@ -95,6 +95,8 @@ namespace PoliceStationIS.Forms.Main
         private PictureBox picArrowPost;
         private PictureBox picArrowReport;
 
+        private PictureBox picPeople;
+
         protected override void Dispose(
             bool disposing)
         {
@@ -745,31 +747,19 @@ namespace PoliceStationIS.Forms.Main
             this.btnViewEmployeess =
                 new Button();
 
-            this.btnVacation =
-                new Button();
-
-            this.btnSickLeave =
-                new Button();
-
-            this.btnChangePosition =
-                new Button();
-
             this.btnReport =
                 new Button();
 
             this.picAddEmployee = new PictureBox();
             this.picViewEmployeesAction = new PictureBox();
-            this.picVacationAction = new PictureBox();
-            this.picSickLeaveAction = new PictureBox();
-            this.picChangePosition = new PictureBox();
             this.picReport = new PictureBox();
 
             this.picArrowAdd = new PictureBox();
             this.picArrowView = new PictureBox();
-            this.picArrowVacation = new PictureBox();
-            this.picArrowSick = new PictureBox();
-            this.picArrowPost = new PictureBox();
             this.picArrowReport = new PictureBox();
+
+            this.picPeople =
+    new PictureBox();
 
             // =====================================
             // QUICK ACTIONS BUTTONS
@@ -778,69 +768,36 @@ namespace PoliceStationIS.Forms.Main
             ConfigureActionButton(
                 this.btnAddEmployee,
                 "Добавить сотрудника",
-                55);
+                50);
 
             ConfigureActionButton(
                 this.btnViewEmployeess,
                 "Просмотреть сотрудников",
-                105);
-
-            ConfigureActionButton(
-                this.btnVacation,
-                "Оформить отпуск",
-                155);
-
-            ConfigureActionButton(
-                this.btnSickLeave,
-                "Оформить больничный",
-                205);
-
-            ConfigureActionButton(
-                this.btnChangePosition,
-                "Изменить должность",
-                255);
+                125);
 
             ConfigureActionButton(
                 this.btnReport,
                 "Сформировать отчет",
-                305);
+                200);
 
             ConfigureActionIcon(
     this.picAddEmployee,
     Properties.Resources.employee_add_gold_icon,
-    55);
+    50);
 
             ConfigureActionIcon(
                 this.picViewEmployeesAction,
                 Properties.Resources.employee_search_gold_icon,
-                105);
-
-            ConfigureActionIcon(
-                this.picVacationAction,
-                Properties.Resources.vacation_gold_icon,
-                155);
-
-            ConfigureActionIcon(
-                this.picSickLeaveAction,
-                Properties.Resources.sick_leave_gold_icon,
-                205);
-
-            ConfigureActionIcon(
-                this.picChangePosition,
-                Properties.Resources.position_gold_icon,
-                255);
+                125);
 
             ConfigureActionIcon(
                 this.picReport,
                 Properties.Resources.reports_gold_icon,
-                305);
+                200);
 
-            ConfigureArrowIcon(this.picArrowAdd, 55);
-            ConfigureArrowIcon(this.picArrowView, 105);
-            ConfigureArrowIcon(this.picArrowVacation, 155);
-            ConfigureArrowIcon(this.picArrowSick, 205);
-            ConfigureArrowIcon(this.picArrowPost, 255);
-            ConfigureArrowIcon(this.picArrowReport, 305);
+            ConfigureArrowIcon(this.picArrowAdd, 50);
+            ConfigureArrowIcon(this.picArrowView, 125);
+            ConfigureArrowIcon(this.picArrowReport, 200);
 
             // =====================================
             // ADD BUTTONS
@@ -856,52 +813,53 @@ namespace PoliceStationIS.Forms.Main
                 this.picViewEmployeesAction);
 
             this.pnlQuickActions.Controls.Add(
-                this.picVacationAction);
-
-            this.pnlQuickActions.Controls.Add(
-                this.picSickLeaveAction);
-
-            this.pnlQuickActions.Controls.Add(
-                this.picChangePosition);
-
-            this.pnlQuickActions.Controls.Add(
                 this.picReport);
 
             this.picAddEmployee.BringToFront();
             this.picViewEmployeesAction.BringToFront();
-            this.picVacationAction.BringToFront();
-            this.picSickLeaveAction.BringToFront();
-            this.picChangePosition.BringToFront();
             this.picReport.BringToFront();
 
             this.pnlQuickActions.Controls.Add(
                 this.btnViewEmployeess);
 
             this.pnlQuickActions.Controls.Add(
-                this.btnVacation);
-
-            this.pnlQuickActions.Controls.Add(
-                this.btnSickLeave);
-
-            this.pnlQuickActions.Controls.Add(
-                this.btnChangePosition);
-
-            this.pnlQuickActions.Controls.Add(
                 this.btnReport);
 
             this.pnlQuickActions.Controls.Add(this.picArrowAdd);
             this.pnlQuickActions.Controls.Add(this.picArrowView);
-            this.pnlQuickActions.Controls.Add(this.picArrowVacation);
-            this.pnlQuickActions.Controls.Add(this.picArrowSick);
-            this.pnlQuickActions.Controls.Add(this.picArrowPost);
             this.pnlQuickActions.Controls.Add(this.picArrowReport);
 
             this.picArrowAdd.BringToFront();
             this.picArrowView.BringToFront();
-            this.picArrowVacation.BringToFront();
-            this.picArrowSick.BringToFront();
-            this.picArrowPost.BringToFront();
             this.picArrowReport.BringToFront();
+            this.pnlQuickActions.Controls.Add(
+    this.picPeople);
+
+            this.picPeople.SendToBack();
+
+            // =====================================
+            // PERSONNEL IMAGE
+            // =====================================
+
+            this.picPeople.Image =
+                Properties.Resources.people_gold_icon;
+
+            this.picPeople.BackColor =
+                Color.Transparent;
+
+            this.picPeople.SizeMode =
+                PictureBoxSizeMode.Zoom;
+
+            this.picPeople.Location =
+                new Point(
+                    145,
+                    235);
+
+            this.picPeople.Size =
+                new Size(
+                    180,
+                    190);
+
 
             // =====================================
             // ADD MAIN CONTROLS
@@ -1065,7 +1023,7 @@ namespace PoliceStationIS.Forms.Main
             button.Size =
                 new Size(
                     420,
-                    48);
+                    64);
 
             button.FlatStyle =
                 FlatStyle.Flat;
@@ -1082,18 +1040,19 @@ namespace PoliceStationIS.Forms.Main
                 Color.White;
 
             button.Font =
-                new Font(
-                    "Segoe UI",
-                    10F);
+    new Font(
+        "Segoe UI",
+        11F,
+        FontStyle.Regular);
 
             button.TextAlign =
     ContentAlignment.MiddleLeft;
 
             button.Padding =
                 new Padding(
-                    55,
+                    70,
                     0,
-                    25,
+                    30,
                     0);
         }
 
@@ -1115,13 +1074,13 @@ namespace PoliceStationIS.Forms.Main
 
             picture.Location =
                 new Point(
-                    24,
-                    y + 8);
+                    28,
+                    y + 12);
 
             picture.Size =
                 new Size(
-                    32,
-                    32);
+                    40,
+                    40);
         }
 
         private void ConfigureArrowIcon(
@@ -1142,8 +1101,8 @@ namespace PoliceStationIS.Forms.Main
 
             picture.Location =
                 new Point(
-                    415,
-                    y + 12);
+                    410,
+                    y + 22);
 
             picture.Size =
                 new Size(

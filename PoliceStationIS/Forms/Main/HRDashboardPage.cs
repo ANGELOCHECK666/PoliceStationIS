@@ -13,14 +13,16 @@ namespace PoliceStationIS.Forms.Main
       Port=5432;
       Database=PoliceStation;
       Username=postgres;
-      Password=1234567890"; 
+      Password=1234567890";
         public HRDashboardPage()
         {
             InitializeComponent();
 
             LoadStatistics();
             LoadRecentChanges();
+
             btnAddEmployee.Click += BtnAddEmployee_Click;
+            btnViewEmployeess.Click += BtnViewEmployeess_Click;
         }
 
         private void LoadStatistics()
@@ -232,6 +234,19 @@ namespace PoliceStationIS.Forms.Main
 
             LoadStatistics();
             LoadRecentChanges();
+        }
+
+        private void BtnViewEmployeess_Click(
+    object sender,
+    EventArgs e)
+        {
+            MainForm mainForm =
+                this.FindForm() as MainForm;
+
+            if (mainForm != null)
+            {
+                mainForm.OpenEmployeesPage();
+            }
         }
     }
 }

@@ -26,7 +26,9 @@ namespace PoliceStationIS.Forms.Main
             ConfigureAccess();
 
             OpenDashboard();
+
             btnEmployees.Click += BtnEmployees_Click;
+            btnDashboard.Click += BtnDashboard_Click;
 
             StartClock();
         }
@@ -110,15 +112,7 @@ namespace PoliceStationIS.Forms.Main
     object sender,
     EventArgs e)
         {
-            panelContent.Controls.Clear();
-
-            EmployeesPage page =
-                new EmployeesPage();
-
-            page.Dock =
-                DockStyle.Fill;
-
-            panelContent.Controls.Add(page);
+            OpenEmployeesPage();
         }
 
         private void StartClock()
@@ -148,6 +142,26 @@ namespace PoliceStationIS.Forms.Main
             lblDate.Text =
                 DateTime.Now.ToString(
                     "dd.MM.yyyy");
+        }
+
+        private void BtnDashboard_Click(
+    object sender,
+    EventArgs e)
+        {
+            OpenDashboard();
+        }
+
+        public void OpenEmployeesPage()
+        {
+            panelContent.Controls.Clear();
+
+            EmployeesPage page =
+                new EmployeesPage();
+
+            page.Dock =
+                DockStyle.Fill;
+
+            panelContent.Controls.Add(page);
         }
     }
 }
