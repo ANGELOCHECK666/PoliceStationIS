@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PoliceStationIS.Core
+﻿namespace PoliceStationIS.Core
 {
     public static class UserSession
     {
+        public static int UserId { get; set; }
+
         public static int EmployeeId { get; set; }
+
+        public static int RoleId { get; set; }
+
+        public static string Login { get; set; }
 
         public static string FullName { get; set; }
 

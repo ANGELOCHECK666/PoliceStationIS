@@ -234,7 +234,11 @@ ORDER BY Employment_status_name;
 @"
 UPDATE Employee
 SET
-    Employment_status_id = @EmploymentStatusId
+    Employment_status_id = @EmploymentStatusId,
+
+    Service_end_date =
+        @ServiceEndDate
+
 WHERE
     Employee_id = @EmployeeId;
 ";
@@ -248,6 +252,19 @@ WHERE
                     command.Parameters.AddWithValue(
                         "@EmploymentStatusId",
                         newStatusId);
+
+                    if (cmbEmploymentStatus.Text == "Уволен")
+                    {
+                        command.Parameters.AddWithValue(
+                            "@ServiceEndDate",
+                            dtpChangeDate.Value.Date);
+                    }
+                    else
+                    {
+                        command.Parameters.AddWithValue(
+                            "@ServiceEndDate",
+                            DBNull.Value);
+                    }
 
                     command.Parameters.AddWithValue(
                         "@EmployeeId",

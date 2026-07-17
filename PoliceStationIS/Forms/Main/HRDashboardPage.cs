@@ -1,7 +1,8 @@
 ﻿using Npgsql;
+using PoliceStationIS.Forms.Employees;
+using PoliceStationIS.Forms.HR;
 using System;
 using System.Windows.Forms;
-using PoliceStationIS.Forms.Employees;
 
 namespace PoliceStationIS.Forms.Main
 {
@@ -23,6 +24,8 @@ namespace PoliceStationIS.Forms.Main
 
             btnAddEmployee.Click += BtnAddEmployee_Click;
             btnViewEmployeess.Click += BtnViewEmployeess_Click;
+            btnReport.Click += BtnReport_Click;
+
         }
 
         private void LoadStatistics()
@@ -246,6 +249,17 @@ namespace PoliceStationIS.Forms.Main
             if (mainForm != null)
             {
                 mainForm.OpenEmployeesPage();
+            }
+        }
+
+        private void BtnReport_Click(
+    object sender,
+    EventArgs e)
+        {
+            using (ReportsForm form =
+    new ReportsForm())
+            {
+                form.ShowDialog();
             }
         }
     }

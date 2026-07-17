@@ -12,6 +12,8 @@ namespace PoliceStationIS.Forms.Employees
 
         private readonly NpgsqlConnection connection;
 
+        private int currentPostId;
+
         public EmployeePositionForm(
             int employeeId)
         {
@@ -70,6 +72,7 @@ e.Employee_id,
 e.Last_name,
 e.Name_,
 e.Middle_name,
+e.Post_id,
 
 p.Post_name,
 
@@ -107,6 +110,10 @@ WHERE e.Employee_id = @EmployeeId;
                             throw new Exception(
                                 "Сотрудник не найден.");
                         }
+
+                        currentPostId =
+    Convert.ToInt32(
+        reader["Post_id"]);
 
                         string middleName = "";
 
@@ -191,6 +198,19 @@ ORDER BY Post_name;
                 return;
             }
 
+            if (Convert.ToInt32(
+        cmbPosition.SelectedValue)
+    == currentPostId)
+            {
+                MessageBox.Show(
+                    "Сотрудник уже занимает выбранную должность.",
+                    "Информация",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+
+                return;
+            }
+
             ChangeEmployeePosition();
         }
 
@@ -232,6 +252,9 @@ WHERE
 
                     command.ExecuteNonQuery();
                 }
+
+                AddPersonnelChange(
+    transaction);
 
                 AddPersonnelHistory(
                     transaction);
@@ -276,6 +299,56 @@ WHERE
                 {
                     connection.Close();
                 }
+            }
+        }
+
+        private void AddPersonnelChange(
+    NpgsqlTransaction transaction)
+        {
+            string query =
+        @"
+INSERT INTO Personnel_change
+(
+    Employee_id,
+    Old_post_id,
+    New_post_id,
+    Change_date,
+    Changed_by
+)
+VALUES
+(
+    @EmployeeId,
+    @OldPostId,
+    @NewPostId,
+    @ChangeDate,
+    NULL
+);
+";
+
+            using (NpgsqlCommand command =
+                new NpgsqlCommand(
+                    query,
+                    connection,
+                    transaction))
+            {
+                command.Parameters.AddWithValue(
+                    "@EmployeeId",
+                    employeeId);
+
+                command.Parameters.AddWithValue(
+                    "@OldPostId",
+                    currentPostId);
+
+                command.Parameters.AddWithValue(
+                    "@NewPostId",
+                    Convert.ToInt32(
+                        cmbPosition.SelectedValue));
+
+                command.Parameters.AddWithValue(
+                    "@ChangeDate",
+                    dtpChangeDate.Value.Date);
+
+                command.ExecuteNonQuery();
             }
         }
 

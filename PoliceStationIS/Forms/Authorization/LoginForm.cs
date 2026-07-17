@@ -182,19 +182,16 @@ namespace PoliceStationIS.Forms.Authorization
                     user.RoleName;
 
                 MessageBox.Show(
-                    $"Добро пожаловать, {user.Login}!\nРоль: {user.RoleName}",
-                    "Успешный вход",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
+    $"Добро пожаловать, {user.Login}!\nРоль: {user.RoleName}",
+    "Успешный вход",
+    MessageBoxButtons.OK,
+    MessageBoxIcon.Information);
 
-                // Здесь позже будет открытие главной формы
-
-                this.Hide();
-
-                MainForm mainForm =
-                    new MainForm();
+                MainForm mainForm = new MainForm();
 
                 mainForm.Show();
+
+                this.Hide();
             }
             catch (Exception ex)
             {

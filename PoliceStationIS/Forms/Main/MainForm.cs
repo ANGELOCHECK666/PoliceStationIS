@@ -66,7 +66,7 @@ namespace PoliceStationIS.Forms.Main
         {
             UserControl page = null;
 
-            switch (UserSession.RoleName)
+            switch (UserSession.PostName)
             {
                 case "Кадровик":
 
@@ -85,16 +85,8 @@ namespace PoliceStationIS.Forms.Main
 
                 case "Кинолог":
 
-                    // позже создадим
                     page =
-                        new HRDashboardPage();
-
-                    break;
-
-                default:
-
-                    page =
-                        new HRDashboardPage();
+                        new DogHandlerDashboardPage();
 
                     break;
             }
