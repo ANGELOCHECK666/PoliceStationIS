@@ -54,6 +54,8 @@ namespace PoliceStationIS.Forms.Main
         private Button btnEquipment;
         private Button btnDogs;
         private Button btnReports;
+        private Button btnStatistics;
+        private Button btnDepartments;
         private Button btnExit;
 
         private void InitializeComponent()
@@ -547,8 +549,19 @@ namespace PoliceStationIS.Forms.Main
             this.btnReports =
                 CreateMenuButton(
                     "Отчеты",
-                    Properties.Resources.reports_gold_icon,
+                    Properties.Resources.cases_gold_icon,
                     465);
+            this.btnStatistics =
+    CreateMenuButton(
+        "Статистика",
+        Properties.Resources.statistics_gold_icon,
+        510);
+
+            this.btnDepartments =
+                CreateMenuButton(
+                    "Подразделения",
+                    Properties.Resources.departments_gold_icon,
+                    555);
 
             this.btnExit =
                 CreateMenuButton(
@@ -592,6 +605,11 @@ namespace PoliceStationIS.Forms.Main
 
             this.panelMenu.Controls.Add(
                 this.btnReports);
+            this.panelMenu.Controls.Add(
+    this.btnStatistics);
+
+            this.panelMenu.Controls.Add(
+                this.btnDepartments);
 
             this.panelMenu.Controls.Add(
                 this.btnExit);

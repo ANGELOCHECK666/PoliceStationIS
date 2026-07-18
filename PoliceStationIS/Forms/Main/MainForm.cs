@@ -68,6 +68,8 @@ namespace PoliceStationIS.Forms.Main
 
             switch (UserSession.PostName)
             {
+                case "Архивариус":
+                case "Специалист по кадрам":
                 case "Кадровик":
 
                     page =
@@ -76,6 +78,33 @@ namespace PoliceStationIS.Forms.Main
                     break;
 
                 case "Следователь":
+                case "Старший следователь":
+                case "Оперуполномоченный":
+                case "Старший оперуполномоченный":
+                case "Дознаватель":
+                case "Помощник следователя":
+                case "Полицейский":
+                case "Старший полицейский":
+
+                    page =
+                        new InvestigatorDashboardPage();
+
+                    break;
+
+                case "Кинолог":
+                case "Инструктор-кинолог":
+
+                    page =
+                        new DogHandlerDashboardPage();
+
+                    break;
+
+                case "Инспектор":
+                case "Старший инспектор":
+                case "Участковый уполномоченный полиции":
+                case "Сотрудник ППС":
+                case "Сотрудник конвоя":
+                case "Инспектор ДПС":
 
                     // позже создадим
                     page =
@@ -83,10 +112,52 @@ namespace PoliceStationIS.Forms.Main
 
                     break;
 
-                case "Кинолог":
+                case "Инженер":
+                case "Специалист по материально-техническому обеспечению":
+                case "Старший специалист по материально-техническому обеспечению":
+                case "Заведующий складом":
+
+                    // позже создадим
+                    page =
+                        new HRDashboardPage();
+
+                    break;
+
+                case "Начальник отдела":
+                case "Заместитель начальника отдела":
+                case "Командир отделения":
+                case "Командир взвода":
 
                     page =
-                        new DogHandlerDashboardPage();
+                        new DepartmentChiefDashboardPage();
+
+                    break;
+
+                case "Генерал полиции":
+
+                    page =
+                        new GeneralPoliceDashboardPage();
+
+                    break;
+
+                case "Эксперт-криминалист":
+                case "Старший эксперт-криминалист":
+                case "Техник-криминалист":
+                case "Специалист-криминалист":
+
+                    page =
+                        new CriminalistDashboardPage();
+
+                    break;
+
+                case "Дежурный":
+                case "Помощник дежурного":
+                case "Оперативный дежурный":
+                case "Специалист связи":
+
+                    // позже создадим
+                    page =
+                        new HRDashboardPage();
 
                     break;
             }

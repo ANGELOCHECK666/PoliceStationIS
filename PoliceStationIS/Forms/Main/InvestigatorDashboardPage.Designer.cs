@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace PoliceStationIS.Forms.Main
 {
-    partial class DogHandlerDashboardPage
+    partial class InvestigatorDashboardPage
     {
         private System.ComponentModel.IContainer components = null;
 
@@ -18,37 +18,37 @@ namespace PoliceStationIS.Forms.Main
         private Label lblPosition;
         private Label lblDescription;
 
-        private PictureBox picDogHandler;
+        private PictureBox picInvestigator;
 
         // =====================================
         // STATISTICS CARDS
         // =====================================
 
-        private RoundedPanel pnlAssignedDogs;
-        private RoundedPanel pnlPatrolDogs;
-        private RoundedPanel pnlNewDogs;
-        private RoundedPanel pnlActiveDogs;
+        private RoundedPanel pnlMyCases;
+        private RoundedPanel pnlActiveCases;
+        private RoundedPanel pnlProtocols;
+        private RoundedPanel pnlExpertises;
 
-        private Label lblAssignedDogsTitle;
-        private Label lblAssignedDogsCount;
-        private Label lblAssignedDogsUnit;
+        private Label lblMyCasesTitle;
+        private Label lblMyCasesCount;
+        private Label lblMyCasesUnit;
 
-        private Label lblPatrolDogsTitle;
-        private Label lblPatrolDogsCount;
-        private Label lblPatrolDogsUnit;
+        private Label lblActiveCasesTitle;
+        private Label lblActiveCasesCount;
+        private Label lblActiveCasesUnit;
 
-        private Label lblNewDogsTitle;
-        private Label lblNewDogsCount;
-        private Label lblNewDogsUnit;
+        private Label lblProtocolsTitle;
+        private Label lblProtocolsCount;
+        private Label lblProtocolsUnit;
 
-        private Label lblActiveDogsTitle;
-        private Label lblActiveDogsCount;
-        private Label lblActiveDogsUnit;
+        private Label lblExpertisesTitle;
+        private Label lblExpertisesCount;
+        private Label lblExpertisesUnit;
 
-        private PictureBox picAssignedDogs;
-        private PictureBox picPatrolDogs;
-        private PictureBox picNewDogs;
-        private PictureBox picActiveDogs;
+        private PictureBox picMyCases;
+        private PictureBox picActiveCases;
+        private PictureBox picProtocols;
+        private PictureBox picExpertises;
 
         // =====================================
         // RECENT EVENTS
@@ -68,23 +68,23 @@ namespace PoliceStationIS.Forms.Main
 
         private Label lblQuickActions;
 
-        private Button btnAddDog;
-        private Button btnViewDogs;
-        private Button btnAssignPatrol;
+        private Button btnCreateCase;
+        private Button btnAddCitizen;
+        private Button btnCreateProtocol;
 
         // =====================================
         // QUICK ACTIONS ICONS
         // =====================================
 
-        private PictureBox picAddDog;
-        private PictureBox picViewDogs;
-        private PictureBox picAssignPatrol;
+        private PictureBox picCreateCase;
+        private PictureBox picAddCitizen;
+        private PictureBox picCreateProtocol;
 
-        private PictureBox picArrowAdd;
-        private PictureBox picArrowView;
-        private PictureBox picArrowPatrol;
+        private PictureBox picArrowCase;
+        private PictureBox picArrowCitizen;
+        private PictureBox picArrowProtocol;
 
-        private PictureBox picDog;
+        private PictureBox picInvestigatorSilhouette;
 
         protected override void Dispose(
             bool disposing)
@@ -118,71 +118,71 @@ namespace PoliceStationIS.Forms.Main
             this.lblDescription =
                 new Label();
 
-            this.picDogHandler =
+            this.picInvestigator =
                 new PictureBox();
 
             // =====================================
             // STATISTIC CARDS
             // =====================================
 
-            this.pnlAssignedDogs =
+            this.pnlMyCases =
                 new RoundedPanel();
 
-            this.pnlPatrolDogs =
+            this.pnlActiveCases =
                 new RoundedPanel();
 
-            this.pnlNewDogs =
+            this.pnlProtocols =
                 new RoundedPanel();
 
-            this.pnlActiveDogs =
+            this.pnlExpertises =
                 new RoundedPanel();
 
-            this.lblAssignedDogsTitle =
+            this.lblMyCasesTitle =
                 new Label();
 
-            this.lblAssignedDogsCount =
+            this.lblMyCasesCount =
                 new Label();
 
-            this.lblAssignedDogsUnit =
+            this.lblMyCasesUnit =
                 new Label();
 
-            this.lblPatrolDogsTitle =
+            this.lblActiveCasesTitle =
                 new Label();
 
-            this.lblPatrolDogsCount =
+            this.lblActiveCasesCount =
                 new Label();
 
-            this.lblPatrolDogsUnit =
+            this.lblActiveCasesUnit =
                 new Label();
 
-            this.lblNewDogsTitle =
+            this.lblProtocolsTitle =
                 new Label();
 
-            this.lblNewDogsCount =
+            this.lblProtocolsCount =
                 new Label();
 
-            this.lblNewDogsUnit =
+            this.lblProtocolsUnit =
                 new Label();
 
-            this.lblActiveDogsTitle =
+            this.lblExpertisesTitle =
                 new Label();
 
-            this.lblActiveDogsCount =
+            this.lblExpertisesCount =
                 new Label();
 
-            this.lblActiveDogsUnit =
+            this.lblExpertisesUnit =
                 new Label();
 
-            this.picAssignedDogs =
+            this.picMyCases =
                 new PictureBox();
 
-            this.picPatrolDogs =
+            this.picActiveCases =
                 new PictureBox();
 
-            this.picNewDogs =
+            this.picProtocols =
                 new PictureBox();
 
-            this.picActiveDogs =
+            this.picExpertises =
                 new PictureBox();
 
             this.SuspendLayout();
@@ -263,7 +263,7 @@ namespace PoliceStationIS.Forms.Main
                     85);
 
             this.lblPosition.Text =
-                "Должность: Кинолог";
+                "Должность: Следователь";
 
             // =====================================
 
@@ -283,29 +283,29 @@ namespace PoliceStationIS.Forms.Main
                     125);
 
             this.lblDescription.Text =
-                "Работа со служебными собаками и кинологическими нарядами";
+                "Работа с уголовными делами, протоколами и экспертизами";
 
             // =====================================
             // IMAGE
             // =====================================
 
-            this.picDogHandler.Image =
-                global::PoliceStationIS.Properties.Resources.dog_main_icon;
+            this.picInvestigator.Image =
+                global::PoliceStationIS.Properties.Resources.sledovatel_main_icon;
 
-            this.picDogHandler.Location =
+            this.picInvestigator.Location =
                 new Point(
                     980,
-                    10);
+                    0);
 
-            this.picDogHandler.Size =
+            this.picInvestigator.Size =
                 new Size(
                     290,
                     240);
 
-            this.picDogHandler.SizeMode =
+            this.picInvestigator.SizeMode =
                 PictureBoxSizeMode.Zoom;
 
-            this.picDogHandler.BackColor =
+            this.picInvestigator.BackColor =
                 Color.Transparent;
 
             // =====================================
@@ -313,19 +313,19 @@ namespace PoliceStationIS.Forms.Main
             // =====================================
 
             ConfigureCard(
-                this.pnlAssignedDogs,
+                this.pnlMyCases,
                 30);
 
             ConfigureCard(
-                this.pnlPatrolDogs,
+                this.pnlActiveCases,
                 360);
 
             ConfigureCard(
-                this.pnlNewDogs,
+                this.pnlProtocols,
                 690);
 
             ConfigureCard(
-                this.pnlActiveDogs,
+                this.pnlExpertises,
                 1020);
 
             // =====================================
@@ -333,134 +333,134 @@ namespace PoliceStationIS.Forms.Main
             // =====================================
 
             ConfigureCardIcon(
-                this.picAssignedDogs,
-                Properties.Resources.dog_card_1);
+                this.picMyCases,
+                Properties.Resources.case_card_1);
 
             ConfigureCardTitle(
-                this.lblAssignedDogsTitle,
-                "Закреплено собак");
+                this.lblMyCasesTitle,
+                "Моих дел");
 
             ConfigureCardValue(
-                this.lblAssignedDogsCount);
+                this.lblMyCasesCount);
 
             ConfigureCardUnit(
-    this.lblAssignedDogsUnit,
-    "соб.");
+                this.lblMyCasesUnit,
+                "шт.");
 
             // =====================================
             // CARD 2
             // =====================================
 
             ConfigureCardIcon(
-                this.picPatrolDogs,
-                Properties.Resources.dog_card_2);
+                this.picActiveCases,
+                Properties.Resources.case_card_2);
 
             ConfigureCardTitle(
-                this.lblPatrolDogsTitle,
-                "Нарядов с собаками");
+                this.lblActiveCasesTitle,
+                "Активных дел");
 
             ConfigureCardValue(
-                this.lblPatrolDogsCount);
+                this.lblActiveCasesCount);
 
             ConfigureCardUnit(
-    this.lblPatrolDogsUnit,
-    "нар.");
+                this.lblActiveCasesUnit,
+                "шт.");
 
             // =====================================
             // CARD 3
             // =====================================
 
             ConfigureCardIcon(
-                this.picNewDogs,
-                Properties.Resources.dog_card_3);
+                this.picProtocols,
+                Properties.Resources.case_card_3);
 
             ConfigureCardTitle(
-                this.lblNewDogsTitle,
-                "Новых собак");
+                this.lblProtocolsTitle,
+                "Протоколов");
 
             ConfigureCardValue(
-                this.lblNewDogsCount);
+                this.lblProtocolsCount);
 
             ConfigureCardUnit(
-    this.lblNewDogsUnit,
-    "соб.");
+                this.lblProtocolsUnit,
+                "шт.");
 
             // =====================================
             // CARD 4
             // =====================================
 
             ConfigureCardIcon(
-                this.picActiveDogs,
-                Properties.Resources.dog_card_4);
+                this.picExpertises,
+                Properties.Resources.case_card_4);
 
             ConfigureCardTitle(
-                this.lblActiveDogsTitle,
-                "Готовы к службе");
+                this.lblExpertisesTitle,
+                "Назначенных экспертиз");
 
             ConfigureCardValue(
-                this.lblActiveDogsCount);
+                this.lblExpertisesCount);
 
             ConfigureCardUnit(
-    this.lblActiveDogsUnit,
-    "соб.");
+                this.lblExpertisesUnit,
+                "шт.");
 
             // =====================================
             // ADD TO CARDS
             // =====================================
 
-            this.pnlAssignedDogs.Controls.Add(
-                this.picAssignedDogs);
+            this.pnlMyCases.Controls.Add(
+                this.picMyCases);
 
-            this.pnlAssignedDogs.Controls.Add(
-                this.lblAssignedDogsTitle);
+            this.pnlMyCases.Controls.Add(
+                this.lblMyCasesTitle);
 
-            this.pnlAssignedDogs.Controls.Add(
-                this.lblAssignedDogsCount);
+            this.pnlMyCases.Controls.Add(
+                this.lblMyCasesCount);
 
-            this.pnlAssignedDogs.Controls.Add(
-                this.lblAssignedDogsUnit);
-
-            // -------------------------------------
-
-            this.pnlPatrolDogs.Controls.Add(
-                this.picPatrolDogs);
-
-            this.pnlPatrolDogs.Controls.Add(
-                this.lblPatrolDogsTitle);
-
-            this.pnlPatrolDogs.Controls.Add(
-                this.lblPatrolDogsCount);
-
-            this.pnlPatrolDogs.Controls.Add(
-                this.lblPatrolDogsUnit);
+            this.pnlMyCases.Controls.Add(
+                this.lblMyCasesUnit);
 
             // -------------------------------------
 
-            this.pnlNewDogs.Controls.Add(
-                this.picNewDogs);
+            this.pnlActiveCases.Controls.Add(
+                this.picActiveCases);
 
-            this.pnlNewDogs.Controls.Add(
-                this.lblNewDogsTitle);
+            this.pnlActiveCases.Controls.Add(
+                this.lblActiveCasesTitle);
 
-            this.pnlNewDogs.Controls.Add(
-                this.lblNewDogsCount);
+            this.pnlActiveCases.Controls.Add(
+                this.lblActiveCasesCount);
 
-            this.pnlNewDogs.Controls.Add(
-                this.lblNewDogsUnit);
+            this.pnlActiveCases.Controls.Add(
+                this.lblActiveCasesUnit);
 
             // -------------------------------------
 
-            this.pnlActiveDogs.Controls.Add(
-                this.picActiveDogs);
+            this.pnlProtocols.Controls.Add(
+                this.picProtocols);
 
-            this.pnlActiveDogs.Controls.Add(
-                this.lblActiveDogsTitle);
+            this.pnlProtocols.Controls.Add(
+                this.lblProtocolsTitle);
 
-            this.pnlActiveDogs.Controls.Add(
-                this.lblActiveDogsCount);
+            this.pnlProtocols.Controls.Add(
+                this.lblProtocolsCount);
 
-            this.pnlActiveDogs.Controls.Add(
-                this.lblActiveDogsUnit);
+            this.pnlProtocols.Controls.Add(
+                this.lblProtocolsUnit);
+
+            // -------------------------------------
+
+            this.pnlExpertises.Controls.Add(
+                this.picExpertises);
+
+            this.pnlExpertises.Controls.Add(
+                this.lblExpertisesTitle);
+
+            this.pnlExpertises.Controls.Add(
+                this.lblExpertisesCount);
+
+            this.pnlExpertises.Controls.Add(
+                this.lblExpertisesUnit);
 
             // =====================================
             // WELCOME PANEL CONTROLS
@@ -476,7 +476,7 @@ namespace PoliceStationIS.Forms.Main
                 this.lblDescription);
 
             this.panelWelcome.Controls.Add(
-                this.picDogHandler);
+                this.picInvestigator);
 
             // =====================================
             // RECENT EVENTS PANEL
@@ -657,13 +657,13 @@ namespace PoliceStationIS.Forms.Main
                 "Событие");
 
             this.dgvEvents.Columns.Add(
-                "Dog",
-                "Служебная собака");
+                "Case",
+                "Уголовное дело");
 
             this.dgvEvents.Columns[0].Width = 110;
             this.dgvEvents.Columns[1].Width = 90;
-            this.dgvEvents.Columns[2].Width = 220;
-            this.dgvEvents.Columns[3].Width = 300;
+            this.dgvEvents.Columns[2].Width = 260;
+            this.dgvEvents.Columns[3].Width = 260;
 
             // =====================================
 
@@ -722,8 +722,6 @@ namespace PoliceStationIS.Forms.Main
             this.lblQuickActions.Text =
                 "Быстрые действия";
 
-            // =====================================
-
             this.pnlQuickActions.Controls.Add(
                 this.lblQuickActions);
 
@@ -731,34 +729,34 @@ namespace PoliceStationIS.Forms.Main
             // BUTTONS
             // =====================================
 
-            this.btnAddDog =
+            this.btnCreateCase =
                 new Button();
 
-            this.btnViewDogs =
+            this.btnAddCitizen =
                 new Button();
 
-            this.btnAssignPatrol =
+            this.btnCreateProtocol =
                 new Button();
 
-            this.picAddDog =
+            this.picCreateCase =
                 new PictureBox();
 
-            this.picViewDogs =
+            this.picAddCitizen =
                 new PictureBox();
 
-            this.picAssignPatrol =
+            this.picCreateProtocol =
                 new PictureBox();
 
-            this.picArrowAdd =
+            this.picArrowCase =
                 new PictureBox();
 
-            this.picArrowView =
+            this.picArrowCitizen =
                 new PictureBox();
 
-            this.picArrowPatrol =
+            this.picArrowProtocol =
                 new PictureBox();
 
-            this.picDog =
+            this.picInvestigatorSilhouette =
                 new PictureBox();
 
             // =====================================
@@ -766,45 +764,45 @@ namespace PoliceStationIS.Forms.Main
             // =====================================
 
             ConfigureActionButton(
-                this.btnAddDog,
-                "Добавить собаку",
+                this.btnCreateCase,
+                "Создать дело",
                 50);
 
             ConfigureActionButton(
-                this.btnViewDogs,
-                "Просмотреть собак",
+                this.btnAddCitizen,
+                "Добавить гражданина",
                 125);
 
             ConfigureActionButton(
-                this.btnAssignPatrol,
-                "Назначить на службу",
+                this.btnCreateProtocol,
+                "Составить протокол",
                 200);
 
             ConfigureActionIcon(
-                this.picAddDog,
-                Properties.Resources.dog_add_gold_icon,
+                this.picCreateCase,
+                Properties.Resources.case_add_gold_icon,
                 50);
 
             ConfigureActionIcon(
-                this.picViewDogs,
-                Properties.Resources.dog_search_gold_icon,
+                this.picAddCitizen,
+                Properties.Resources.citizen_add_gold_icon,
                 125);
 
             ConfigureActionIcon(
-                this.picAssignPatrol,
-                Properties.Resources.dog_patrol_gold_icon,
+                this.picCreateProtocol,
+                Properties.Resources.protocol_add_gold_icon,
                 200);
 
             ConfigureArrowIcon(
-                this.picArrowAdd,
+                this.picArrowCase,
                 50);
 
             ConfigureArrowIcon(
-                this.picArrowView,
+                this.picArrowCitizen,
                 125);
 
             ConfigureArrowIcon(
-                this.picArrowPatrol,
+                this.picArrowProtocol,
                 200);
 
             // =====================================
@@ -812,67 +810,67 @@ namespace PoliceStationIS.Forms.Main
             // =====================================
 
             this.pnlQuickActions.Controls.Add(
-                this.btnAddDog);
+                this.btnCreateCase);
 
             this.pnlQuickActions.Controls.Add(
-                this.picAddDog);
+                this.picCreateCase);
 
             this.pnlQuickActions.Controls.Add(
-                this.picViewDogs);
+                this.picAddCitizen);
 
             this.pnlQuickActions.Controls.Add(
-                this.picAssignPatrol);
+                this.picCreateProtocol);
 
-            this.picAddDog.BringToFront();
-            this.picViewDogs.BringToFront();
-            this.picAssignPatrol.BringToFront();
-
-            this.pnlQuickActions.Controls.Add(
-                this.btnViewDogs);
+            this.picCreateCase.BringToFront();
+            this.picAddCitizen.BringToFront();
+            this.picCreateProtocol.BringToFront();
 
             this.pnlQuickActions.Controls.Add(
-                this.btnAssignPatrol);
+                this.btnAddCitizen);
 
             this.pnlQuickActions.Controls.Add(
-                this.picArrowAdd);
+                this.btnCreateProtocol);
 
             this.pnlQuickActions.Controls.Add(
-                this.picArrowView);
+                this.picArrowCase);
 
             this.pnlQuickActions.Controls.Add(
-                this.picArrowPatrol);
-
-            this.picArrowAdd.BringToFront();
-            this.picArrowView.BringToFront();
-            this.picArrowPatrol.BringToFront();
+                this.picArrowCitizen);
 
             this.pnlQuickActions.Controls.Add(
-                this.picDog);
+                this.picArrowProtocol);
 
-            this.picDog.SendToBack();
+            this.picArrowCase.BringToFront();
+            this.picArrowCitizen.BringToFront();
+            this.picArrowProtocol.BringToFront();
+
+            this.pnlQuickActions.Controls.Add(
+                this.picInvestigatorSilhouette);
+
+            this.picInvestigatorSilhouette.SendToBack();
 
             // =====================================
-            // DOG IMAGE
+            // INVESTIGATOR IMAGE
             // =====================================
 
-            this.picDog.Image =
-                Properties.Resources.dog_sil_gold_icon;
+            this.picInvestigatorSilhouette.Image =
+                Properties.Resources.investigator_silhouette_gold;
 
-            this.picDog.BackColor =
+            this.picInvestigatorSilhouette.BackColor =
                 Color.Transparent;
 
-            this.picDog.SizeMode =
+            this.picInvestigatorSilhouette.SizeMode =
                 PictureBoxSizeMode.Zoom;
 
-            this.picDog.Location =
+            this.picInvestigatorSilhouette.Location =
                 new Point(
-                    145,
-                    230);
+                    155,
+                    240);
 
-            this.picDog.Size =
+            this.picInvestigatorSilhouette.Size =
                 new Size(
-                    170,
-                    180);
+                    135,
+                    155);
 
             // =====================================
             // ADD MAIN CONTROLS
@@ -882,16 +880,16 @@ namespace PoliceStationIS.Forms.Main
                 this.panelWelcome);
 
             this.Controls.Add(
-                this.pnlAssignedDogs);
+                this.pnlMyCases);
 
             this.Controls.Add(
-                this.pnlPatrolDogs);
+                this.pnlActiveCases);
 
             this.Controls.Add(
-                this.pnlNewDogs);
+                this.pnlProtocols);
 
             this.Controls.Add(
-                this.pnlActiveDogs);
+                this.pnlExpertises);
 
             this.Controls.Add(
                 this.pnlRecentEvents);
@@ -902,9 +900,9 @@ namespace PoliceStationIS.Forms.Main
             this.ResumeLayout(false);
         }
 
-                    // =====================================
-                    // CARD METHODS
-                    // =====================================
+        // =====================================
+        // CARD METHODS
+        // =====================================
 
         private void ConfigureCard(
             RoundedPanel panel,
@@ -991,7 +989,7 @@ namespace PoliceStationIS.Forms.Main
                     190,
                     62);
 
-            label.Text = "соб.";
+            label.Text = "шт.";
         }
 
         private void ConfigureCardUnit(
@@ -1017,8 +1015,8 @@ namespace PoliceStationIS.Forms.Main
         }
 
         private void ConfigureCardIcon(
-    PictureBox picture,
-    Image image)
+            PictureBox picture,
+            Image image)
         {
             picture.Image = image;
 
