@@ -127,6 +127,12 @@
   <data name="calendar_gold_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\calendar_gold_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="car_main_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\car_main_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="car_main_icon_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\car_main_icon_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="cases_gold_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\cases_gold_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -220,8 +226,20 @@
   <data name="download_icon_gold" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\download_icon_gold.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="duty_call" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\duty_call.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="duty_card_3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\duty_card_3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="duty_card_4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\duty_card_4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="duty_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\duty_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="duty_sil" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\duty_sil.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="edit_gold_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\edit_gold_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -307,6 +325,30 @@
   <data name="home_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\home_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="inspector_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\inspector_1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="inspector_2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\inspector_2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="inspector_3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\inspector_3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="inspector_4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\inspector_4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="inspector_card_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\inspector_card_1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="inspector_card_2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\inspector_card_2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="inspector_card_3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\inspector_card_3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="inspector_card_4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\inspector_card_4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="investigator_silhouette_gold" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\investigator_silhouette_gold.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -318,6 +360,33 @@
   </data>
   <data name="logout_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\logout_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="main_duty" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\main_duty.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mto_card_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\mto_card_1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mto_card_2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\mto_card_2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mto_card_3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\mto_card_3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mto_card_gold_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\mto_card_gold_1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mto_card_gold_2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\mto_card_gold_2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mto_card_gold_3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\mto_card_gold_3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mto_main" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\mto_main.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mto_sil" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\mto_sil.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="nachalnik_main_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\nachalnik_main_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

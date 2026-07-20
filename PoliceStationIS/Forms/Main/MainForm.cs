@@ -106,9 +106,8 @@ namespace PoliceStationIS.Forms.Main
                 case "Сотрудник конвоя":
                 case "Инспектор ДПС":
 
-                    // позже создадим
                     page =
-                        new HRDashboardPage();
+                        new InspectorDashboardPage();
 
                     break;
 
@@ -117,9 +116,8 @@ namespace PoliceStationIS.Forms.Main
                 case "Старший специалист по материально-техническому обеспечению":
                 case "Заведующий складом":
 
-                    // позже создадим
                     page =
-                        new HRDashboardPage();
+                        new MTODashboardPage();
 
                     break;
 
@@ -155,9 +153,8 @@ namespace PoliceStationIS.Forms.Main
                 case "Оперативный дежурный":
                 case "Специалист связи":
 
-                    // позже создадим
                     page =
-                        new HRDashboardPage();
+                        new DutyOfficerDashboardPage();
 
                     break;
             }

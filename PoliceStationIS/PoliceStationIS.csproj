@@ -216,6 +216,12 @@
     <Compile Include="Forms\Main\DogHandlerDashboardPage.Designer.cs">
       <DependentUpon>DogHandlerDashboardPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Main\DutyOfficerDashboardPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Main\DutyOfficerDashboardPage.Designer.cs">
+      <DependentUpon>DutyOfficerDashboardPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Main\GeneralPoliceDashboardPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -228,6 +234,12 @@
     <Compile Include="Forms\Main\HRDashboardPage.Designer.cs">
       <DependentUpon>HRDashboardPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Main\InspectorDashboardPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Main\InspectorDashboardPage.Designer.cs">
+      <DependentUpon>InspectorDashboardPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Main\InvestigatorDashboardPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -239,6 +251,12 @@
     </Compile>
     <Compile Include="Forms\Main\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Main\MTODashboardPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Main\MTODashboardPage.Designer.cs">
+      <DependentUpon>MTODashboardPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\PasswordHelper.cs" />
     <Compile Include="Models\RegisterUserModel.cs" />
