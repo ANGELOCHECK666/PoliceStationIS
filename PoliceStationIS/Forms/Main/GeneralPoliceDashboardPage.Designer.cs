@@ -767,7 +767,7 @@ namespace PoliceStationIS.Forms.Main
 
             ConfigureActionButton(
                 this.btnReports,
-                "Просмотреть отчёты",
+                "Просмотреть сотрудников",
                 50);
 
             ConfigureActionButton(

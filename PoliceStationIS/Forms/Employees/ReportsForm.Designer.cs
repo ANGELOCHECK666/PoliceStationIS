@@ -541,7 +541,7 @@ namespace PoliceStationIS.Forms.HR
                 Cursors.Hand;
 
             this.picPrint.Image =
-    Properties.Resources.print_gold_icon;
+    Properties.Resources.printer_icon;
 
             this.picPrint.SizeMode =
                 PictureBoxSizeMode.Zoom;

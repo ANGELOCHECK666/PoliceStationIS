@@ -53,7 +53,6 @@ namespace PoliceStationIS.Forms.Main
         private Button btnDuty;
         private Button btnEquipment;
         private Button btnDogs;
-        private Button btnReports;
         private Button btnStatistics;
         private Button btnDepartments;
         private Button btnExit;
@@ -546,22 +545,17 @@ namespace PoliceStationIS.Forms.Main
                     Properties.Resources.dogs_gold_icon,
                     420);
 
-            this.btnReports =
-                CreateMenuButton(
-                    "Отчеты",
-                    Properties.Resources.cases_gold_icon,
-                    465);
             this.btnStatistics =
     CreateMenuButton(
         "Статистика",
         Properties.Resources.statistics_gold_icon,
-        510);
+        465);
 
             this.btnDepartments =
                 CreateMenuButton(
                     "Подразделения",
                     Properties.Resources.departments_gold_icon,
-                    555);
+                    510);
 
             this.btnExit =
                 CreateMenuButton(
@@ -603,8 +597,6 @@ namespace PoliceStationIS.Forms.Main
             this.panelMenu.Controls.Add(
                 this.btnDogs);
 
-            this.panelMenu.Controls.Add(
-                this.btnReports);
             this.panelMenu.Controls.Add(
     this.btnStatistics);
 

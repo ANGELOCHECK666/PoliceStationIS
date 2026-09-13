@@ -163,6 +163,66 @@ namespace PoliceStationIS.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap case_close {
+            get {
+                object obj = ResourceManager.GetObject("case_close", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap case_header_image {
+            get {
+                object obj = ResourceManager.GetObject("case_header_image", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap case_resume_gold_icon {
+            get {
+                object obj = ResourceManager.GetObject("case_resume_gold_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap case_section_gold {
+            get {
+                object obj = ResourceManager.GetObject("case_section_gold", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap case_suspend_gold_icon {
+            get {
+                object obj = ResourceManager.GetObject("case_suspend_gold_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap case_transfer_gold_icon {
+            get {
+                object obj = ResourceManager.GetObject("case_transfer_gold_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap cases_gold_icon {
             get {
                 object obj = ResourceManager.GetObject("cases_gold_icon", resourceCulture);
@@ -196,6 +256,16 @@ namespace PoliceStationIS.Properties {
         internal static System.Drawing.Bitmap citizen_add_gold_icon {
             get {
                 object obj = ResourceManager.GetObject("citizen_add_gold_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap citizen_placeholder {
+            get {
+                object obj = ResourceManager.GetObject("citizen_placeholder", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -286,6 +356,16 @@ namespace PoliceStationIS.Properties {
         internal static System.Drawing.Bitmap criminalist_silhouette_gold {
             get {
                 object obj = ResourceManager.GetObject("criminalist_silhouette_gold", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap delete_gold_icon {
+            get {
+                object obj = ResourceManager.GetObject("delete_gold_icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -663,6 +743,16 @@ namespace PoliceStationIS.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap gender_icon {
+            get {
+                object obj = ResourceManager.GetObject("gender_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap general_card_1 {
             get {
                 object obj = ResourceManager.GetObject("general_card_1", resourceCulture);
@@ -726,6 +816,16 @@ namespace PoliceStationIS.Properties {
         internal static System.Drawing.Bitmap gerb_mvd {
             get {
                 object obj = ResourceManager.GetObject("gerb_mvd", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap history_gold_icon {
+            get {
+                object obj = ResourceManager.GetObject("history_gold_icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1133,9 +1233,9 @@ namespace PoliceStationIS.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap print_gold_icon {
+        internal static System.Drawing.Bitmap printer_icon {
             get {
-                object obj = ResourceManager.GetObject("print_gold_icon", resourceCulture);
+                object obj = ResourceManager.GetObject("printer_icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -1396,6 +1496,16 @@ namespace PoliceStationIS.Properties {
         internal static System.Drawing.Bitmap vacation_icon {
             get {
                 object obj = ResourceManager.GetObject("vacation_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap view_gold_icon {
+            get {
+                object obj = ResourceManager.GetObject("view_gold_icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

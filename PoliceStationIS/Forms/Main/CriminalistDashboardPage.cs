@@ -1,10 +1,20 @@
-﻿using System;
+﻿using Npgsql;
+using PoliceStationIS.Forms.Evidence;
+using PoliceStationIS.Forms.Expertises;
+using System;
 using System.Windows.Forms;
 
 namespace PoliceStationIS.Forms.Main
 {
     public partial class CriminalistDashboardPage : UserControl
     {
+        private readonly string connectionString =
+            @"Host=localhost;
+              Port=5432;
+              Database=PoliceStation;
+              Username=postgres;
+              Password=1234567890";
+
         public CriminalistDashboardPage()
         {
             InitializeComponent();
@@ -23,10 +33,102 @@ namespace PoliceStationIS.Forms.Main
 
         private void LoadStatistics()
         {
-            lblExpertisesCount.Text = "14";
-            lblInspectionsCount.Text = "38";
-            lblEvidenceCount.Text = "21";
-            lblCompletedExpertisesCount.Text = "156";
+            try
+            {
+                using (NpgsqlConnection connection =
+                    new NpgsqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    LoadExpertisesCount(connection);
+                    LoadInspectionsCount(connection);
+                    LoadEvidenceCount(connection);
+                    LoadCompletedExpertisesCount(connection);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    ex.Message,
+                    "Ошибка загрузки статистики",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+        }
+
+        private void LoadExpertisesCount(
+            NpgsqlConnection connection)
+        {
+            string sql =
+                @"SELECT COUNT(*)
+                  FROM Inspection i
+                  JOIN Inspection_status s
+                    ON s.Inspection_status_id =
+                       i.Inspection_status_id
+                  WHERE s.Inspection_status_name IN
+                        ('Назначена', 'Проводится')";
+
+            using (NpgsqlCommand command =
+                new NpgsqlCommand(sql, connection))
+            {
+                lblExpertisesCount.Text =
+                    command.ExecuteScalar().ToString();
+            }
+        }
+
+        private void LoadInspectionsCount(
+            NpgsqlConnection connection)
+        {
+            string sql =
+                @"SELECT COUNT(*)
+                  FROM Protocol p
+                  JOIN Protocol_type pt
+                    ON pt.Protocol_type_id =
+                       p.Protocol_type_id
+                  WHERE pt.Protocol_type_name =
+                        'О результатах осмотра'";
+
+            using (NpgsqlCommand command =
+                new NpgsqlCommand(sql, connection))
+            {
+                lblInspectionsCount.Text =
+                    command.ExecuteScalar().ToString();
+            }
+        }
+
+        private void LoadEvidenceCount(
+            NpgsqlConnection connection)
+        {
+            string sql =
+                @"SELECT COUNT(*)
+                  FROM Evidence";
+
+            using (NpgsqlCommand command =
+                new NpgsqlCommand(sql, connection))
+            {
+                lblEvidenceCount.Text =
+                    command.ExecuteScalar().ToString();
+            }
+        }
+
+        private void LoadCompletedExpertisesCount(
+            NpgsqlConnection connection)
+        {
+            string sql =
+                @"SELECT COUNT(*)
+                  FROM Inspection i
+                  JOIN Inspection_status s
+                    ON s.Inspection_status_id =
+                       i.Inspection_status_id
+                  WHERE s.Inspection_status_name =
+                        'Завершена'";
+
+            using (NpgsqlCommand command =
+                new NpgsqlCommand(sql, connection))
+            {
+                lblCompletedExpertisesCount.Text =
+                    command.ExecuteScalar().ToString();
+            }
         }
 
         // =====================================
@@ -35,37 +137,117 @@ namespace PoliceStationIS.Forms.Main
 
         private void LoadRecentEvents()
         {
-            dgvEvents.Rows.Clear();
+            try
+            {
+                dgvEvents.Rows.Clear();
 
-            dgvEvents.Rows.Add(
-                "18.07.2026",
-                "09:15",
-                "Назначена экспертиза",
-                "ЭК-1025");
+                string sql =
+                    @"
+                    SELECT
+                        event_date,
+                        event_type,
+                        event_number
+                    FROM
+                    (
+                        SELECT
+                            i.appointment_date::timestamp
+                                AS event_date,
+                            CASE
+                                WHEN s.inspection_status_name =
+                                     'Завершена'
+                                THEN 'Завершена экспертиза'
 
-            dgvEvents.Rows.Add(
-                "18.07.2026",
-                "10:40",
-                "Добавлено доказательство",
-                "ЭК-1021");
+                                WHEN s.inspection_status_name =
+                                     'Проводится'
+                                THEN 'Проводится экспертиза'
 
-            dgvEvents.Rows.Add(
-                "18.07.2026",
-                "12:05",
-                "Завершена экспертиза",
-                "ЭК-1018");
+                                WHEN s.inspection_status_name =
+                                     'Приостановлена'
+                                THEN 'Приостановлена экспертиза'
 
-            dgvEvents.Rows.Add(
-                "17.07.2026",
-                "16:20",
-                "Осмотр места происшествия",
-                "ЭК-1016");
+                                WHEN s.inspection_status_name =
+                                     'Отменена'
+                                THEN 'Отменена экспертиза'
 
-            dgvEvents.Rows.Add(
-                "17.07.2026",
-                "18:00",
-                "Переданы материалы следователю",
-                "ЭК-1014");
+                                ELSE 'Назначена экспертиза'
+                            END AS event_type,
+                            i.inspection_number AS event_number
+                        FROM Inspection i
+                        JOIN Inspection_status s
+                          ON s.inspection_status_id =
+                             i.inspection_status_id
+
+                        UNION ALL
+
+                        SELECT
+                            e.date_of_seizure::timestamp
+                                AS event_date,
+                            'Добавлено доказательство'
+                                AS event_type,
+                            e.evidence_number AS event_number
+                        FROM Evidence e
+
+                        UNION ALL
+
+                        SELECT
+                            p.date_of_preparation_protocol::timestamp
+                                AS event_date,
+                            'Осмотр места происшествия'
+                                AS event_type,
+                            p.protocol_number AS event_number
+                        FROM Protocol p
+                        JOIN Protocol_type pt
+                          ON pt.protocol_type_id =
+                             p.protocol_type_id
+                        WHERE pt.protocol_type_name =
+                              'О результатах осмотра'
+                    ) events
+                    ORDER BY event_date DESC
+                    LIMIT 10;
+                    ";
+
+                using (NpgsqlConnection connection =
+                    new NpgsqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    using (NpgsqlCommand command =
+                        new NpgsqlCommand(sql, connection))
+                    {
+                        using (NpgsqlDataReader reader =
+                            command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                DateTime date =
+                                    reader.GetDateTime(0);
+
+                                string eventType =
+                                    reader.GetString(1);
+
+                                string eventNumber =
+                                    reader.IsDBNull(2)
+                                        ? "—"
+                                        : reader.GetString(2);
+
+                                dgvEvents.Rows.Add(
+                                    date.ToString("dd.MM.yyyy"),
+                                    "—",
+                                    eventType,
+                                    eventNumber);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    ex.Message,
+                    "Ошибка загрузки последних событий",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
         }
 
         // =====================================
@@ -76,33 +258,42 @@ namespace PoliceStationIS.Forms.Main
             object sender,
             EventArgs e)
         {
-            MessageBox.Show(
-                "Здесь будет открываться список назначенных экспертиз.",
-                "Криминалист",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
+            MainForm mainForm =
+                this.FindForm() as MainForm;
+
+            if (mainForm != null)
+            {
+                mainForm.OpenExpertisesPage();
+            }
         }
 
         private void BtnAddReport_Click(
             object sender,
             EventArgs e)
         {
-            MessageBox.Show(
-                "Здесь будет открываться форма добавления экспертного заключения.",
-                "Криминалист",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
+            using (ExpertiseEditForm form =
+                new ExpertiseEditForm())
+            {
+                if (form.ShowDialog(this.FindForm()) ==
+                    DialogResult.OK)
+                {
+                    LoadStatistics();
+                    LoadRecentEvents();
+                }
+            }
         }
 
         private void BtnEvidence_Click(
             object sender,
             EventArgs e)
         {
-            MessageBox.Show(
-                "Здесь будет открываться список вещественных доказательств.",
-                "Криминалист",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
+            MainForm mainForm =
+                this.FindForm() as MainForm;
+
+            if (mainForm != null)
+            {
+                mainForm.OpenEvidencePage();
+            }
         }
     }
 }

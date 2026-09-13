@@ -1,10 +1,21 @@
-﻿using System;
+﻿using Npgsql;
+using PoliceStationIS.Forms.Cases;
+using PoliceStationIS.Forms.Citizens;
+using PoliceStationIS.Forms.Protocols;
+using System;
 using System.Windows.Forms;
 
 namespace PoliceStationIS.Forms.Main
 {
     public partial class InvestigatorDashboardPage : UserControl
     {
+        private readonly string connectionString =
+            @"Host=localhost;
+              Port=5432;
+              Database=PoliceStation;
+              Username=postgres;
+              Password=1234567890";
+
         public InvestigatorDashboardPage()
         {
             InitializeComponent();
@@ -17,22 +28,91 @@ namespace PoliceStationIS.Forms.Main
             btnCreateProtocol.Click += BtnCreateProtocol_Click;
         }
 
+        // ============================================================
+        // СТАТИСТИКА
+        // ============================================================
+
         private void LoadStatistics()
         {
             try
             {
-                lblMyCasesCount.Text = "18";
-                lblActiveCasesCount.Text = "11";
-                lblProtocolsCount.Text = "42";
-                lblExpertisesCount.Text = "7";
+                using (NpgsqlConnection connection =
+                    new NpgsqlConnection(connectionString))
+                {
+                    connection.Open();
+
+                    // Все уголовные дела
+                    lblMyCasesCount.Text =
+                        ExecuteCount(
+                            connection,
+                            @"
+                            SELECT COUNT(*)
+                            FROM Criminal_case;
+                            ").ToString();
+
+                    // Все активные уголовные дела
+                    lblActiveCasesCount.Text =
+                        ExecuteCount(
+                            connection,
+                            @"
+                            SELECT COUNT(*)
+                            FROM Criminal_case cc
+                            INNER JOIN Case_status cs
+                                ON cs.Case_status_id =
+                                   cc.Case_status_id
+                            WHERE cs.Case_status_name IN
+                            (
+                                'Возбуждено',
+                                'Расследуется',
+                                'Приостановлено'
+                            );
+                            ").ToString();
+
+                    // Все протоколы
+                    lblProtocolsCount.Text =
+                        ExecuteCount(
+                            connection,
+                            @"
+                            SELECT COUNT(*)
+                            FROM Protocol;
+                            ").ToString();
+
+                    // Все экспертизы
+                    lblExpertisesCount.Text =
+                        ExecuteCount(
+                            connection,
+                            @"
+                            SELECT COUNT(*)
+                            FROM Inspection;
+                            ").ToString();
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(
+                    "Не удалось загрузить статистику из базы данных.\n\n" +
                     ex.Message,
-                    "Ошибка загрузки статистики");
+                    "Ошибка загрузки статистики",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
+
+        private int ExecuteCount(
+            NpgsqlConnection connection,
+            string query)
+        {
+            using (NpgsqlCommand command =
+                new NpgsqlCommand(query, connection))
+            {
+                return Convert.ToInt32(
+                    command.ExecuteScalar());
+            }
+        }
+
+        // ============================================================
+        // ПОСЛЕДНИЕ СОБЫТИЯ
+        // ============================================================
 
         private void LoadRecentEvents()
         {
@@ -40,108 +120,170 @@ namespace PoliceStationIS.Forms.Main
             {
                 dgvEvents.Rows.Clear();
 
-                dgvEvents.Rows.Add(
-                    "17.07.2026",
-                    "09:10",
-                    "● Создано уголовное дело",
-                    "№ 24158");
+                using (NpgsqlConnection connection =
+                    new NpgsqlConnection(connectionString))
+                {
+                    connection.Open();
 
-                dgvEvents.Rows.Add(
-                    "17.07.2026",
-                    "10:35",
-                    "● Добавлен гражданин",
-                    "№ 24158");
+                    string sql =
+                        @"
+                        SELECT
+                            event_timestamp,
+                            event_name,
+                            event_object
+                        FROM
+                        (
+                            -- Уголовные дела
+                            SELECT
+                                COALESCE(
+                                    cc.Case_creation_date::timestamp,
+                                    cc.Date_and_time_of_crime
+                                ) AS event_timestamp,
+                                '● Уголовное дело' AS event_name,
+                                '№ ' ||
+                                TRIM(cc.Case_number) AS event_object
+                            FROM Criminal_case cc
 
-                dgvEvents.Rows.Add(
-                    "17.07.2026",
-                    "13:20",
-                    "● Назначена экспертиза",
-                    "№ 24146");
+                            UNION ALL
 
-                dgvEvents.Rows.Add(
-                    "16.07.2026",
-                    "09:40",
-                    "● Составлен протокол",
-                    "№ 24141");
+                            -- Протоколы
+                            SELECT
+                                p.Date_of_preparation_protocol::timestamp
+                                    AS event_timestamp,
+                                '● Составлен протокол'
+                                    AS event_name,
+                                '№ ' ||
+                                TRIM(p.Protocol_number)
+                                    AS event_object
+                            FROM Protocol p
 
-                dgvEvents.Rows.Add(
-                    "16.07.2026",
-                    "12:15",
-                    "● Допрошен свидетель",
-                    "№ 24139");
+                            UNION ALL
 
-                dgvEvents.Rows.Add(
-                    "16.07.2026",
-                    "16:50",
-                    "● Добавлено вещественное доказательство",
-                    "№ 24137");
+                            -- Экспертизы
+                            SELECT
+                                i.Appointment_date::timestamp
+                                    AS event_timestamp,
+                                '● Назначена экспертиза'
+                                    AS event_name,
+                                '№ ' ||
+                                TRIM(i.Inspection_number)
+                                    AS event_object
+                            FROM Inspection i
 
-                dgvEvents.Rows.Add(
-                    "15.07.2026",
-                    "08:45",
-                    "● Назначена экспертиза",
-                    "№ 24131");
+                            UNION ALL
 
-                dgvEvents.Rows.Add(
-                    "15.07.2026",
-                    "14:30",
-                    "● Получено заключение эксперта",
-                    "№ 24128");
+                            -- Работа с гражданами
+                            SELECT
+                                ch.Event_date AS event_timestamp,
+                                CASE
+                                    WHEN ch.Event_type = 'Создание'
+                                        THEN '● Добавлен гражданин'
+                                    WHEN ch.Event_type = 'Изменение'
+                                        THEN '● Изменены данные гражданина'
+                                    WHEN ch.Event_type = 'Удаление'
+                                        THEN '● Удалён гражданин'
+                                    ELSE
+                                        '● Изменение гражданина'
+                                END AS event_name,
+                                'Гражданин № ' ||
+                                ch.Citizen_id::text AS event_object
+                            FROM Citizen_history ch
+                        ) events
+                        WHERE event_timestamp IS NOT NULL
+                        ORDER BY event_timestamp DESC
+                        LIMIT 10;
+                        ";
 
-                dgvEvents.Rows.Add(
-                    "14.07.2026",
-                    "11:05",
-                    "● Составлен протокол осмотра",
-                    "№ 24122");
+                    using (NpgsqlCommand command =
+                        new NpgsqlCommand(sql, connection))
+                    using (NpgsqlDataReader reader =
+                        command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            DateTime eventDate =
+                                reader.GetDateTime(0);
 
-                dgvEvents.Rows.Add(
-                    "14.07.2026",
-                    "17:40",
-                    "● Уголовное дело завершено",
-                    "№ 24110");
+                            string eventName =
+                                reader.IsDBNull(1)
+                                    ? "—"
+                                    : reader.GetString(1);
+
+                            string eventObject =
+                                reader.IsDBNull(2)
+                                    ? "—"
+                                    : reader.GetString(2);
+
+                            dgvEvents.Rows.Add(
+                                eventDate.ToString("dd.MM.yyyy"),
+                                eventDate.ToString("HH:mm"),
+                                eventName,
+                                eventObject);
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(
+                    "Не удалось загрузить последние события из базы данных.\n\n" +
                     ex.Message,
-                    "Ошибка загрузки последних событий");
+                    "Ошибка загрузки последних событий",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
+
+        // ============================================================
+        // БЫСТРЫЕ ДЕЙСТВИЯ
+        // ============================================================
 
         private void BtnCreateCase_Click(
             object sender,
             EventArgs e)
         {
-            MessageBox.Show(
-                "Форма создания уголовного дела пока не подключена.",
-                "Информация",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
-
-            LoadStatistics();
-            LoadRecentEvents();
+            using (CaseEditForm form =
+                new CaseEditForm())
+            {
+                if (form.ShowDialog(
+                    this.FindForm()) == DialogResult.OK)
+                {
+                    LoadStatistics();
+                    LoadRecentEvents();
+                }
+            }
         }
 
         private void BtnAddCitizen_Click(
             object sender,
             EventArgs e)
         {
-            MessageBox.Show(
-                "Форма добавления гражданина пока не подключена.",
-                "Информация",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
+            using (CitizenEditForm form =
+                new CitizenEditForm())
+            {
+                if (form.ShowDialog(
+                    this.FindForm()) == DialogResult.OK)
+                {
+                    LoadStatistics();
+                    LoadRecentEvents();
+                }
+            }
         }
 
         private void BtnCreateProtocol_Click(
             object sender,
             EventArgs e)
         {
-            MessageBox.Show(
-                "Форма составления протокола пока не подключена.",
-                "Информация",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
+            using (ProtocolEditForm form =
+                new ProtocolEditForm())
+            {
+                if (form.ShowDialog(
+                    this.FindForm()) == DialogResult.OK)
+                {
+                    LoadStatistics();
+                    LoadRecentEvents();
+                }
+            }
         }
     }
 }

@@ -338,7 +338,7 @@ namespace PoliceStationIS.Forms.Main
 
             ConfigureCardTitle(
                 this.lblMyCasesTitle,
-                "Моих дел");
+                "Всего дел");
 
             ConfigureCardValue(
                 this.lblMyCasesCount);

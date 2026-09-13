@@ -772,12 +772,12 @@ namespace PoliceStationIS.Forms.Main
 
             ConfigureActionButton(
                 this.btnCallLog,
-                "Журнал вызовов",
+                "Добавить гражданина",
                 125);
 
             ConfigureActionButton(
                 this.btnRegisterIncident,
-                "Зарегистрировать происшествие",
+                "Просмотреть граждан",
                 200);
 
             // =====================================

@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Npgsql;
+using PoliceStationIS.Database;
+using PoliceStationIS.Forms.Dogs;
+using PoliceStationIS.Forms.Equipment;
+using System;
 using System.Windows.Forms;
 
 namespace PoliceStationIS.Forms.Main
@@ -21,16 +25,68 @@ namespace PoliceStationIS.Forms.Main
         {
             try
             {
-                lblAssignedDogsCount.Text = "8";
-                lblPatrolDogsCount.Text = "27";
-                lblNewDogsCount.Text = "3";
-                lblActiveDogsCount.Text = "5";
+                using (NpgsqlConnection connection =
+                    DatabaseConnection.GetConnection())
+                {
+                    connection.Open();
+
+                    lblAssignedDogsCount.Text =
+                        ExecuteCount(
+                            connection,
+                            @"SELECT COUNT(*)
+                              FROM service_dog
+                              WHERE employee_id IS NOT NULL;")
+                        .ToString();
+
+                    lblPatrolDogsCount.Text =
+                        ExecuteCount(
+                            connection,
+                            @"SELECT COUNT(*)
+                              FROM patrol_and_post_service
+                              WHERE LOWER(description) LIKE '%кинолог%';")
+                        .ToString();
+
+                    lblNewDogsCount.Text =
+                        ExecuteCount(
+                            connection,
+                            @"SELECT COUNT(*)
+                              FROM service_dog sd
+                              INNER JOIN dog_status ds
+                                  ON sd.dog_status_id = ds.dog_status_id
+                              WHERE ds.dog_status_name = 'На обучении';")
+                        .ToString();
+
+                    lblActiveDogsCount.Text =
+                        ExecuteCount(
+                            connection,
+                            @"SELECT COUNT(*)
+                              FROM service_dog sd
+                              INNER JOIN dog_status ds
+                                  ON sd.dog_status_id = ds.dog_status_id
+                              WHERE ds.dog_status_name = 'На службе';")
+                        .ToString();
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(
+                    "Не удалось загрузить статистику служебных собак.\n\n" +
                     ex.Message,
-                    "Ошибка загрузки статистики");
+                    "Ошибка загрузки статистики",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+        }
+
+        private int ExecuteCount(
+            NpgsqlConnection connection,
+            string query)
+        {
+            using (NpgsqlCommand command =
+                new NpgsqlCommand(query, connection))
+            {
+                return Convert.ToInt32(
+                    command.ExecuteScalar());
             }
         }
 
@@ -40,105 +96,123 @@ namespace PoliceStationIS.Forms.Main
             {
                 dgvEvents.Rows.Clear();
 
-                dgvEvents.Rows.Add(
-                    "17.07.2026",
-                    "08:30",
-                    "● Назначена на службу",
-                    "Альфа");
+                using (NpgsqlConnection connection =
+                    DatabaseConnection.GetConnection())
+                {
+                    connection.Open();
 
-                dgvEvents.Rows.Add(
-                    "17.07.2026",
-                    "10:15",
-                    "● Начата дрессировка",
-                    "Гром");
+                    string query = @"
+                        SELECT
+                            sd.date_of_birth AS event_date,
+                            '—' AS event_time,
+                            '● Зарегистрирована служебная собака' AS event_name,
+                            sd.dog_name AS dog_name
+                        FROM service_dog sd
 
-                dgvEvents.Rows.Add(
-                    "16.07.2026",
-                    "13:40",
-                    "● Завершена дрессировка",
-                    "Барс");
+                        UNION ALL
 
-                dgvEvents.Rows.Add(
-                    "16.07.2026",
-                    "15:10",
-                    "● Ветеринарный осмотр",
-                    "Рекс");
+                        SELECT
+                            NULL AS event_date,
+                            '—' AS event_time,
+                            '● Патруль с кинологической группой' AS event_name,
+                            COALESCE(
+                                (
+                                    SELECT sd.dog_name
+                                    FROM service_dog sd
+                                    INNER JOIN employee_squad es
+                                        ON es.employee_id = sd.employee_id
+                                    WHERE LOWER(es.personal_notes)
+                                          LIKE '%кинолог%'
+                                    LIMIT 1
+                                ),
+                                '—'
+                            ) AS dog_name
+                        FROM patrol_and_post_service pps
+                        WHERE LOWER(pps.description) LIKE '%кинолог%'
 
-                dgvEvents.Rows.Add(
-                    "15.07.2026",
-                    "09:20",
-                    "● Закреплена за кинологом",
-                    "Лорд");
+                        ORDER BY event_date DESC NULLS LAST
+                        LIMIT 10;
+                    ";
 
-                dgvEvents.Rows.Add(
-                    "15.07.2026",
-                    "11:50",
-                    "● Назначена на службу",
-                    "Тайга");
+                    using (NpgsqlCommand command =
+                        new NpgsqlCommand(query, connection))
+                    {
+                        using (NpgsqlDataReader reader =
+                            command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                string date =
+                                    reader["event_date"] == DBNull.Value
+                                        ? "—"
+                                        : Convert.ToDateTime(
+                                            reader["event_date"])
+                                            .ToString("dd.MM.yyyy");
 
-                dgvEvents.Rows.Add(
-                    "14.07.2026",
-                    "16:25",
-                    "● Начата дрессировка",
-                    "Буран");
-
-                dgvEvents.Rows.Add(
-                    "14.07.2026",
-                    "18:05",
-                    "● Ветеринарный осмотр",
-                    "Вега");
-
-                dgvEvents.Rows.Add(
-                    "13.07.2026",
-                    "12:30",
-                    "● Завершена дрессировка",
-                    "Кай");
-
-                dgvEvents.Rows.Add(
-                    "13.07.2026",
-                    "17:40",
-                    "● Назначена на службу",
-                    "Арчи");
+                                dgvEvents.Rows.Add(
+                                    date,
+                                    reader["event_time"].ToString(),
+                                    reader["event_name"].ToString(),
+                                    reader["dog_name"].ToString());
+                            }
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(
+                    "Не удалось загрузить последние события.\n\n" +
                     ex.Message,
-                    "Ошибка загрузки последних событий");
+                    "Ошибка загрузки последних событий",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
 
         private void BtnAddDog_Click(
-    object sender,
-    EventArgs e)
-        {
-            MessageBox.Show(
-                "Форма добавления служебной собаки пока не подключена.",
-                "Информация",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
-
-            LoadStatistics();
-            LoadRecentEvents();
-        }
-
-        private void BtnViewDogs_Click(
-    object sender,
-    EventArgs e)
-        {
-            MessageBox.Show(
-                "Страница служебных собак пока не создана.");
-        }
-
-        private void BtnAssignPatrol_Click(
             object sender,
             EventArgs e)
         {
-            MessageBox.Show(
-                "Форма назначения собаки на службу пока не подключена.",
-                "Информация",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
+            using (ServiceDogEditForm form =
+                new ServiceDogEditForm())
+            {
+                if (form.ShowDialog(
+                    this.FindForm()) ==
+                    DialogResult.OK)
+                {
+                    LoadStatistics();
+                    LoadRecentEvents();
+                }
+            }
+        }
+
+        private void BtnViewDogs_Click(
+     object sender,
+     EventArgs e)
+        {
+            MainForm mainForm =
+                this.FindForm() as MainForm;
+
+            if (mainForm != null)
+            {
+                mainForm.OpenDogsPage();
+            }
+        }
+
+        private void BtnAssignPatrol_Click(object sender, EventArgs e)
+        {
+            using (CreateIssueRequestForm form =
+                new CreateIssueRequestForm())
+            {
+                if (form.ShowDialog(
+                    this.FindForm()) ==
+                    DialogResult.OK)
+                {
+                    LoadStatistics();
+                    LoadRecentEvents();
+                }
+            }
         }
     }
 }

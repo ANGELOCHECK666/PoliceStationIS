@@ -1,5 +1,10 @@
 ﻿using System;
 using System.Windows.Forms;
+using Npgsql;
+using PoliceStationIS.Database;
+using PoliceStationIS.Forms.Expertises;
+using PoliceStationIS.Forms.Squads;
+using PoliceStationIS.Forms.Cases;
 
 namespace PoliceStationIS.Forms.Main
 {
@@ -23,10 +28,95 @@ namespace PoliceStationIS.Forms.Main
 
         private void LoadStatistics()
         {
-            lblEmployeesCount.Text = "124";
-            lblCasesCount.Text = "48";
-            lblExpertisesCount.Text = "17";
-            lblPatrolsCount.Text = "12";
+            try
+            {
+                using (NpgsqlConnection connection =
+                    DatabaseConnection.GetConnection())
+                {
+                    connection.Open();
+
+                    LoadEmployeesCount(connection);
+                    LoadCasesCount(connection);
+                    LoadExpertisesCount(connection);
+                    LoadPatrolsCount(connection);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Не удалось загрузить статистику.\n\n" +
+                    ex.Message,
+                    "Ошибка подключения к БД",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+        }
+
+        private void LoadEmployeesCount(
+            NpgsqlConnection connection)
+        {
+            string sql =
+                @"SELECT COUNT(*)
+                  FROM Employee;";
+
+            using (NpgsqlCommand command =
+                new NpgsqlCommand(sql, connection))
+            {
+                lblEmployeesCount.Text =
+                    command.ExecuteScalar().ToString();
+            }
+        }
+
+        private void LoadCasesCount(
+            NpgsqlConnection connection)
+        {
+            string sql =
+                @"SELECT COUNT(*)
+                  FROM Criminal_case;";
+
+            using (NpgsqlCommand command =
+                new NpgsqlCommand(sql, connection))
+            {
+                lblCasesCount.Text =
+                    command.ExecuteScalar().ToString();
+            }
+        }
+
+        private void LoadExpertisesCount(
+            NpgsqlConnection connection)
+        {
+            string sql =
+                @"SELECT COUNT(*)
+                  FROM Inspection i
+                  INNER JOIN Inspection_status s
+                      ON s.Inspection_status_id =
+                         i.Inspection_status_id
+                  WHERE s.Inspection_status_name IN
+                        ('Назначена', 'Проводится');";
+
+            using (NpgsqlCommand command =
+                new NpgsqlCommand(sql, connection))
+            {
+                lblExpertisesCount.Text =
+                    command.ExecuteScalar().ToString();
+            }
+        }
+
+        private void LoadPatrolsCount(
+            NpgsqlConnection connection)
+        {
+            string sql =
+                @"SELECT COUNT(*)
+                  FROM Schedule
+                  WHERE Planned_start_date_and_time::date =
+                        CURRENT_DATE;";
+
+            using (NpgsqlCommand command =
+                new NpgsqlCommand(sql, connection))
+            {
+                lblPatrolsCount.Text =
+                    command.ExecuteScalar().ToString();
+            }
         }
 
         // =====================================
@@ -35,67 +125,104 @@ namespace PoliceStationIS.Forms.Main
 
         private void LoadRecentEvents()
         {
-            dgvEvents.Rows.Clear();
+            try
+            {
+                dgvEvents.Rows.Clear();
 
-            dgvEvents.Rows.Add(
-                "18.07.2026",
-                "08:15",
-                "Назначена судебная экспертиза",
-                "Дело №24158");
+                using (NpgsqlConnection connection =
+                    DatabaseConnection.GetConnection())
+                {
+                    connection.Open();
 
-            dgvEvents.Rows.Add(
-                "18.07.2026",
-                "08:42",
-                "Создан новый наряд",
-                "Наряд №153");
+                    string sql =
+                        @"
+                        SELECT
+                            event_date,
+                            event_time,
+                            event_name,
+                            event_object
+                        FROM
+                        (
+                            SELECT
+                                cc.date_and_time_of_crime::date AS event_date,
+                                cc.date_and_time_of_crime::time AS event_time,
+                                'Открыто уголовное дело' AS event_name,
+                                'Дело №' || TRIM(cc.case_number) AS event_object
+                            FROM Criminal_case cc
+                            WHERE cc.date_and_time_of_crime IS NOT NULL
 
-            dgvEvents.Rows.Add(
-                "18.07.2026",
-                "09:18",
-                "Открыто уголовное дело",
-                "Дело №24161");
+                            UNION ALL
 
-            dgvEvents.Rows.Add(
-                "18.07.2026",
-                "10:05",
-                "Назначен ответственный следователь",
-                "Дело №24160");
+                            SELECT
+                                i.appointment_date AS event_date,
+                                NULL::time AS event_time,
+                                'Назначена экспертиза' AS event_name,
+                                'Экспертиза №' || TRIM(i.inspection_number) AS event_object
+                            FROM Inspection i
 
-            dgvEvents.Rows.Add(
-                "18.07.2026",
-                "10:47",
-                "Добавлен новый сотрудник",
-                "Иванов И.И.");
+                            UNION ALL
 
-            dgvEvents.Rows.Add(
-                "18.07.2026",
-                "11:30",
-                "Экспертиза завершена",
-                "Экспертиза №518");
+                            SELECT
+                                s.planned_start_date_and_time::date AS event_date,
+                                s.planned_start_date_and_time::time AS event_time,
+                                'Создан новый наряд' AS event_name,
+                                'Наряд №' || s.schedule_id::text AS event_object
+                            FROM Schedule s
+                        ) events
+                        ORDER BY
+                            event_date DESC,
+                            event_time DESC NULLS LAST
+                        LIMIT 10;
+                        ";
 
-            dgvEvents.Rows.Add(
-                "18.07.2026",
-                "12:12",
-                "Наряд отправлен на маршрут",
-                "Наряд №154");
+                    using (NpgsqlCommand command =
+                        new NpgsqlCommand(sql, connection))
+                    using (NpgsqlDataReader reader =
+                        command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            string date =
+                                reader["event_date"] == DBNull.Value
+                                    ? "—"
+                                    : Convert.ToDateTime(
+                                        reader["event_date"])
+                                        .ToString("dd.MM.yyyy");
 
-            dgvEvents.Rows.Add(
-                "18.07.2026",
-                "13:05",
-                "Получено заключение эксперта",
-                "Дело №24157");
+                            string time = "—";
 
-            dgvEvents.Rows.Add(
-                "18.07.2026",
-                "14:21",
-                "Создано новое уголовное дело",
-                "Дело №24162");
+                            if (reader["event_time"] != DBNull.Value)
+                            {
+                                TimeSpan eventTime =
+                                    (TimeSpan)reader["event_time"];
 
-            dgvEvents.Rows.Add(
-                "18.07.2026",
-                "15:03",
-                "Изменён статус расследования",
-                "Дело №24156");
+                                time = eventTime.ToString(@"hh\:mm");
+                            }
+
+                            string eventName =
+                                reader["event_name"].ToString();
+
+                            string eventObject =
+                                reader["event_object"].ToString();
+
+                            dgvEvents.Rows.Add(
+                                date,
+                                time,
+                                eventName,
+                                eventObject);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    "Не удалось загрузить последние события.\n\n" +
+                    ex.Message,
+                    "Ошибка подключения к БД",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
         }
 
         // =====================================
@@ -106,11 +233,11 @@ namespace PoliceStationIS.Forms.Main
             object sender,
             EventArgs e)
         {
-            MessageBox.Show(
-                "Форма назначения экспертизы пока не подключена.",
-                "Информация",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
+            using (ExpertiseEditForm form =
+                new ExpertiseEditForm())
+            {
+                form.ShowDialog(this.FindForm());
+            }
 
             LoadStatistics();
             LoadRecentEvents();
@@ -120,11 +247,11 @@ namespace PoliceStationIS.Forms.Main
             object sender,
             EventArgs e)
         {
-            MessageBox.Show(
-                "Форма оформления наряда пока не подключена.",
-                "Информация",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
+            using (SquadEditForm form =
+                new SquadEditForm())
+            {
+                form.ShowDialog(this.FindForm());
+            }
 
             LoadStatistics();
             LoadRecentEvents();
@@ -134,11 +261,11 @@ namespace PoliceStationIS.Forms.Main
             object sender,
             EventArgs e)
         {
-            MessageBox.Show(
-                "Форма создания уголовного дела пока не подключена.",
-                "Информация",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
+            using (CaseEditForm form =
+                new CaseEditForm())
+            {
+                form.ShowDialog(this.FindForm());
+            }
 
             LoadStatistics();
             LoadRecentEvents();

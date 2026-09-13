@@ -17,7 +17,7 @@
     </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -107,6 +107,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\IconButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\RoundedPanel.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -114,6 +117,12 @@
     <Compile Include="Core\UserSession.cs" />
     <Compile Include="Database\DatabaseConnection.cs" />
     <Compile Include="Database\DatabaseTester.cs" />
+    <Compile Include="Departments\DepartmentsPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Departments\DepartmentsPage.Designer.cs">
+      <DependentUpon>DepartmentsPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Authorization\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -156,6 +165,55 @@
     <Compile Include="Forms\Authorization\RegistrationPages\PersonalDataPage.Designer.cs">
       <DependentUpon>PersonalDataPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Cases\CaseEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Cases\CaseEditForm.Designer.cs">
+      <DependentUpon>CaseEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Cases\CasePrintService.cs" />
+    <Compile Include="Forms\Cases\CasesPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Cases\CasesPage.Designer.cs">
+      <DependentUpon>CasesPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Cases\CloseCaseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Cases\CloseCaseForm.Designer.cs">
+      <DependentUpon>CloseCaseForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Cases\ResumeCaseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Cases\ResumeCaseForm.Designer.cs">
+      <DependentUpon>ResumeCaseForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Cases\SuspendCaseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Cases\SuspendCaseForm.Designer.cs">
+      <DependentUpon>SuspendCaseForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Cases\TransferToCourtForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Cases\TransferToCourtForm.Designer.cs">
+      <DependentUpon>TransferToCourtForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Citizens\CitizenEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Citizens\CitizenEditForm.Designer.cs">
+      <DependentUpon>CitizenEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Citizens\CitizensPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Citizens\CitizensPage.Designer.cs">
+      <DependentUpon>CitizensPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Employees\AddEmployeeForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -197,6 +255,65 @@
     </Compile>
     <Compile Include="Forms\Employees\ReportsForm.Designer.cs">
       <DependentUpon>ReportsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Equipment\CreateIssueRequestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Equipment\CreateIssueRequestForm.Designer.cs">
+      <DependentUpon>CreateIssueRequestForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Equipment\EquipmentEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Equipment\EquipmentEditForm.Designer.cs">
+      <DependentUpon>EquipmentEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Equipment\EquipmentPage.cs" />
+    <Compile Include="Forms\Equipment\EquipmentPage.Designer.cs">
+      <DependentUpon>EquipmentPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Equipment\IssueRequestsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Equipment\IssueRequestsForm.Designer.cs">
+      <DependentUpon>IssueRequestsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Equipment\MaintenanceForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Equipment\MaintenanceForm.Designer.cs">
+      <DependentUpon>MaintenanceForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Equipment\WarehouseManagementForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Equipment\WarehouseManagementForm.Designer.cs">
+      <DependentUpon>WarehouseManagementForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Evidence\EvidenceEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Evidence\EvidenceEditForm.Designer.cs">
+      <DependentUpon>EvidenceEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Evidence\EvidencePage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Evidence\EvidencePage.Designer.cs">
+      <DependentUpon>EvidencePage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inspections\ExpertiseEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Inspections\ExpertiseEditForm.Designer.cs">
+      <DependentUpon>ExpertiseEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inspections\ExpertisePrintService.cs" />
+    <Compile Include="Forms\Inspections\ExpertisesPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Inspections\ExpertisesPage.Designer.cs">
+      <DependentUpon>ExpertisesPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Main\CriminalistDashboardPage.cs">
       <SubType>UserControl</SubType>
@@ -258,6 +375,54 @@
     <Compile Include="Forms\Main\MTODashboardPage.Designer.cs">
       <DependentUpon>MTODashboardPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Protocols\ProtocolEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Protocols\ProtocolEditForm.Designer.cs">
+      <DependentUpon>ProtocolEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Protocols\ProtocolPrintService.cs" />
+    <Compile Include="Forms\Protocols\ProtocolsPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Protocols\ProtocolsPage.Designer.cs">
+      <DependentUpon>ProtocolsPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ServiceDogs\AssignDogForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ServiceDogs\AssignDogForm.Designer.cs">
+      <DependentUpon>AssignDogForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ServiceDogs\DogsPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\ServiceDogs\DogsPage.Designer.cs">
+      <DependentUpon>DogsPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ServiceDogs\ServiceDogEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\ServiceDogs\ServiceDogEditForm.Designer.cs">
+      <DependentUpon>ServiceDogEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Squads\PatrolEventJournalForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Squads\PatrolEventJournalForm.Designer.cs">
+      <DependentUpon>PatrolEventJournalForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Squads\PatrolEventJournalPrintService.cs" />
+    <Compile Include="Forms\Squads\SquadEditForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Squads\SquadEditForm.Designer.cs">
+      <DependentUpon>SquadEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Squads\SquadsPage.cs" />
+    <Compile Include="Forms\Squads\SquadsPage.Designer.cs">
+      <DependentUpon>SquadsPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\PasswordHelper.cs" />
     <Compile Include="Models\RegisterUserModel.cs" />
     <Compile Include="Models\RegistrationData.cs" />
@@ -274,6 +439,12 @@
     <Compile Include="Services\InputHelper.cs" />
     <Compile Include="Services\RegistrationService.cs" />
     <Compile Include="Services\ValidationHelper.cs" />
+    <Compile Include="StatisticsF\StatisticsPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="StatisticsF\StatisticsPage.Designer.cs">
+      <DependentUpon>StatisticsPage.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Forms\Authorization\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -282,6 +453,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Employees\EmployeeStatusForm.resx">
       <DependentUpon>EmployeeStatusForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Evidence\EvidenceEditForm.resx">
+      <DependentUpon>EvidenceEditForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -308,16 +482,19 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Forms\Citizens\" />
-    <Folder Include="Forms\CriminalCases\" />
-    <Folder Include="Forms\Equipment\" />
-    <Folder Include="Forms\Evidence\" />
-    <Folder Include="Forms\Inspections\" />
-    <Folder Include="Forms\Protocols\" />
-    <Folder Include="Forms\ServiceDogs\" />
-    <Folder Include="Forms\Squads\" />
     <Folder Include="Images\" />
     <Folder Include="PoliceStationIS\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="EvidencePhotos\E101.jpg" />
+    <Content Include="EvidencePhotos\E102.jpg" />
+    <Content Include="EvidencePhotos\E103.jpg" />
+    <Content Include="EvidencePhotos\E104.jpg" />
+    <Content Include="EvidencePhotos\E105.jpg" />
+    <Content Include="EvidencePhotos\E106.jpg" />
+    <Content Include="EvidencePhotos\E107.jpg" />
+    <Content Include="EvidencePhotos\E108.jpg" />
+    <Content Include="EvidencePhotos\E109.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.0\build\Microsoft.Extensions.Logging.Abstractions.targets" Condition="Exists('..\packages\Microsoft.Extensions.Logging.Abstractions.6.0.0\build\Microsoft.Extensions.Logging.Abstractions.targets')" />

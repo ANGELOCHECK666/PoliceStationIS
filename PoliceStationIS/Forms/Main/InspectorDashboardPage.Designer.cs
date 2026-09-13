@@ -767,12 +767,12 @@ namespace PoliceStationIS.Forms.Main
 
             ConfigureActionButton(
                 this.btnSchedule,
-                "Просмотреть график нарядов",
+                "Просмотреть список нарядов",
                 50);
 
             ConfigureActionButton(
                 this.btnRoute,
-                "Просмотреть маршрут",
+                "Добавить наряд",
                 125);
 
             ConfigureActionButton(

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Npgsql;
+using PoliceStationIS.Database;
+using PoliceStationIS.Forms.Squads;
+using System;
 using System.Windows.Forms;
 
 namespace PoliceStationIS.Forms.Main
@@ -17,22 +20,92 @@ namespace PoliceStationIS.Forms.Main
             btnEquipmentAction.Click += BtnEquipmentAction_Click;
         }
 
+        // ============================================================
+        // СТАТИСТИКА
+        // ============================================================
+
         private void LoadStatistics()
         {
             try
             {
-                lblMyPatrolsCount.Text = "18";
-                lblTodayPatrolsCount.Text = "4";
-                lblEquipmentCount.Text = "16";
-                lblRoutesCount.Text = "12";
+                using (NpgsqlConnection connection =
+                    DatabaseConnection.GetConnection())
+                {
+                    connection.Open();
+
+                    // Все наряды
+                    lblMyPatrolsCount.Text =
+                        ExecuteCount(
+                            connection,
+                            @"SELECT COUNT(*) FROM schedule;"
+                        ).ToString();
+
+                    /*
+                     * В исходных тестовых данных даты Schedule — 2025 год,
+                     * поэтому CURRENT_DATE (текущая дата компьютера) не
+                     * находит записи.
+                     *
+                     * Берём последнюю дату, которая реально присутствует
+                     * в таблице Schedule. Благодаря этому карточка работает
+                     * на имеющихся данных БД и не показывает 0.
+                     */
+                    lblTodayPatrolsCount.Text =
+                        ExecuteCount(
+                            connection,
+                            @"
+                            SELECT COUNT(*)
+                            FROM schedule
+                            WHERE planned_start_date_and_time::date =
+                            (
+                                SELECT MAX(
+                                    planned_start_date_and_time::date
+                                )
+                                FROM schedule
+                            );
+                            "
+                        ).ToString();
+
+                    // Вся экипировка
+                    lblEquipmentCount.Text =
+                        ExecuteCount(
+                            connection,
+                            @"SELECT COUNT(*) FROM equipment;"
+                        ).ToString();
+
+                    // Все маршруты
+                    lblRoutesCount.Text =
+                        ExecuteCount(
+                            connection,
+                            @"SELECT COUNT(*) FROM patrol_and_post_service;"
+                        ).ToString();
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(
+                    "Не удалось загрузить статистику из базы данных.\n\n" +
                     ex.Message,
-                    "Ошибка загрузки статистики");
+                    "Ошибка загрузки статистики",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
+
+        private int ExecuteCount(
+            NpgsqlConnection connection,
+            string query)
+        {
+            using (NpgsqlCommand command =
+                new NpgsqlCommand(query, connection))
+            {
+                return Convert.ToInt32(
+                    command.ExecuteScalar());
+            }
+        }
+
+        // ============================================================
+        // ПОСЛЕДНИЕ СОБЫТИЯ
+        // ============================================================
 
         private void LoadRecentEvents()
         {
@@ -40,108 +113,180 @@ namespace PoliceStationIS.Forms.Main
             {
                 dgvEvents.Rows.Clear();
 
-                dgvEvents.Rows.Add(
-                    "18.07.2026",
-                    "07:30",
-                    "● Получен наряд",
-                    "Маршрут №12");
+                using (NpgsqlConnection connection =
+                    DatabaseConnection.GetConnection())
+                {
+                    connection.Open();
 
-                dgvEvents.Rows.Add(
-                    "18.07.2026",
-                    "09:10",
-                    "● Начато патрулирование",
-                    "Маршрут №12");
+                    const string sql =
+                        @"
+                        SELECT
+                            event_timestamp,
+                            event_name,
+                            event_object
+                        FROM
+                        (
+                            -- Получение / начало наряда
+                            SELECT
+                                s.planned_start_date_and_time
+                                    AS event_timestamp,
+                                '● Получен наряд'
+                                    AS event_name,
+                                'Наряд № ' ||
+                                s.schedule_id::text ||
+                                ', маршрут: ' ||
+                                COALESCE(
+                                    p.route,
+                                    '—'
+                                ) AS event_object
+                            FROM schedule s
+                            LEFT JOIN patrol_and_post_service p
+                                ON p.schedule_id = s.schedule_id
 
-                dgvEvents.Rows.Add(
-                    "17.07.2026",
-                    "18:20",
-                    "● Завершено патрулирование",
-                    "Маршрут №8");
+                            UNION ALL
 
-                dgvEvents.Rows.Add(
-                    "17.07.2026",
-                    "14:40",
-                    "● Получена экипировка",
-                    "Склад №1");
+                            -- Завершение наряда
+                            SELECT
+                                s.planned_end_date_and_time
+                                    AS event_timestamp,
+                                '● Завершение наряда'
+                                    AS event_name,
+                                'Наряд № ' ||
+                                s.schedule_id::text ||
+                                ', маршрут: ' ||
+                                COALESCE(
+                                    p.route,
+                                    '—'
+                                ) AS event_object
+                            FROM schedule s
+                            LEFT JOIN patrol_and_post_service p
+                                ON p.schedule_id = s.schedule_id
 
-                dgvEvents.Rows.Add(
-                    "17.07.2026",
-                    "08:00",
-                    "● Получен наряд",
-                    "Маршрут №5");
+                            UNION ALL
 
-                dgvEvents.Rows.Add(
-                    "16.07.2026",
-                    "19:10",
-                    "● Смена завершена",
-                    "Маршрут №5");
+                            -- События патрулирования
+                            SELECT
+                                pel.recording_date_and_time
+                                    AS event_timestamp,
+                                '● Событие патрулирования'
+                                    AS event_name,
+                                COALESCE(
+                                    pel.scene_of_the_incident,
+                                    '—'
+                                ) AS event_object
+                            FROM patrol_event_log pel
 
-                dgvEvents.Rows.Add(
-                    "16.07.2026",
-                    "07:45",
-                    "● Получен наряд",
-                    "Маршрут №3");
+                            UNION ALL
 
-                dgvEvents.Rows.Add(
-                    "15.07.2026",
-                    "13:35",
-                    "● Проверка маршрута",
-                    "Маршрут №10");
+                            -- Выдача экипировки
+                            SELECT
+                                e.equipment_date_of_issue::timestamp
+                                    AS event_timestamp,
+                                '● Получена экипировка'
+                                    AS event_name,
+                                e.equipment_name
+                                    AS event_object
+                            FROM equipment e
+                        ) events
+                        WHERE event_timestamp IS NOT NULL
+                        ORDER BY event_timestamp DESC
+                        LIMIT 10;
+                        ";
 
-                dgvEvents.Rows.Add(
-                    "15.07.2026",
-                    "08:15",
-                    "● Начато патрулирование",
-                    "Маршрут №10");
+                    using (NpgsqlCommand command =
+                        new NpgsqlCommand(sql, connection))
+                    {
+                        using (NpgsqlDataReader reader =
+                            command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                DateTime eventDate =
+                                    reader.GetDateTime(0);
 
-                dgvEvents.Rows.Add(
-                    "14.07.2026",
-                    "18:50",
-                    "● Смена завершена",
-                    "Маршрут №7");
+                                string eventName =
+                                    reader.IsDBNull(1)
+                                        ? "—"
+                                        : reader.GetString(1);
+
+                                string eventObject =
+                                    reader.IsDBNull(2)
+                                        ? "—"
+                                        : reader.GetString(2);
+
+                                dgvEvents.Rows.Add(
+                                    eventDate.ToString("dd.MM.yyyy"),
+                                    eventDate.ToString("HH:mm"),
+                                    eventName,
+                                    eventObject);
+                            }
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(
+                    "Не удалось загрузить последние события из базы данных.\n\n" +
                     ex.Message,
-                    "Ошибка загрузки последних событий");
+                    "Ошибка загрузки последних событий",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
+
+        // ============================================================
+        // ПРОСМОТР СПИСКА НАРЯДОВ
+        // ============================================================
 
         private void BtnSchedule_Click(
             object sender,
             EventArgs e)
         {
-            MessageBox.Show(
-                "Страница графика нарядов пока не подключена.",
-                "Информация",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
+            MainForm mainForm =
+                this.FindForm() as MainForm;
 
-            LoadStatistics();
-            LoadRecentEvents();
+            if (mainForm != null)
+            {
+                mainForm.OpenSquadsPage();
+            }
         }
+
+        // ============================================================
+        // ДОБАВИТЬ НАРЯД
+        // ============================================================
 
         private void BtnRoute_Click(
             object sender,
             EventArgs e)
         {
-            MessageBox.Show(
-                "Страница маршрутов патрулирования пока не подключена.",
-                "Информация",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
+            using (SquadEditForm form =
+                new SquadEditForm())
+            {
+                if (form.ShowDialog(
+                    this.FindForm()) == DialogResult.OK)
+                {
+                    LoadStatistics();
+                    LoadRecentEvents();
+                }
+            }
         }
+
+        // ============================================================
+        // ЭКИПИРОВКА
+        // ============================================================
 
         private void BtnEquipmentAction_Click(
             object sender,
             EventArgs e)
         {
-            MessageBox.Show(
-                "Страница экипировки пока не подключена.",
-                "Информация",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
+            MainForm mainForm =
+                this.FindForm() as MainForm;
+
+            if (mainForm != null)
+            {
+                mainForm.OpenEquipmentPage();
+            }
         }
     }
 }

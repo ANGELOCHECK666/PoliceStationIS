@@ -777,7 +777,7 @@ namespace PoliceStationIS.Forms.Main
 
             ConfigureActionButton(
                 this.btnAssignPatrol,
-                "Назначить на службу",
+                "Заявка на экипировку",
                 200);
 
             ConfigureActionIcon(

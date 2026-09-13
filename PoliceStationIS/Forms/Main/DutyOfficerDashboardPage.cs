@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Npgsql;
+using PoliceStationIS.Database;
+using PoliceStationIS.Forms.Citizens;
+using PoliceStationIS.Forms.Squads;
+using System;
 using System.Windows.Forms;
 
 namespace PoliceStationIS.Forms.Main
@@ -21,16 +25,68 @@ namespace PoliceStationIS.Forms.Main
         {
             try
             {
-                lblActivePatrolsCount.Text = "12";
-                lblEmployeesShiftCount.Text = "48";
-                lblIncidentsCount.Text = "9";
-                lblCallsCount.Text = "27";
+                using (NpgsqlConnection connection =
+                    DatabaseConnection.GetConnection())
+                {
+                    connection.Open();
+
+                    // Все активные наряды.
+                    lblActivePatrolsCount.Text =
+                        ExecuteCount(
+                            connection,
+                            @"
+                            SELECT COUNT(*)
+                            FROM schedule
+                            WHERE CURRENT_TIMESTAMP BETWEEN
+                                  planned_start_date_and_time
+                                  AND planned_end_date_and_time;
+                            "
+                        ).ToString();
+
+                    // Сотрудники, назначенные в наряды.
+                    lblEmployeesShiftCount.Text =
+                        ExecuteCount(
+                            connection,
+                            @"
+                            SELECT COUNT(DISTINCT employee_id)
+                            FROM employee_squad;
+                            "
+                        ).ToString();
+
+                    // Зарегистрированные события патрулирования.
+                    lblIncidentsCount.Text =
+                        ExecuteCount(
+                            connection,
+                            @"SELECT COUNT(*) FROM patrol_event_log;"
+                        ).ToString();
+
+                    // Всего граждан в системе.
+                    lblCallsCount.Text =
+                        ExecuteCount(
+                            connection,
+                            @"SELECT COUNT(*) FROM citizen;"
+                        ).ToString();
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(
+                    "Не удалось загрузить статистику из базы данных.\n\n" +
                     ex.Message,
-                    "Ошибка загрузки статистики");
+                    "Ошибка загрузки статистики",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+            }
+        }
+
+        private int ExecuteCount(
+            NpgsqlConnection connection,
+            string query)
+        {
+            using (NpgsqlCommand command =
+                new NpgsqlCommand(query, connection))
+            {
+                return Convert.ToInt32(command.ExecuteScalar());
             }
         }
 
@@ -40,108 +96,142 @@ namespace PoliceStationIS.Forms.Main
             {
                 dgvEvents.Rows.Clear();
 
-                dgvEvents.Rows.Add(
-                    "18.07.2026",
-                    "08:12",
-                    "● Принят вызов",
-                    "Вызов №154");
+                using (NpgsqlConnection connection =
+                    DatabaseConnection.GetConnection())
+                {
+                    connection.Open();
 
-                dgvEvents.Rows.Add(
-                    "18.07.2026",
-                    "08:18",
-                    "● Наряд направлен",
-                    "Наряд №12");
+                    const string sql =
+                        @"
+                        SELECT
+                            event_timestamp,
+                            event_name,
+                            event_object
+                        FROM
+                        (
+                            SELECT
+                                s.planned_start_date_and_time
+                                    AS event_timestamp,
+                                '● Наряд направлен'
+                                    AS event_name,
+                                'Наряд № ' ||
+                                s.schedule_id::text AS event_object
+                            FROM schedule s
 
-                dgvEvents.Rows.Add(
-                    "18.07.2026",
-                    "09:05",
-                    "● Зарегистрировано происшествие",
-                    "№2026-318");
+                            UNION ALL
 
-                dgvEvents.Rows.Add(
-                    "18.07.2026",
-                    "09:47",
-                    "● Наряд завершил выезд",
-                    "Наряд №8");
+                            SELECT
+                                s.planned_end_date_and_time
+                                    AS event_timestamp,
+                                '● Наряд завершил выезд'
+                                    AS event_name,
+                                'Наряд № ' ||
+                                s.schedule_id::text AS event_object
+                            FROM schedule s
 
-                dgvEvents.Rows.Add(
-                    "18.07.2026",
-                    "10:25",
-                    "● Получен повторный вызов",
-                    "Вызов №157");
+                            UNION ALL
 
-                dgvEvents.Rows.Add(
-                    "17.07.2026",
-                    "18:40",
-                    "● Наряд направлен",
-                    "Наряд №5");
+                            SELECT
+                                pel.recording_date_and_time
+                                    AS event_timestamp,
+                                '● Зарегистрировано происшествие'
+                                    AS event_name,
+                                COALESCE(
+                                    pel.scene_of_the_incident,
+                                    '—'
+                                ) AS event_object
+                            FROM patrol_event_log pel
+                        ) events
+                        WHERE event_timestamp IS NOT NULL
+                        ORDER BY event_timestamp DESC
+                        LIMIT 10;
+                        ";
 
-                dgvEvents.Rows.Add(
-                    "17.07.2026",
-                    "19:15",
-                    "● Принят вызов",
-                    "Вызов №148");
+                    using (NpgsqlCommand command =
+                        new NpgsqlCommand(sql, connection))
+                    {
+                        using (NpgsqlDataReader reader =
+                            command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                DateTime eventDate =
+                                    reader.GetDateTime(0);
 
-                dgvEvents.Rows.Add(
-                    "17.07.2026",
-                    "20:30",
-                    "● Зарегистрировано происшествие",
-                    "№2026-311");
+                                string eventName =
+                                    reader.IsDBNull(1)
+                                        ? "—"
+                                        : reader.GetString(1);
 
-                dgvEvents.Rows.Add(
-                    "17.07.2026",
-                    "21:05",
-                    "● Наряд завершил выезд",
-                    "Наряд №3");
+                                string eventObject =
+                                    reader.IsDBNull(2)
+                                        ? "—"
+                                        : reader.GetString(2);
 
-                dgvEvents.Rows.Add(
-                    "17.07.2026",
-                    "22:14",
-                    "● Вызов закрыт",
-                    "Вызов №148");
+                                dgvEvents.Rows.Add(
+                                    eventDate.ToString("dd.MM.yyyy"),
+                                    eventDate.ToString("HH:mm"),
+                                    eventName,
+                                    eventObject);
+                            }
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(
+                    "Не удалось загрузить последние события из базы данных.\n\n" +
                     ex.Message,
-                    "Ошибка загрузки последних событий");
+                    "Ошибка загрузки последних событий",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
             }
         }
 
+        // Просмотреть наряды
         private void BtnPatrols_Click(
             object sender,
             EventArgs e)
         {
-            MessageBox.Show(
-                "Страница активных нарядов пока не подключена.",
-                "Информация",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
+            MainForm mainForm =
+                this.FindForm() as MainForm;
 
-            LoadStatistics();
-            LoadRecentEvents();
+            if (mainForm != null)
+            {
+                mainForm.OpenSquadsPage();
+            }
         }
 
+        // Добавить гражданина
         private void BtnCallLog_Click(
             object sender,
             EventArgs e)
         {
-            MessageBox.Show(
-                "Журнал вызовов пока не подключен.",
-                "Информация",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
+            using (CitizenEditForm form =
+                new CitizenEditForm())
+            {
+                if (form.ShowDialog(
+                    this.FindForm()) == DialogResult.OK)
+                {
+                    LoadStatistics();
+                    LoadRecentEvents();
+                }
+            }
         }
 
+        // Просмотреть граждан
         private void BtnRegisterIncident_Click(
             object sender,
             EventArgs e)
         {
-            MessageBox.Show(
-                "Форма регистрации происшествия пока не подключена.",
-                "Информация",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
+            MainForm mainForm =
+                this.FindForm() as MainForm;
+
+            if (mainForm != null)
+            {
+                mainForm.OpenCitizensPage();
+            }
         }
     }
 }
