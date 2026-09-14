@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Drawing;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using PoliceStationIS.Services;
 
 namespace PoliceStationIS.Forms.Authorization.RegistrationPages
 {
     public partial class AccountDataPage : UserControl
     {
         public string Login =>
-            txtLogin.Text;
+            txtLogin.Text.Trim();
 
         public string Email =>
-            txtEmail.Text;
+            txtEmail.Text.Trim();
 
         public string Password =>
             txtPassword.Text;
@@ -21,33 +21,40 @@ namespace PoliceStationIS.Forms.Authorization.RegistrationPages
         {
             InitializeComponent();
 
+            txtLogin.Leave += TxtLogin_Leave;
             txtEmail.Leave += TxtEmail_Leave;
-
             txtPassword.Leave += Password_Leave;
-
-            txtConfirmPassword.Leave +=
-                ConfirmPassword_Leave;
-
-            txtPassword.TextChanged +=
-                TxtPassword_TextChanged;
+            txtConfirmPassword.Leave += ConfirmPassword_Leave;
+            txtPassword.TextChanged += TxtPassword_TextChanged;
         }
 
-        private void TxtEmail_Leave(
-            object sender,
-            EventArgs e)
+        private void TxtLogin_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(
-                    txtEmail.Text))
-            {
+            string login = txtLogin.Text.Trim();
+
+            if (!ValidationHelper.IsFilled(login))
                 return;
+
+            if (!ValidationHelper.IsValidLogin(login))
+            {
+                MessageBox.Show(
+                    "Логин должен содержать от 5 до 50 символов: ", 
+                    "Ошибка",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                txtLogin.Focus();
             }
+        }
 
-            bool isValid =
-                Regex.IsMatch(
-                    txtEmail.Text,
-                    @"^[^@\s]+@[^@\s]+\.[^@\s]+$");
+        private void TxtEmail_Leave(object sender, EventArgs e)
+        {
+            string email = txtEmail.Text.Trim();
 
-            if (!isValid)
+            if (!ValidationHelper.IsFilled(email))
+                return;
+
+            if (!ValidationHelper.IsValidEmail(email))
             {
                 MessageBox.Show(
                     "Введите корректный адрес электронной почты.",
@@ -59,20 +66,16 @@ namespace PoliceStationIS.Forms.Authorization.RegistrationPages
             }
         }
 
-        private void Password_Leave(
-            object sender,
-            EventArgs e)
+        private void Password_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(
-                    txtPassword.Text))
-            {
+            if (!ValidationHelper.IsFilled(txtPassword.Text))
                 return;
-            }
 
-            if (txtPassword.Text.Length < 8)
+            if (!ValidationHelper.IsValidPassword(txtPassword.Text))
             {
                 MessageBox.Show(
-                    "Пароль должен содержать минимум 8 символов.",
+                    "Пароль должен содержать минимум 8 символов, " +
+                    "буквы и цифры.",
                     "Ошибка",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
@@ -81,18 +84,12 @@ namespace PoliceStationIS.Forms.Authorization.RegistrationPages
             }
         }
 
-        private void ConfirmPassword_Leave(
-            object sender,
-            EventArgs e)
+        private void ConfirmPassword_Leave(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(
-                    txtConfirmPassword.Text))
-            {
+            if (!ValidationHelper.IsFilled(txtConfirmPassword.Text))
                 return;
-            }
 
-            if (txtPassword.Text !=
-                txtConfirmPassword.Text)
+            if (txtPassword.Text != txtConfirmPassword.Text)
             {
                 MessageBox.Show(
                     "Пароли не совпадают.",
@@ -101,25 +98,18 @@ namespace PoliceStationIS.Forms.Authorization.RegistrationPages
                     MessageBoxIcon.Warning);
 
                 txtConfirmPassword.Clear();
-
                 txtConfirmPassword.Focus();
             }
         }
 
-        private void TxtPassword_TextChanged(
-    object sender,
-    EventArgs e)
+        private void TxtPassword_TextChanged(object sender, EventArgs e)
         {
-            string password =
-                txtPassword.Text;
+            string password = txtPassword.Text;
 
             if (string.IsNullOrWhiteSpace(password))
             {
                 panelStrength.Width = 0;
-
-                lblStrength.Text =
-                    "Надёжность пароля: —";
-
+                lblStrength.Text = "Надёжность пароля: —";
                 return;
             }
 
@@ -140,63 +130,35 @@ namespace PoliceStationIS.Forms.Authorization.RegistrationPages
             switch (score)
             {
                 case 1:
-
                     panelStrength.Width = 60;
-
                     panelStrength.BackColor =
-                        Color.FromArgb(
-                            120,
-                            170,
-                            60);
-
+                        Color.FromArgb(120, 170, 60);
                     lblStrength.Text =
                         "Надёжность пароля: слабая";
-
                     break;
 
                 case 2:
-
                     panelStrength.Width = 120;
-
                     panelStrength.BackColor =
-                        Color.FromArgb(
-                            145,
-                            190,
-                            70);
-
+                        Color.FromArgb(145, 190, 70);
                     lblStrength.Text =
                         "Надёжность пароля: средняя";
-
                     break;
 
                 case 3:
-
                     panelStrength.Width = 180;
-
                     panelStrength.BackColor =
-                        Color.FromArgb(
-                            170,
-                            210,
-                            80);
-
+                        Color.FromArgb(170, 210, 80);
                     lblStrength.Text =
                         "Надёжность пароля: хорошая";
-
                     break;
 
                 case 4:
-
                     panelStrength.Width = 240;
-
                     panelStrength.BackColor =
-                        Color.FromArgb(
-                            190,
-                            230,
-                            90);
-
+                        Color.FromArgb(190, 230, 90);
                     lblStrength.Text =
                         "Надёжность пароля: высокая";
-
                     break;
             }
         }

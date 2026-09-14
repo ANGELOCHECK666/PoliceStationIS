@@ -23,7 +23,6 @@ namespace PoliceStationIS.Forms.Citizens
 
         private int totalRecords = 0;
 
-        private bool searchMode = false;
         private bool isLoadingCitizens = false;
         private enum CitizenTab
         {
@@ -56,10 +55,14 @@ namespace PoliceStationIS.Forms.Citizens
 
             ConfigureGrid();
 
+            // Справочник пола загружается из БД при открытии раздела.
+            // Само подключение создаётся через общий DatabaseConnection,
+            // поэтому строка подключения не дублируется в странице.
             LoadGenders();
 
             dgvCitizens.SelectionChanged += DgvCitizens_SelectionChanged;
 
+            // После загрузки справочника получаем реальные записи граждан.
             LoadCitizens();
 
             InitializeTabs();
@@ -73,7 +76,7 @@ namespace PoliceStationIS.Forms.Citizens
             btnFirstPage.Click += BtnFirstPage_Click;
             btnPreviousPage.Click += BtnPreviousPage_Click;
             btnNextPage.Click += BtnNextPage_Click;
-            btnLastPage.Click += BtnLastPage_Click;  
+            btnLastPage.Click += BtnLastPage_Click;
         }
 
         private void LoadGenders()
@@ -84,6 +87,9 @@ namespace PoliceStationIS.Forms.Citizens
 
                 cmbGender.Items.Add("Все");
 
+                // Для каждого отдельного обращения к БД используется
+                // общий фабричный метод DatabaseConnection.GetConnection().
+                // Страница не хранит собственную строку подключения.
                 using (NpgsqlConnection connection =
                     DatabaseConnection.GetConnection())
                 {
@@ -215,13 +221,17 @@ ORDER BY
             {
                 isLoadingCitizens = true;
 
+                // Основная загрузка страницы также выполняется через
+                // общий класс DatabaseConnection. Соединение гарантированно
+                // освобождается после завершения работы блока using.
                 using (NpgsqlConnection connection =
                     DatabaseConnection.GetConnection())
                 {
                     connection.Open();
 
                     //--------------------------------------------------
-                    // ОБЩЕЕ КОЛИЧЕСТВО ЗАПИСЕЙ С УЧЁТОМ ФИЛЬТРОВ
+                    // СНАЧАЛА ПОЛУЧАЕМ КОЛИЧЕСТВО ЗАПИСЕЙ
+                    // С УЧЁТОМ ТЕКУЩИХ ФИЛЬТРОВ
                     //--------------------------------------------------
 
                     string countQuery =
@@ -265,6 +275,10 @@ LEFT JOIN sex s
 
                     //--------------------------------------------------
                     // ПОЛУЧЕНИЕ ГРАЖДАН
+                    //
+                    // Здесь используется тот же набор фильтров, что и
+                    // для COUNT(*), поэтому количество страниц и список
+                    // записей всегда соответствуют друг другу.
                     //--------------------------------------------------
 
                     string query =
@@ -381,10 +395,15 @@ OFFSET @offset;
                 // ОБНОВЛЯЕМ ПАГИНАЦИЮ
                 //--------------------------------------------------
 
+                // После получения данных пересчитываем пагинацию.
                 UpdatePagination();
 
                 //--------------------------------------------------
                 // ВЫБИРАЕМ ПЕРВОГО ГРАЖДАНИНА
+                //
+                // Это позволяет сразу заполнить правую информационную
+                // панель, не заставляя пользователя повторно нажимать
+                // на первую строку.
                 //--------------------------------------------------
 
                 if (dgvCitizens.Rows.Count > 0)
@@ -1392,6 +1411,8 @@ ORDER BY
 
         private void BtnAddCitizen_Click(object sender, EventArgs e)
         {
+            // Форма добавления отвечает только за ввод и сохранение
+            // данных. После успешного закрытия обновляем список из БД.
             using (CitizenEditForm form =
                 new CitizenEditForm())
             {
@@ -1416,6 +1437,9 @@ ORDER BY
                 return;
             }
 
+            // Редактирование выполняется для выбранного ID.
+            // После сохранения повторно читаем данные из БД, чтобы список
+            // сразу показывал актуальное состояние.
             using (CitizenEditForm form =
                 new CitizenEditForm(selectedCitizenId))
             {
@@ -1429,9 +1453,8 @@ ORDER BY
 
         private void BtnSearch_Click(object sender, EventArgs e)
         {
+            // Новый поиск всегда начинается с первой страницы.
             currentPage = 1;
-
-            searchMode = true;
 
             LoadCitizens();
 
@@ -1450,9 +1473,8 @@ ORDER BY
 
             txtPassport.Clear();
 
+            // После сброса фильтров снова показываем первую страницу.
             currentPage = 1;
-
-            searchMode = false;
 
             LoadCitizens();
 

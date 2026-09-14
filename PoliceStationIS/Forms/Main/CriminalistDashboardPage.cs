@@ -1,4 +1,5 @@
 ﻿using Npgsql;
+using PoliceStationIS.Database;
 using PoliceStationIS.Forms.Evidence;
 using PoliceStationIS.Forms.Expertises;
 using System;
@@ -8,15 +9,10 @@ namespace PoliceStationIS.Forms.Main
 {
     public partial class CriminalistDashboardPage : UserControl
     {
-        private readonly string connectionString =
-            @"Host=localhost;
-              Port=5432;
-              Database=PoliceStation;
-              Username=postgres;
-              Password=1234567890";
-
         public CriminalistDashboardPage()
         {
+            // При открытии панели загружаем актуальные данные из базы данных.
+
             InitializeComponent();
 
             LoadStatistics();
@@ -31,12 +27,13 @@ namespace PoliceStationIS.Forms.Main
         // STATISTICS
         // =====================================
 
+        // Загрузка основных показателей панели.
         private void LoadStatistics()
         {
             try
             {
                 using (NpgsqlConnection connection =
-                    new NpgsqlConnection(connectionString))
+                    DatabaseConnection.GetConnection())
                 {
                     connection.Open();
 
@@ -56,6 +53,7 @@ namespace PoliceStationIS.Forms.Main
             }
         }
 
+        // Количество назначенных и проводимых экспертиз.
         private void LoadExpertisesCount(
             NpgsqlConnection connection)
         {
@@ -76,6 +74,7 @@ namespace PoliceStationIS.Forms.Main
             }
         }
 
+        // Количество протоколов осмотра места происшествия.
         private void LoadInspectionsCount(
             NpgsqlConnection connection)
         {
@@ -96,6 +95,7 @@ namespace PoliceStationIS.Forms.Main
             }
         }
 
+        // Общее количество зарегистрированных доказательств.
         private void LoadEvidenceCount(
             NpgsqlConnection connection)
         {
@@ -111,6 +111,7 @@ namespace PoliceStationIS.Forms.Main
             }
         }
 
+        // Количество завершённых экспертиз.
         private void LoadCompletedExpertisesCount(
             NpgsqlConnection connection)
         {
@@ -135,6 +136,7 @@ namespace PoliceStationIS.Forms.Main
         // RECENT EVENTS
         // =====================================
 
+        // Загрузка последних событий по экспертизам, доказательствам и протоколам.
         private void LoadRecentEvents()
         {
             try
@@ -207,7 +209,7 @@ namespace PoliceStationIS.Forms.Main
                     ";
 
                 using (NpgsqlConnection connection =
-                    new NpgsqlConnection(connectionString))
+                    DatabaseConnection.GetConnection())
                 {
                     connection.Open();
 

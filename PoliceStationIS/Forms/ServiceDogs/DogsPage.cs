@@ -22,8 +22,12 @@ namespace PoliceStationIS.Forms.Dogs
         {
             InitializeComponent();
 
+            // Настраиваем таблицу и загружаем значения фильтра из БД.
+
+
             ConfigureGrid();
             LoadStampNumbers();
+
 
             btnSearch.Click += BtnSearch_Click;
             btnReset.Click += BtnReset_Click;
@@ -171,6 +175,7 @@ namespace PoliceStationIS.Forms.Dogs
             dgvDogs.Columns.Add(employeeColumn);
         }
 
+        // Загружает список служебных собак с учётом текущих фильтров и пагинации.
         private void LoadDogs()
         {
             try
@@ -397,6 +402,7 @@ namespace PoliceStationIS.Forms.Dogs
             }
         }
 
+        // Заполняет список номеров клейма для выпадающего фильтра.
         private void LoadStampNumbers()
         {
             try
@@ -442,6 +448,7 @@ namespace PoliceStationIS.Forms.Dogs
             }
         }
 
+        // Формирует параметризованные условия поиска.
         private string BuildDogFilter(
             NpgsqlCommand command)
         {
@@ -608,6 +615,7 @@ namespace PoliceStationIS.Forms.Dogs
             LoadDogInformation(selectedDogId);
         }
 
+        // Загружает подробную информацию о выбранной собаке.
         private void LoadDogInformation(
             int dogId)
         {
@@ -759,6 +767,7 @@ namespace PoliceStationIS.Forms.Dogs
             LoadDogs();
         }
 
+        // После добавления перечитываем список и фильтр из БД.
         private void BtnAddDog_Click(
             object sender,
             EventArgs e)
@@ -777,6 +786,7 @@ namespace PoliceStationIS.Forms.Dogs
             }
         }
 
+        // После редактирования обновляем список и фильтр из БД.
         private void BtnEditDog_Click(
             object sender,
             EventArgs e)
@@ -805,6 +815,7 @@ namespace PoliceStationIS.Forms.Dogs
             }
         }
 
+        // После закрепления обновляем отображаемые данные.
         private void BtnAssignDog_Click(
             object sender,
             EventArgs e)

@@ -1,14 +1,12 @@
-﻿using System;
-using System.Data;
-using System.Drawing;
-using System.Diagnostics;
-using System.IO;
-using System.Windows.Forms;
-
-using Npgsql;
-
+﻿using Npgsql;
 using PoliceStationIS.Database;
 using PoliceStationIS.Services;
+using System;
+using System.Data;
+using System.Diagnostics;
+using System.Drawing;
+using System.IO;
+using System.Windows.Forms;
 
 namespace PoliceStationIS.Forms.Expertises
 {
@@ -58,6 +56,8 @@ namespace PoliceStationIS.Forms.Expertises
         // ИНИЦИАЛИЗАЦИЯ
         //============================================================
 
+        // Начальная загрузка справочников и данных страницы.
+        // Все обращения к БД выполняются через DatabaseConnection.
         private void InitializePage()
         {
             try
@@ -444,6 +444,8 @@ namespace PoliceStationIS.Forms.Expertises
         // ЗАГРУЗКА ЭКСПЕРТИЗ
         //============================================================
 
+        // Загружаем текущую страницу экспертиз и одновременно считаем
+        // общее количество записей для пагинации.
         private void LoadExpertises()
         {
             try
@@ -673,6 +675,9 @@ namespace PoliceStationIS.Forms.Expertises
         // УСЛОВИЯ ПОИСКА
         //============================================================
 
+        // Формируем только SQL-условия. Значения фильтров передаются
+        // отдельно параметрами, поэтому пользовательский ввод не вставляется
+        // напрямую в SQL.
         private string BuildSearchConditions()
         {
             string conditions =
@@ -1445,6 +1450,7 @@ namespace PoliceStationIS.Forms.Expertises
         // SEARCH
         //============================================================
 
+        // Поиск сбрасывает пагинацию на первую страницу.
         private void BtnSearch_Click(
             object sender,
             EventArgs e)
@@ -1596,6 +1602,8 @@ namespace PoliceStationIS.Forms.Expertises
         // ADD EXPERTISE
         //============================================================
 
+        // Добавление выполняется в отдельной форме, после успешного
+        // сохранения список перечитывается из БД.
         private void BtnAddExpertise_Click(
     object sender,
     EventArgs e)

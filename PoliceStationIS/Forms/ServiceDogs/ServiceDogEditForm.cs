@@ -1,6 +1,7 @@
 ﻿using Npgsql;
 using NpgsqlTypes;
 using PoliceStationIS.Database;
+using PoliceStationIS.Services;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
@@ -386,9 +387,11 @@ namespace PoliceStationIS.Forms.Dogs
             }
         }
 
+        // Общая проверка заполненности выполняется через ValidationHelper.
+        // Специальные правила для полей собаки остаются в этой форме.
         private bool ValidateFields()
         {
-            if (string.IsNullOrWhiteSpace(
+            if (!ValidationHelper.IsFilled(
                 txtStampNumber.Text))
             {
                 MessageBox.Show(
@@ -413,7 +416,7 @@ namespace PoliceStationIS.Forms.Dogs
                 return false;
             }
 
-            if (string.IsNullOrWhiteSpace(
+            if (!ValidationHelper.IsFilled(
                 txtDogName.Text))
             {
                 MessageBox.Show(
@@ -486,7 +489,7 @@ namespace PoliceStationIS.Forms.Dogs
                 return false;
             }
 
-            if (string.IsNullOrWhiteSpace(
+            if (!ValidationHelper.IsFilled(
                 txtHealth.Text))
             {
                 MessageBox.Show(
@@ -559,6 +562,7 @@ namespace PoliceStationIS.Forms.Dogs
             }
         }
 
+        // Добавление новой записи служебной собаки.
         private void InsertDog()
         {
             ComboItem sex =
@@ -626,6 +630,7 @@ namespace PoliceStationIS.Forms.Dogs
             }
         }
 
+        // Обновление существующей записи служебной собаки.
         private void UpdateDog()
         {
             ComboItem sex =

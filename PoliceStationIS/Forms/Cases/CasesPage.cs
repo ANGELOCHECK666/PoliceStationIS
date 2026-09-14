@@ -34,6 +34,10 @@ namespace PoliceStationIS.Forms.Cases
 
         private void InitializePage()
         {
+            // При открытии раздела сначала загружаются значения
+            // справочников для фильтров, затем сами уголовные дела.
+            // Все подключения к PostgreSQL создаются только через
+            // общий класс DatabaseConnection.
             LoadArticles();
 
             LoadStatuses();
@@ -119,6 +123,9 @@ namespace PoliceStationIS.Forms.Cases
 
         private void LoadCases()
         {
+            // Основная загрузка списка дел выполняется непосредственно
+            // из PostgreSQL. Здесь же рассчитывается пагинация и
+            // применяются текущие параметры поиска.
             try
             {
                 using (NpgsqlConnection connection =
@@ -126,6 +133,9 @@ namespace PoliceStationIS.Forms.Cases
                 {
                     connection.Open();
 
+                    // Условия и параметры поиска формируются отдельно,
+                    // поэтому пользовательские значения не вставляются
+                    // напрямую в SQL-запрос.
                     string fromWhere =
     BuildSearchConditions();
                     string countQuery =
@@ -348,6 +358,8 @@ OFFSET @offset;
 
         private void LoadCaseInformation(int caseId)
         {
+            // Загружаем подробную информацию только для выбранного
+            // дела. ID передаётся как параметр SQL-запроса.
             try
             {
                 using (NpgsqlConnection connection =
@@ -435,9 +447,6 @@ WHERE cc.criminal_case_id=@id;
 
                                 string article =
                                     reader["article_of_the_ccrf_code"].ToString();
-
-                                string articleName =
-                                    reader["article_of_the_ccrf_name"].ToString();
 
                                 lblArticleValue.Text =
                                     $"ст. {article} УК РФ";
@@ -552,6 +561,8 @@ ORDER BY last_name;";
         private void AddSearchParameters(
     NpgsqlCommand command)
         {
+            // Все значения фильтров передаются через параметры Npgsql.
+            // Это безопаснее, чем собирать SQL из строк интерфейса.
             if (!searchMode)
                 return;
 
@@ -598,6 +609,8 @@ ORDER BY last_name;";
 
         private string BuildSearchConditions()
         {
+            // Возвращаем только SQL-условия. Значения фильтров
+            // добавляются отдельно в AddSearchParameters().
             string fromWhere =
         @"
 
@@ -666,6 +679,7 @@ AND @dateTo";
 
         private void SearchCases()
         {
+            // После нового поиска возвращаемся на первую страницу.
             currentPage = 1;
 
             searchMode = true;
@@ -675,6 +689,8 @@ AND @dateTo";
 
         private void ResetFilters()
         {
+            // Сбрасываем только состояние фильтров и заново
+            // загружаем исходный список из базы.
             txtCaseNumber.Clear();
 
             cmbArticle.SelectedIndex = 0;
@@ -700,6 +716,9 @@ AND @dateTo";
 
         private void CreateCase()
         {
+            // Проверка и сохранение данных нового дела находятся
+            // в CaseEditForm. После успешного сохранения список
+            // обновляется из PostgreSQL.
             using (CaseEditForm form =
                 new CaseEditForm())
             {
@@ -957,10 +976,11 @@ AND @dateTo";
                 caseId =
                     Convert.ToInt32(row["Id"]);
             }
-            catch
+            catch (Exception ex)
             {
                 MessageBox.Show(
-                    "Не удалось определить идентификатор уголовного дела.",
+                    "Не удалось определить идентификатор уголовного дела.\n\n" +
+                    ex.Message,
                     "Печать дела",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
@@ -1144,6 +1164,8 @@ AND @dateTo";
     object sender,
     EventArgs e)
         {
+            // При смене строки карточка справа обновляется
+            // по ID выбранного дела из текущего DataRowView.
             if (dgvCases.CurrentRow == null)
                 return;
 

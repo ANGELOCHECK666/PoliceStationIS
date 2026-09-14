@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using Npgsql;
 using PoliceStationIS.Database;
+using PoliceStationIS.Services;
 
 namespace PoliceStationIS.Forms.Protocols
 {
@@ -54,6 +55,7 @@ namespace PoliceStationIS.Forms.Protocols
             btnCancel.Click += BtnCancel_Click;
         }
 
+        // Все справочники загружаются из БД через общий DatabaseConnection.
         private void LoadReferenceData()
         {
             try
@@ -476,12 +478,15 @@ namespace PoliceStationIS.Forms.Protocols
                 comboBox.SelectedIndex = 0;
         }
 
+        // Общие проверки заполненности выполняются через ValidationHelper.
+        // Ограничения длины и проверки, относящиеся именно к протоколу,
+        // остаются в этой форме.
         private bool ValidateProtocol()
         {
             string protocolNumber =
                 txtProtocolNumber.Text.Trim();
 
-            if (string.IsNullOrWhiteSpace(protocolNumber))
+            if (!ValidationHelper.IsFilled(protocolNumber))
             {
                 MessageBox.Show(
                     "Введите номер протокола.",
@@ -541,7 +546,7 @@ namespace PoliceStationIS.Forms.Protocols
                 return false;
             }
 
-            if (string.IsNullOrWhiteSpace(
+            if (!ValidationHelper.IsFilled(
                 txtPlace.Text))
             {
                 MessageBox.Show(
@@ -566,7 +571,7 @@ namespace PoliceStationIS.Forms.Protocols
                 return false;
             }
 
-            if (string.IsNullOrWhiteSpace(
+            if (!ValidationHelper.IsFilled(
                 txtDescription.Text))
             {
                 MessageBox.Show(
@@ -628,6 +633,7 @@ namespace PoliceStationIS.Forms.Protocols
             }
         }
 
+        // Сохранение нового протокола через параметризованный SQL-запрос.
         private void AddProtocol()
         {
             ComboBoxItem employeeItem =
@@ -728,6 +734,7 @@ namespace PoliceStationIS.Forms.Protocols
             }
         }
 
+        // Обновление существующего протокола.
         private void UpdateProtocol()
         {
             ComboBoxItem employeeItem =

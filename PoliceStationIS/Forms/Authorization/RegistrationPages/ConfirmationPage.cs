@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using PoliceStationIS.Models;
+using PoliceStationIS.Services;
 
 namespace PoliceStationIS.Forms.Authorization.RegistrationPages
 {
@@ -12,21 +13,15 @@ namespace PoliceStationIS.Forms.Authorization.RegistrationPages
         {
             InitializeComponent();
 
-            btnRegister.Click +=
-                BtnRegister_Click;
+            btnRegister.Click += BtnRegister_Click;
         }
 
-        private void BtnRegister_Click(
-            object sender,
-            EventArgs e)
+        private void BtnRegister_Click(object sender, EventArgs e)
         {
-            RegisterClicked?.Invoke(
-                this,
-                EventArgs.Empty);
+            RegisterClicked?.Invoke(this, EventArgs.Empty);
         }
 
-        public void LoadData(
-            RegistrationData data)
+        public void LoadData(RegistrationData data)
         {
             lblPersonalData.Text =
                 $"Фамилия: {data.LastName}\r\n" +
@@ -37,11 +32,11 @@ namespace PoliceStationIS.Forms.Authorization.RegistrationPages
                 $"Звание: {data.Rank}";
 
             lblPassportData.Text =
-    $"Серия: {data.PassportSeries}\r\n" +
-    $"Номер: {data.PassportNumber}\r\n" +
-    $"Код подразделения: {data.DepartmentCode}\r\n" +
-    $"Кем выдан: {data.IssuedBy}\r\n" +
-    $"Дата выдачи: {data.IssueDate:d}";
+                $"Серия: {data.PassportSeries}\r\n" +
+                $"Номер: {data.PassportNumber}\r\n" +
+                $"Код подразделения: {data.DepartmentCode}\r\n" +
+                $"Кем выдан: {data.IssuedBy}\r\n" +
+                $"Дата выдачи: {data.IssueDate:d}";
 
             lblContactsData.Text =
                 $"Телефон: {data.Phone}\r\n\r\n" +

@@ -34,7 +34,7 @@
                 new System.Windows.Forms.Label();
 
             this.txtPhone =
-                new System.Windows.Forms.MaskedTextBox();
+                new System.Windows.Forms.TextBox();
 
             this.txtAddress =
                 new System.Windows.Forms.TextBox();
@@ -183,9 +183,6 @@
                 new System.Drawing.Size(
                     240,
                     28);
-
-            this.txtPhone.Mask =
-                "+7 (999) 000-00-00";
 
             this.txtPhone.Font =
                 new System.Drawing.Font(
@@ -439,7 +436,7 @@
         private System.Windows.Forms.Label lblPhone;
         private System.Windows.Forms.Label lblAddress;
 
-        private System.Windows.Forms.MaskedTextBox txtPhone;
+        private System.Windows.Forms.TextBox txtPhone;
         private System.Windows.Forms.TextBox txtAddress;
 
         private System.Windows.Forms.Panel panelPhoneInfo;

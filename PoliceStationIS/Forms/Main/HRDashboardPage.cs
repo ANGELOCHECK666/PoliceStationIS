@@ -1,4 +1,5 @@
 ﻿using Npgsql;
+using PoliceStationIS.Database;
 using PoliceStationIS.Forms.Employees;
 using PoliceStationIS.Forms.HR;
 using System;
@@ -8,15 +9,10 @@ namespace PoliceStationIS.Forms.Main
 {
     public partial class HRDashboardPage : UserControl
     {
-
-        private readonly string connectionString =
-    @"Host=localhost;
-      Port=5432;
-      Database=PoliceStation;
-      Username=postgres;
-      Password=1234567890";
         public HRDashboardPage()
         {
+            // При открытии панели загружаем актуальные данные из базы данных.
+
             InitializeComponent();
 
             LoadStatistics();
@@ -28,16 +24,17 @@ namespace PoliceStationIS.Forms.Main
 
         }
 
+        // Загрузка основных показателей панели.
         private void LoadStatistics()
         {
 
 
             try
             {
-                
+
 
                 using (NpgsqlConnection connection =
-                    new NpgsqlConnection(connectionString))
+                    DatabaseConnection.GetConnection())
                 {
                     connection.Open();
 
@@ -58,6 +55,7 @@ namespace PoliceStationIS.Forms.Main
             }
         }
 
+        // Загрузка последних кадровых изменений из истории персонала.
         private void LoadRecentChanges()
         {
             try
@@ -79,7 +77,7 @@ namespace PoliceStationIS.Forms.Main
               LIMIT 10";
 
                 using (NpgsqlConnection connection =
-                    new NpgsqlConnection(connectionString))
+                    DatabaseConnection.GetConnection())
                 {
                     connection.Open();
 
@@ -160,6 +158,7 @@ namespace PoliceStationIS.Forms.Main
             }
         }
 
+        // Количество действующих сотрудников.
         private void LoadEmployeesCount(
             NpgsqlConnection connection)
         {
@@ -176,6 +175,7 @@ namespace PoliceStationIS.Forms.Main
             }
         }
 
+        // Количество принятых сотрудников за текущий месяц.
         private void LoadNewEmployeesCount(
      NpgsqlConnection connection)
         {
@@ -194,6 +194,7 @@ namespace PoliceStationIS.Forms.Main
             }
         }
 
+        // Количество сотрудников в отпуске.
         private void LoadVacationCount(
             NpgsqlConnection connection)
         {
@@ -210,6 +211,7 @@ namespace PoliceStationIS.Forms.Main
             }
         }
 
+        // Количество сотрудников на больничном.
         private void LoadSickLeaveCount(
             NpgsqlConnection connection)
         {

@@ -2,6 +2,7 @@
 using PoliceStationIS.Controls;
 using PoliceStationIS.Database;
 using PoliceStationIS.Forms.Squads;
+using PoliceStationIS.Services;
 using System;
 using System.Drawing;
 using System.IO;
@@ -79,6 +80,8 @@ namespace PoliceStationIS.Forms.Expertises
             comboBox.Font = new Font("Segoe UI", 9F);
         }
 
+        // Загружаем все справочники через единый класс подключения к БД.
+        // Сама форма отвечает только за отображение и выбор данных.
         private void LoadReferenceData()
         {
             try
@@ -541,12 +544,15 @@ namespace PoliceStationIS.Forms.Expertises
             }
         }
 
+        // Проверка введённых данных выполняется через общий ValidationHelper.
+        // Специфические правила формы (длина номера и порядок дат)
+        // остаются здесь, потому что они относятся именно к экспертизе.
         private bool ValidateInput()
         {
             string number =
                 txtExpertiseNumber.Text.Trim();
 
-            if (string.IsNullOrWhiteSpace(number))
+            if (!ValidationHelper.IsFilled(number))
             {
                 ShowValidation("Введите номер экспертизы.");
                 txtExpertiseNumber.Focus();
@@ -620,6 +626,8 @@ namespace PoliceStationIS.Forms.Expertises
                 MessageBoxIcon.Warning);
         }
 
+        // Сохранение новой экспертизы. Подключение создаётся только
+        // через DatabaseConnection, поэтому строка подключения не дублируется.
         private void AddExpertise()
         {
             ComboBoxItem employee =
@@ -683,6 +691,7 @@ namespace PoliceStationIS.Forms.Expertises
             }
         }
 
+        // Обновление существующей экспертизы.
         private void UpdateExpertise()
         {
             ComboBoxItem employee =

@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using Npgsql;
 using PoliceStationIS.Database;
+using PoliceStationIS.Services;
 
 namespace PoliceStationIS.Forms.Citizens
 {
@@ -62,6 +63,11 @@ namespace PoliceStationIS.Forms.Citizens
 
             btnSave.Click += BtnSave_Click;
             btnCancel.Click += BtnCancel_Click;
+
+            // Форматируем телефон после завершения ввода,
+            // чтобы номер можно было вводить обычными цифрами.
+            txtPhone.KeyDown += TxtPhone_KeyDown;
+            txtPhone.Leave += TxtPhone_Leave;
             AcceptButton = btnSave;
             CancelButton = btnCancel;
         }
@@ -148,28 +154,28 @@ namespace PoliceStationIS.Forms.Citizens
                     connection.Open();
 
                     const string query = @"
-SELECT
-    citizen_id,
-    sex_id,
-    birth_place_id,
-    citizenship_id,
-    marital_status_id,
-    passport_issuance_id,
-    citizen_role_id,
-    passport_series,
-    passport_number,
-    last_name,
-    name_,
-    middle_name,
-    phone_number,
-    email,
-    date_of_issue,
-    date_of_birth,
-    registration_address,
-    residential_address,
-    distinguishing_features
-FROM citizen
-WHERE citizen_id = @citizen_id;";
+    SELECT
+        citizen_id,
+        sex_id,
+        birth_place_id,
+        citizenship_id,
+        marital_status_id,
+        passport_issuance_id,
+        citizen_role_id,
+        passport_series,
+        passport_number,
+        last_name,
+        name_,
+        middle_name,
+        phone_number,
+        email,
+        date_of_issue,
+        date_of_birth,
+        registration_address,
+        residential_address,
+        distinguishing_features
+    FROM citizen
+    WHERE citizen_id = @citizen_id;";
 
                     using (NpgsqlCommand command = new NpgsqlCommand(query, connection))
                     {
@@ -243,6 +249,40 @@ WHERE citizen_id = @citizen_id;";
             comboBox.SelectedIndex = 0;
         }
 
+        private void TxtPhone_KeyDown(
+            object sender,
+            KeyEventArgs e)
+        {
+            // Enter и пробел завершают ввод номера и запускают форматирование.
+            if (e.KeyCode == Keys.Enter ||
+                e.KeyCode == Keys.Space)
+            {
+                FormatPhoneField();
+                e.SuppressKeyPress = true;
+            }
+        }
+
+        private void TxtPhone_Leave(
+            object sender,
+            EventArgs e)
+        {
+            FormatPhoneField();
+        }
+
+        private void FormatPhoneField()
+        {
+            string phone = txtPhone.Text.Trim();
+
+            if (string.IsNullOrWhiteSpace(phone))
+                return;
+
+            if (!ValidationHelper.IsValidPhone(phone))
+                return;
+
+            txtPhone.Text = ValidationHelper.FormatPhone(phone);
+            txtPhone.SelectionStart = txtPhone.Text.Length;
+        }
+
         private void BtnSave_Click(object sender, EventArgs e)
         {
             string lastName = txtLastName.Text.Trim();
@@ -287,17 +327,23 @@ WHERE citizen_id = @citizen_id;";
                 return;
             }
 
-            if (string.IsNullOrWhiteSpace(phone))
+            if (!ValidationHelper.IsValidPhone(phone))
             {
-                ShowValidation("Введите номер телефона.", txtPhone);
+                ShowValidation(
+                    "Введите корректный номер телефона.",
+                    txtPhone);
                 return;
             }
 
-            if (!string.IsNullOrWhiteSpace(email) && !email.Contains("@"))
+            if (!ValidationHelper.IsValidEmail(email))
             {
-                ShowValidation("Введите корректный адрес электронной почты.", txtEmail);
+                ShowValidation(
+                    "Введите корректный адрес электронной почты.",
+                    txtEmail);
                 return;
             }
+
+            phone = ValidationHelper.FormatPhone(phone);
 
             if (string.IsNullOrWhiteSpace(registrationAddress))
             {
@@ -427,48 +473,48 @@ WHERE citizen_id = @citizen_id;";
             string features)
         {
             const string query = @"
-INSERT INTO citizen
-(
-    sex_id,
-    birth_place_id,
-    citizenship_id,
-    marital_status_id,
-    passport_issuance_id,
-    citizen_role_id,
-    passport_series,
-    passport_number,
-    last_name,
-    name_,
-    middle_name,
-    phone_number,
-    email,
-    date_of_issue,
-    date_of_birth,
-    registration_address,
-    residential_address,
-    distinguishing_features
-)
-VALUES
-(
-    @sex_id,
-    @birth_place_id,
-    @citizenship_id,
-    @marital_id,
-    @issuance_id,
-    @role_id,
-    @series,
-    @number,
-    @last_name,
-    @name_,
-    @middle_name,
-    @phone,
-    @email,
-    @issue_date,
-    @birth_date,
-    @registration,
-    @residence,
-    @features
-);";
+    INSERT INTO citizen
+    (
+        sex_id,
+        birth_place_id,
+        citizenship_id,
+        marital_status_id,
+        passport_issuance_id,
+        citizen_role_id,
+        passport_series,
+        passport_number,
+        last_name,
+        name_,
+        middle_name,
+        phone_number,
+        email,
+        date_of_issue,
+        date_of_birth,
+        registration_address,
+        residential_address,
+        distinguishing_features
+    )
+    VALUES
+    (
+        @sex_id,
+        @birth_place_id,
+        @citizenship_id,
+        @marital_id,
+        @issuance_id,
+        @role_id,
+        @series,
+        @number,
+        @last_name,
+        @name_,
+        @middle_name,
+        @phone,
+        @email,
+        @issue_date,
+        @birth_date,
+        @registration,
+        @residence,
+        @features
+    );";
 
             ExecuteSaveQuery(
                 connection,
@@ -512,26 +558,26 @@ VALUES
             string features)
         {
             const string query = @"
-UPDATE citizen SET
-    sex_id = @sex_id,
-    birth_place_id = @birth_place_id,
-    citizenship_id = @citizenship_id,
-    marital_status_id = @marital_id,
-    passport_issuance_id = @issuance_id,
-    citizen_role_id = @role_id,
-    passport_series = @series,
-    passport_number = @number,
-    last_name = @last_name,
-    name_ = @name_,
-    middle_name = @middle_name,
-    phone_number = @phone,
-    email = @email,
-    date_of_issue = @issue_date,
-    date_of_birth = @birth_date,
-    registration_address = @registration,
-    residential_address = @residence,
-    distinguishing_features = @features
-WHERE citizen_id = @citizen_id;";
+    UPDATE citizen SET
+        sex_id = @sex_id,
+        birth_place_id = @birth_place_id,
+        citizenship_id = @citizenship_id,
+        marital_status_id = @marital_id,
+        passport_issuance_id = @issuance_id,
+        citizen_role_id = @role_id,
+        passport_series = @series,
+        passport_number = @number,
+        last_name = @last_name,
+        name_ = @name_,
+        middle_name = @middle_name,
+        phone_number = @phone,
+        email = @email,
+        date_of_issue = @issue_date,
+        date_of_birth = @birth_date,
+        registration_address = @registration,
+        residential_address = @residence,
+        distinguishing_features = @features
+    WHERE citizen_id = @citizen_id;";
 
             ExecuteSaveQuery(
                 connection,

@@ -22,8 +22,9 @@ namespace PoliceStationIS.Forms.Evidence
         {
             InitializeComponent();
 
-            // Эти Label объявлены в Designer, но не создаются там.
-            // Создаём их здесь, не меняя основной дизайн формы.
+            // Информация справа создаётся программно, потому что
+            // соответствующие Label не создаются в Designer.
+
             CreateInfoLabels();
 
             ClearEvidenceInformation();
@@ -189,6 +190,8 @@ namespace PoliceStationIS.Forms.Evidence
 
         private void LoadStatuses()
         {
+            // Статусы доказательств загружаются из справочника БД.
+            // Подключение создаётся через DatabaseConnection.
             try
             {
                 using (NpgsqlConnection connection =
@@ -243,6 +246,7 @@ namespace PoliceStationIS.Forms.Evidence
 
         private void LoadEvidenceNames()
         {
+            // Для фильтра берём уникальные названия прямо из Evidence.
             try
             {
                 using (NpgsqlConnection connection =
@@ -295,6 +299,7 @@ namespace PoliceStationIS.Forms.Evidence
 
         private void LoadCases()
         {
+            // В фильтр выводятся только дела, связанные с доказательствами.
             try
             {
                 using (NpgsqlConnection connection =
@@ -357,6 +362,8 @@ namespace PoliceStationIS.Forms.Evidence
 
         private void LoadEvidence()
         {
+            // Сначала получаем количество записей, затем текущую страницу.
+            // Это позволяет сохранить существующую пагинацию.
             try
             {
                 totalRecords = GetEvidenceCount();
@@ -390,6 +397,8 @@ namespace PoliceStationIS.Forms.Evidence
 
         private int GetEvidenceCount()
         {
+            // COUNT выполняется отдельным параметризованным запросом,
+            // чтобы корректно рассчитать количество страниц.
             using (NpgsqlConnection connection =
                 DatabaseConnection.GetConnection())
             {
@@ -427,6 +436,8 @@ namespace PoliceStationIS.Forms.Evidence
 
         private DataTable GetEvidencePage()
         {
+            // Получаем только записи текущей страницы. Все фильтры
+            // передаются в запрос через параметры Npgsql.
             DataTable table = new DataTable();
 
             using (NpgsqlConnection connection =
@@ -520,6 +531,8 @@ namespace PoliceStationIS.Forms.Evidence
 
         private string BuildWhereClause()
         {
+            // Формируем SQL-условия отдельно от пользовательских значений.
+            // Это сохраняет параметризованный запрос.
             string where = "";
 
             if (!string.IsNullOrWhiteSpace(
@@ -582,6 +595,7 @@ namespace PoliceStationIS.Forms.Evidence
         private void AddSearchParameters(
             NpgsqlCommand command)
         {
+            // Добавляем только те параметры, для которых выбран фильтр.
             if (!string.IsNullOrWhiteSpace(
                 txtEvidenceNumber.Text))
             {
@@ -640,6 +654,8 @@ namespace PoliceStationIS.Forms.Evidence
 
         private void DisplayEvidence(DataTable table)
         {
+            // Карточки строятся из результата SQL-запроса.
+            // Сами размеры и расположение элементов не меняются.
             ClearEvidenceCards();
 
             if (table.Rows.Count == 0)
@@ -742,6 +758,8 @@ namespace PoliceStationIS.Forms.Evidence
                 }
                 catch
                 {
+                    // Некорректное изображение не должно мешать
+                    // отображению остальных данных доказательства.
                     picture.Image = null;
                 }
             }
@@ -1214,6 +1232,7 @@ namespace PoliceStationIS.Forms.Evidence
             object sender,
             EventArgs e)
         {
+            // Не допускаем поиск по некорректному диапазону дат.
             if (dtDateFrom.Checked &&
                 dtDateTo.Checked &&
                 dtDateFrom.Value.Date >
@@ -1332,6 +1351,9 @@ namespace PoliceStationIS.Forms.Evidence
             object sender,
             EventArgs e)
         {
+            // Валидация и сохранение находятся в EvidenceEditForm.
+            // После успешного сохранения фильтры-справочники и список
+            // обновляются из PostgreSQL.
             using (EvidenceEditForm form =
                 new EvidenceEditForm())
             {
@@ -1511,6 +1533,8 @@ namespace PoliceStationIS.Forms.Evidence
             object sender,
             EventArgs e)
         {
+            // Удаление выполняется только после выбора доказательства;
+            // SQL-команда использует параметр ID.
             if (selectedEvidenceId <= 0)
             {
                 return;

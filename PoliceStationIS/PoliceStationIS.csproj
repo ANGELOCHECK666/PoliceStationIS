@@ -116,7 +116,6 @@
     <Compile Include="Core\Printing\ReportPrinter.cs" />
     <Compile Include="Core\UserSession.cs" />
     <Compile Include="Database\DatabaseConnection.cs" />
-    <Compile Include="Database\DatabaseTester.cs" />
     <Compile Include="Departments\DepartmentsPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -405,6 +404,12 @@
     </Compile>
     <Compile Include="Forms\ServiceDogs\ServiceDogEditForm.Designer.cs">
       <DependentUpon>ServiceDogEditForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Squads\PatrolEventAddForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Squads\PatrolEventAddForm.Designer.cs">
+      <DependentUpon>PatrolEventAddForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Squads\PatrolEventJournalForm.cs">
       <SubType>Form</SubType>

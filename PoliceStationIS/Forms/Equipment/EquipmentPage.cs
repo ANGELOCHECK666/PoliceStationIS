@@ -45,6 +45,9 @@ namespace PoliceStationIS.Forms.Equipment
         {
             InitializeComponent();
 
+            // Настраиваем только поведение уже существующих элементов.
+            // Внешний вид формы и расположение контролов не меняются.
+
             ConfigureControls();
 
             ConfigureEvents();
@@ -153,6 +156,8 @@ namespace PoliceStationIS.Forms.Equipment
 
         private void InitializePage()
         {
+            // Сначала загружаются справочники фильтров, затем
+            // основная таблица имущества из PostgreSQL.
             try
             {
                 LoadCategories();
@@ -180,6 +185,8 @@ namespace PoliceStationIS.Forms.Equipment
 
         private void LoadCategories()
         {
+            // Категории берутся из справочника equipment_category.
+            // Соединение создаётся через общий DatabaseConnection.
             using (
                 NpgsqlConnection connection =
                     DatabaseConnection.GetConnection())
@@ -243,6 +250,8 @@ namespace PoliceStationIS.Forms.Equipment
 
         private void LoadStatuses()
         {
+            // Статусы имущества загружаются из PostgreSQL,
+            // а не хранятся в коде формы.
             using (
                 NpgsqlConnection connection =
                     DatabaseConnection.GetConnection())
@@ -306,6 +315,8 @@ namespace PoliceStationIS.Forms.Equipment
 
         private void LoadEmployees()
         {
+            // Список сотрудников нужен для фильтра и также
+            // загружается непосредственно из базы.
             using (
                 NpgsqlConnection connection =
                     DatabaseConnection.GetConnection())
@@ -379,6 +390,9 @@ namespace PoliceStationIS.Forms.Equipment
 
         private void LoadEquipment()
         {
+            // Основной запрос раздела. Здесь одновременно выполняются
+            // подсчёт записей, выборка текущей страницы и применение
+            // параметризованных фильтров.
             try
             {
                 using (
@@ -654,6 +668,8 @@ namespace PoliceStationIS.Forms.Equipment
 
         private string BuildSearchConditions()
         {
+            // Формируем только SQL-условия. Значения фильтров
+            // передаются отдельно через параметры NpgsqlCommand.
             string conditions =
                 @"
                 WHERE 1 = 1
@@ -772,6 +788,8 @@ namespace PoliceStationIS.Forms.Equipment
         private void AddSearchParameters(
             NpgsqlCommand command)
         {
+            // Пользовательские значения не вставляются в SQL напрямую.
+            // Для каждого фильтра используется параметр Npgsql.
             if (!searchMode)
                 return;
 
@@ -1170,6 +1188,8 @@ namespace PoliceStationIS.Forms.Equipment
         private void SelectEquipment(
             int equipmentId)
         {
+            // Храним ID выбранной записи, чтобы кнопка редактирования
+            // работала с тем же объектом, который выбран в списке.
             selectedEquipmentId =
                 equipmentId;
 
@@ -1534,6 +1554,7 @@ namespace PoliceStationIS.Forms.Equipment
             object sender,
             EventArgs e)
         {
+            // Поиск выполняется заново с первой страницы.
             searchMode = true;
 
             currentPage = 1;
@@ -1546,6 +1567,7 @@ namespace PoliceStationIS.Forms.Equipment
             object sender,
             EventArgs e)
         {
+            // Сбрасываем фильтры и возвращаем исходный список.
             txtEquipmentName.Clear();
 
             cmbCategory.SelectedIndex =
@@ -1629,6 +1651,8 @@ namespace PoliceStationIS.Forms.Equipment
 
         private void BtnAddEquipment_Click(object sender, EventArgs e)
         {
+            // Валидация и сохранение нового имущества выполняются
+            // внутри EquipmentEditForm. После OK список обновляется.
             using (EquipmentEditForm form =
                 new EquipmentEditForm())
             {
@@ -1646,6 +1670,7 @@ namespace PoliceStationIS.Forms.Equipment
 
         private void BtnEditEquipment_Click(object sender, EventArgs e)
         {
+            // Редактировать можно только выбранную запись.
             if (selectedEquipmentId <= 0)
             {
                 MessageBox.Show(

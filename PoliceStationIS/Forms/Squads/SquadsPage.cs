@@ -6,7 +6,6 @@ using System.Windows.Forms;
 using Npgsql;
 
 using PoliceStationIS.Database;
-using PoliceStationIS.Controls;
 
 namespace PoliceStationIS.Forms.Squads
 {
@@ -170,6 +169,9 @@ namespace PoliceStationIS.Forms.Squads
 
             btnEditSquad.Click +=
                 BtnEditSquad_Click;
+
+            btnAddEvent.Click +=
+                BtnAddEvent_Click;
 
 
             lblTabMain.Click +=
@@ -2478,6 +2480,57 @@ namespace PoliceStationIS.Forms.Squads
                     DialogResult.OK)
                 {
                     LoadSquads();
+                }
+            }
+        }
+
+
+        // ============================================================
+        // ADD EVENT
+        // ============================================================
+
+        private void BtnAddEvent_Click(
+            object sender,
+            EventArgs e)
+        {
+            // Событие можно добавить только для выбранного наряда
+            // с уже созданным патрульно-постовым обслуживанием.
+            if (selectedSquadId <= 0)
+            {
+                MessageBox.Show(
+                    "Сначала выберите наряд из списка.",
+                    "Добавление события",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+
+                return;
+            }
+
+            if (selectedPatrolServiceId <= 0)
+            {
+                MessageBox.Show(
+                    "Для выбранного наряда не назначено патрульно-постовое обслуживание.",
+                    "Добавление события",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+
+                return;
+            }
+
+            string squadNumber =
+                "Н-" + selectedSquadId.ToString("000");
+
+            using (PatrolEventAddForm form =
+                new PatrolEventAddForm(
+                    selectedPatrolServiceId,
+                    squadNumber))
+            {
+                if (form.ShowDialog(this.FindForm()) ==
+                    DialogResult.OK)
+                {
+                    // После сохранения сразу обновляем события
+                    // в правой панели текущего наряда.
+                    LoadRecentEvents();
                 }
             }
         }

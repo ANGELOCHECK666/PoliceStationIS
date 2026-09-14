@@ -21,6 +21,8 @@ namespace PoliceStationIS.Forms.Employees
 
             dgvEmployees.CellPainting += DgvEmployees_CellPainting;
 
+            // Все справочники и сам список сотрудников загружаются
+            // из PostgreSQL. Страница не содержит тестовых записей.
             LoadDepartments();
             LoadPosts();
             LoadRanks();
@@ -156,6 +158,8 @@ namespace PoliceStationIS.Forms.Employees
         {
             try
             {
+                // Используем единый DatabaseConnection для всех запросов.
+                // Отдельная строка подключения внутри страницы не нужна.
                 using (NpgsqlConnection connection =
                     DatabaseConnection.GetConnection())
                 {
@@ -258,154 +262,182 @@ ORDER BY
 
         private void LoadDepartments()
         {
-            try
+            // Загружаем отделы из БД, чтобы фильтр всегда соответствовал
+            // актуальному справочнику Department.
             {
-                cmbDepartment.Items.Clear();
-
-                cmbDepartment.Items.Add("Все");
-
-                using (NpgsqlConnection connection =
-                    DatabaseConnection.GetConnection())
+                try
                 {
-                    connection.Open();
+                    cmbDepartment.Items.Clear();
 
-                    string query =
-                        "SELECT department_name FROM department ORDER BY department_name";
+                    cmbDepartment.Items.Add("Все");
 
-                    using (NpgsqlCommand command =
-                        new NpgsqlCommand(query, connection))
+                    using (NpgsqlConnection connection =
+                        DatabaseConnection.GetConnection())
                     {
-                        using (NpgsqlDataReader reader =
-                            command.ExecuteReader())
+                        connection.Open();
+
+                        string query =
+                            "SELECT department_name FROM department ORDER BY department_name";
+
+                        using (NpgsqlCommand command =
+                            new NpgsqlCommand(query, connection))
                         {
-                            while (reader.Read())
+                            using (NpgsqlDataReader reader =
+                                command.ExecuteReader())
                             {
-                                cmbDepartment.Items.Add(
-                                    reader["department_name"].ToString());
+                                while (reader.Read())
+                                {
+                                    cmbDepartment.Items.Add(
+                                        reader["department_name"].ToString());
+                                }
                             }
                         }
                     }
-                }
 
-                cmbDepartment.SelectedIndex = 0;
-            }
-            catch
-            {
+                    cmbDepartment.SelectedIndex = 0;
+                }
+                catch
+                {
+                }
             }
         }
         private void LoadPosts()
         {
-            try
+            // Загружаем должности непосредственно из справочника Post.
             {
-                cmbPost.Items.Clear();
-
-                cmbPost.Items.Add("Все");
-
-                using (NpgsqlConnection connection =
-                    DatabaseConnection.GetConnection())
+                try
                 {
-                    connection.Open();
+                    cmbPost.Items.Clear();
 
-                    string query =
-                        "SELECT post_name FROM post ORDER BY post_name";
+                    cmbPost.Items.Add("Все");
 
-                    using (NpgsqlCommand command =
-                        new NpgsqlCommand(query, connection))
+                    using (NpgsqlConnection connection =
+                        DatabaseConnection.GetConnection())
                     {
-                        using (NpgsqlDataReader reader =
-                            command.ExecuteReader())
+                        connection.Open();
+
+                        string query =
+                            "SELECT post_name FROM post ORDER BY post_name";
+
+                        using (NpgsqlCommand command =
+                            new NpgsqlCommand(query, connection))
                         {
-                            while (reader.Read())
+                            using (NpgsqlDataReader reader =
+                                command.ExecuteReader())
                             {
-                                cmbPost.Items.Add(
-                                    reader["post_name"].ToString());
+                                while (reader.Read())
+                                {
+                                    cmbPost.Items.Add(
+                                        reader["post_name"].ToString());
+                                }
                             }
                         }
                     }
-                }
 
-                cmbPost.SelectedIndex = 0;
-            }
-            catch
-            {
+                    cmbPost.SelectedIndex = 0;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(
+                        ex.Message,
+                        "Ошибка загрузки должностей",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
             }
         }
 
         private void LoadRanks()
         {
-            try
+            // Звания также берём из БД, а не из списка, заданного в коде.
             {
-                cmbRank.Items.Clear();
-
-                cmbRank.Items.Add("Все");
-
-                using (NpgsqlConnection connection =
-                    DatabaseConnection.GetConnection())
+                try
                 {
-                    connection.Open();
+                    cmbRank.Items.Clear();
 
-                    string query =
-                        "SELECT rank_name FROM rank_ ORDER BY rank_name";
+                    cmbRank.Items.Add("Все");
 
-                    using (NpgsqlCommand command =
-                        new NpgsqlCommand(query, connection))
+                    using (NpgsqlConnection connection =
+                        DatabaseConnection.GetConnection())
                     {
-                        using (NpgsqlDataReader reader =
-                            command.ExecuteReader())
+                        connection.Open();
+
+                        string query =
+                            "SELECT rank_name FROM rank_ ORDER BY rank_name";
+
+                        using (NpgsqlCommand command =
+                            new NpgsqlCommand(query, connection))
                         {
-                            while (reader.Read())
+                            using (NpgsqlDataReader reader =
+                                command.ExecuteReader())
                             {
-                                cmbRank.Items.Add(
-                                    reader["rank_name"].ToString());
+                                while (reader.Read())
+                                {
+                                    cmbRank.Items.Add(
+                                        reader["rank_name"].ToString());
+                                }
                             }
                         }
                     }
-                }
 
-                cmbRank.SelectedIndex = 0;
-            }
-            catch
-            {
+                    cmbRank.SelectedIndex = 0;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(
+                        ex.Message,
+                        "Ошибка загрузки званий",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
             }
         }
 
         private void LoadStatuses()
         {
-            try
+            // Статусы сотрудников читаются из справочника Employment_status.
             {
-                cmbStatus.Items.Clear();
-
-                cmbStatus.Items.Add("Все");
-
-                using (NpgsqlConnection connection =
-                    DatabaseConnection.GetConnection())
+                try
                 {
-                    connection.Open();
+                    cmbStatus.Items.Clear();
 
-                    string query =
-                        @"SELECT employment_status_name
+                    cmbStatus.Items.Add("Все");
+
+                    using (NpgsqlConnection connection =
+                        DatabaseConnection.GetConnection())
+                    {
+                        connection.Open();
+
+                        string query =
+                            @"SELECT employment_status_name
                   FROM employment_status
                   ORDER BY employment_status_id";
 
-                    using (NpgsqlCommand command =
-                        new NpgsqlCommand(query, connection))
-                    {
-                        using (NpgsqlDataReader reader =
-                            command.ExecuteReader())
+                        using (NpgsqlCommand command =
+                            new NpgsqlCommand(query, connection))
                         {
-                            while (reader.Read())
+                            using (NpgsqlDataReader reader =
+                                command.ExecuteReader())
                             {
-                                cmbStatus.Items.Add(
-                                    reader["employment_status_name"].ToString());
+                                while (reader.Read())
+                                {
+                                    cmbStatus.Items.Add(
+                                        reader["employment_status_name"].ToString());
+                                }
                             }
                         }
                     }
-                }
 
-                cmbStatus.SelectedIndex = 0;
-            }
-            catch
-            {
+                    cmbStatus.SelectedIndex = 0;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(
+                        ex.Message,
+                        "Ошибка загрузки статусов",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -420,8 +452,14 @@ ORDER BY
                 if (!string.IsNullOrWhiteSpace(
                     txtSearch.Text))
                 {
+                    // RowFilter использует собственный синтаксис строк.
+                    // Экранируем одинарные кавычки, чтобы фамилия или имя
+                    // вроде "О'Коннор" не ломали фильтр.
+                    string searchText =
+                        txtSearch.Text.Replace("'", "''");
+
                     filter +=
-                        $"[ФИО] LIKE '%{txtSearch.Text}%'";
+                        $"[ФИО] LIKE '%{searchText}%'";
                 }
 
                 if (cmbDepartment.SelectedIndex > 0)
@@ -429,8 +467,11 @@ ORDER BY
                     if (filter != "")
                         filter += " AND ";
 
+                    string department =
+                        cmbDepartment.Text.Replace("'", "''");
+
                     filter +=
-                        $"[Отдел] = '{cmbDepartment.Text}'";
+                        $"[Отдел] = '{department}'";
                 }
 
                 if (cmbPost.SelectedIndex > 0)
@@ -438,8 +479,11 @@ ORDER BY
                     if (filter != "")
                         filter += " AND ";
 
+                    string post =
+                        cmbPost.Text.Replace("'", "''");
+
                     filter +=
-                        $"[Должность] = '{cmbPost.Text}'";
+                        $"[Должность] = '{post}'";
                 }
 
                 if (cmbRank.SelectedIndex > 0)
@@ -447,8 +491,11 @@ ORDER BY
                     if (filter != "")
                         filter += " AND ";
 
+                    string rank =
+                        cmbRank.Text.Replace("'", "''");
+
                     filter +=
-                        $"[Звание] = '{cmbRank.Text}'";
+                        $"[Звание] = '{rank}'";
                 }
 
                 if (cmbStatus.SelectedIndex > 0)
@@ -456,10 +503,16 @@ ORDER BY
                     if (filter != "")
                         filter += " AND ";
 
+                    string status =
+                        cmbStatus.Text.Replace("'", "''");
+
                     filter +=
-                        $"[Статус] = '{cmbStatus.Text}'";
+                        $"[Статус] = '{status}'";
                 }
 
+                // Фильтрация выполняется уже по загруженной таблице,
+                // поэтому повторный запрос к БД при каждом изменении фильтра
+                // здесь не требуется.
                 employeesTable.DefaultView.RowFilter =
                     filter;
             }
@@ -473,6 +526,9 @@ ORDER BY
     object sender,
     EventArgs e)
         {
+            // Сбрасываем только параметры отображения. Исходные данные
+            // уже находятся в employeesTable, поэтому обращаться к БД повторно
+            // для сброса фильтра не нужно.
             txtSearch.Clear();
 
             cmbDepartment.SelectedIndex = 0;
@@ -556,6 +612,8 @@ ORDER BY
     object sender,
     EventArgs e)
         {
+            // Форма выполняет сохранение в БД. После её закрытия перечитываем
+            // список, чтобы новый сотрудник сразу появился в таблице.
             AddEmployeeForm form =
                 new AddEmployeeForm();
 
@@ -583,6 +641,8 @@ ORDER BY
                 Convert.ToInt32(
                     row["employee_id"]);
 
+            // Передаём ID выбранного сотрудника в форму редактирования.
+            // После закрытия снова загружаем данные из БД.
             AddEmployeeForm form =
                 new AddEmployeeForm(
                     employeeId);

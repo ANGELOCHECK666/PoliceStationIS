@@ -22,6 +22,8 @@ namespace PoliceStationIS.Forms.Employees
         {
             InitializeComponent();
 
+            // Используем общее подключение проекта,
+            // чтобы все операции формы работали через один механизм.
             connection =
                 DatabaseConnection.GetConnection();
 
@@ -30,6 +32,9 @@ namespace PoliceStationIS.Forms.Employees
             btnCancel.Click += BtnCancel_Click;
             btnSave.Click += BtnSave_Click;
             btnClose.Click += BtnClose_Click;
+            // Телефон вводится обычными цифрами и форматируется
+            // после завершения ввода.
+            txtPhone.KeyDown += TxtPhone_KeyDown;
             txtPhone.Leave += TxtPhone_Leave;
             // =====================================
             // ФИО
@@ -175,9 +180,9 @@ namespace PoliceStationIS.Forms.Employees
             using (NpgsqlDataAdapter adapter =
                    new NpgsqlDataAdapter(
                        @"SELECT Marital_status_id,
-                        Marital_status_name
-                 FROM Marital_status
-                 ORDER BY Marital_status_name",
+                            Marital_status_name
+                     FROM Marital_status
+                     ORDER BY Marital_status_name",
                        connection))
             {
                 adapter.Fill(table);
@@ -199,9 +204,9 @@ namespace PoliceStationIS.Forms.Employees
             using (NpgsqlDataAdapter adapter =
                    new NpgsqlDataAdapter(
                        @"SELECT Passport_issuance_id,
-                        Passport_issuance_name
-                 FROM Passport_issuance
-                 ORDER BY Passport_issuance_name",
+                            Passport_issuance_name
+                     FROM Passport_issuance
+                     ORDER BY Passport_issuance_name",
                        connection))
             {
                 adapter.Fill(table);
@@ -225,9 +230,9 @@ namespace PoliceStationIS.Forms.Employees
             using (NpgsqlDataAdapter adapter =
                    new NpgsqlDataAdapter(
                        @"SELECT Military_category_id,
-                        Military_category_name
-                 FROM Military_category
-                 ORDER BY Military_category_name",
+                            Military_category_name
+                     FROM Military_category
+                     ORDER BY Military_category_name",
                        connection))
             {
                 adapter.Fill(table);
@@ -251,9 +256,9 @@ namespace PoliceStationIS.Forms.Employees
             using (NpgsqlDataAdapter adapter =
                    new NpgsqlDataAdapter(
                        @"SELECT Department_id,
-                        Department_name
-                 FROM Department
-                 ORDER BY Department_name",
+                            Department_name
+                     FROM Department
+                     ORDER BY Department_name",
                        connection))
             {
                 adapter.Fill(table);
@@ -277,9 +282,9 @@ namespace PoliceStationIS.Forms.Employees
             using (NpgsqlDataAdapter adapter =
                    new NpgsqlDataAdapter(
                        @"SELECT Post_id,
-                        Post_name
-                 FROM Post
-                 ORDER BY Post_name",
+                            Post_name
+                     FROM Post
+                     ORDER BY Post_name",
                        connection))
             {
                 adapter.Fill(table);
@@ -303,9 +308,9 @@ namespace PoliceStationIS.Forms.Employees
             using (NpgsqlDataAdapter adapter =
                    new NpgsqlDataAdapter(
                        @"SELECT Rank_id,
-                        Rank_name
-                 FROM Rank_
-                 ORDER BY Rank_name",
+                            Rank_name
+                     FROM Rank_
+                     ORDER BY Rank_name",
                        connection))
             {
                 adapter.Fill(table);
@@ -329,9 +334,9 @@ namespace PoliceStationIS.Forms.Employees
             using (NpgsqlDataAdapter adapter =
                    new NpgsqlDataAdapter(
                        @"SELECT Employment_status_id,
-                        Employment_status_name
-                 FROM Employment_status
-                 ORDER BY Employment_status_name",
+                            Employment_status_name
+                     FROM Employment_status
+                     ORDER BY Employment_status_name",
                        connection))
             {
                 adapter.Fill(table);
@@ -355,9 +360,9 @@ namespace PoliceStationIS.Forms.Employees
             using (NpgsqlDataAdapter adapter =
                    new NpgsqlDataAdapter(
                        @"SELECT User_role_id,
-                        User_role_name
-                 FROM User_role
-                 ORDER BY User_role_name",
+                            User_role_name
+                     FROM User_role
+                     ORDER BY User_role_name",
                        connection))
             {
                 adapter.Fill(table);
@@ -580,94 +585,94 @@ namespace PoliceStationIS.Forms.Employees
 
                 string employeeQuery =
 @"
-INSERT INTO Employee
-(
-    Sex_id,
-    Marital_status_id,
-    Passport_issuance_id,
-    Military_category_id,
-    Department_id,
-    Post_id,
-    Rank_id,
-    Employment_status_id,
+    INSERT INTO Employee
+    (
+        Sex_id,
+        Marital_status_id,
+        Passport_issuance_id,
+        Military_category_id,
+        Department_id,
+        Post_id,
+        Rank_id,
+        Employment_status_id,
 
-    Passport_series,
-    Passport_number,
+        Passport_series,
+        Passport_number,
 
-    Last_name,
-    Name_,
-    Middle_name,
+        Last_name,
+        Name_,
+        Middle_name,
 
-    Phone_number,
+        Phone_number,
 
-    Date_of_issue,
-    Date_of_birth,
+        Date_of_issue,
+        Date_of_birth,
 
-    Registration_address,
-    Residential_address,
+        Registration_address,
+        Residential_address,
 
-    Military_card_series,
-    Military_card_number,
+        Military_card_series,
+        Military_card_number,
 
-    Weight_kg,
-    Height_cm,
+        Weight_kg,
+        Height_cm,
 
-    Criminal_record,
+        Criminal_record,
 
-    License_series,
-    License_number,
-    Validity_period,
+        License_series,
+        License_number,
+        Validity_period,
 
-    Token_series,
-    Token_number,
+        Token_series,
+        Token_number,
 
-    Service_start_date
-)
-VALUES
-(
-    @SexId,
-    @MaritalStatusId,
-    @PassportIssuanceId,
-    @MilitaryCategoryId,
-    @DepartmentId,
-    @PostId,
-    @RankId,
-    @EmploymentStatusId,
+        Service_start_date
+    )
+    VALUES
+    (
+        @SexId,
+        @MaritalStatusId,
+        @PassportIssuanceId,
+        @MilitaryCategoryId,
+        @DepartmentId,
+        @PostId,
+        @RankId,
+        @EmploymentStatusId,
 
-    @PassportSeries,
-    @PassportNumber,
+        @PassportSeries,
+        @PassportNumber,
 
-    @LastName,
-    @FirstName,
-    @MiddleName,
+        @LastName,
+        @FirstName,
+        @MiddleName,
 
-    @Phone,
+        @Phone,
 
-    @IssueDate,
-    @BirthDate,
+        @IssueDate,
+        @BirthDate,
 
-    @RegistrationAddress,
-    @ResidentialAddress,
+        @RegistrationAddress,
+        @ResidentialAddress,
 
-    @MilitarySeries,
-    @MilitaryNumber,
+        @MilitarySeries,
+        @MilitaryNumber,
 
-    @Weight,
-    @Height,
+        @Weight,
+        @Height,
 
-    @CriminalRecord,
+        @CriminalRecord,
 
-    @LicenseSeries,
-    @LicenseNumber,
-    @LicenseValidity,
+        @LicenseSeries,
+        @LicenseNumber,
+        @LicenseValidity,
 
-    @TokenSeries,
-    @TokenNumber,
+        @TokenSeries,
+        @TokenNumber,
 
-    @ServiceStartDate
-)
-RETURNING Employee_id;
-";
+        @ServiceStartDate
+    )
+    RETURNING Employee_id;
+    ";
 
                 NpgsqlCommand employeeCommand =
     new NpgsqlCommand(
@@ -797,23 +802,23 @@ RETURNING Employee_id;
 
                 string userQuery =
 @"
-INSERT INTO App_user
-(
-    Employee_id,
-    User_role_id,
-    Login_,
-    Password_hash,
-    Email
-)
-VALUES
-(
-    @EmployeeId,
-    @UserRoleId,
-    @Login,
-    @PasswordHash,
-    @Email
-);
-";
+    INSERT INTO App_user
+    (
+        Employee_id,
+        User_role_id,
+        Login_,
+        Password_hash,
+        Email
+    )
+    VALUES
+    (
+        @EmployeeId,
+        @UserRoleId,
+        @Login,
+        @PasswordHash,
+        @Email
+    );
+    ";
 
                 NpgsqlCommand userCommand =
     new NpgsqlCommand(
@@ -847,19 +852,19 @@ VALUES
 
                 string historyQuery =
                 @"
-INSERT INTO Personnel_history
-(
-    employee_id,
-    event_type,
-    event_description
-)
-VALUES
-(
-    @EmployeeId,
-    @EventType,
-    @Description
-);
-";
+    INSERT INTO Personnel_history
+    (
+        employee_id,
+        event_type,
+        event_description
+    )
+    VALUES
+    (
+        @EmployeeId,
+        @EventType,
+        @Description
+    );
+    ";
 
                 NpgsqlCommand historyCommand =
                     new NpgsqlCommand(
@@ -934,6 +939,25 @@ VALUES
             this.Close();
         }
 
+        private void TxtPhone_KeyDown(
+            object sender,
+            KeyEventArgs e)
+        {
+            // Enter и пробел завершают ввод номера.
+            if (e.KeyCode == Keys.Enter ||
+                e.KeyCode == Keys.Space)
+            {
+                txtPhone.Text =
+                    ValidationHelper.FormatPhone(
+                        txtPhone.Text);
+
+                txtPhone.SelectionStart =
+                    txtPhone.Text.Length;
+
+                e.SuppressKeyPress = true;
+            }
+        }
+
         private void TxtPhone_Leave(
     object sender,
     EventArgs e)
@@ -949,20 +973,20 @@ VALUES
             {
                 string query =
         @"
-SELECT
-    e.*,
+    SELECT
+        e.*,
 
-    u.Login_,
-    u.Email,
-    u.User_role_id
+        u.Login_,
+        u.Email,
+        u.User_role_id
 
-FROM Employee e
+    FROM Employee e
 
-LEFT JOIN App_user u
-    ON e.Employee_id = u.Employee_id
+    LEFT JOIN App_user u
+        ON e.Employee_id = u.Employee_id
 
-WHERE e.Employee_id = @EmployeeId;
-";
+    WHERE e.Employee_id = @EmployeeId;
+    ";
 
                 using (NpgsqlCommand command =
                     new NpgsqlCommand(
@@ -1125,52 +1149,52 @@ WHERE e.Employee_id = @EmployeeId;
         {
             string employeeQuery =
         @"
-UPDATE Employee
-SET
-    Sex_id = @SexId,
-    Marital_status_id = @MaritalStatusId,
-    Passport_issuance_id = @PassportIssuanceId,
-    Military_category_id = @MilitaryCategoryId,
+    UPDATE Employee
+    SET
+        Sex_id = @SexId,
+        Marital_status_id = @MaritalStatusId,
+        Passport_issuance_id = @PassportIssuanceId,
+        Military_category_id = @MilitaryCategoryId,
 
-    Department_id = @DepartmentId,
-    Post_id = @PostId,
-    Rank_id = @RankId,
-    Employment_status_id = @EmploymentStatusId,
+        Department_id = @DepartmentId,
+        Post_id = @PostId,
+        Rank_id = @RankId,
+        Employment_status_id = @EmploymentStatusId,
 
-    Passport_series = @PassportSeries,
-    Passport_number = @PassportNumber,
+        Passport_series = @PassportSeries,
+        Passport_number = @PassportNumber,
 
-    Last_name = @LastName,
-    Name_ = @FirstName,
-    Middle_name = @MiddleName,
+        Last_name = @LastName,
+        Name_ = @FirstName,
+        Middle_name = @MiddleName,
 
-    Phone_number = @Phone,
+        Phone_number = @Phone,
 
-    Date_of_issue = @IssueDate,
-    Date_of_birth = @BirthDate,
+        Date_of_issue = @IssueDate,
+        Date_of_birth = @BirthDate,
 
-    Registration_address = @RegistrationAddress,
-    Residential_address = @ResidentialAddress,
+        Registration_address = @RegistrationAddress,
+        Residential_address = @ResidentialAddress,
 
-    Military_card_series = @MilitarySeries,
-    Military_card_number = @MilitaryNumber,
+        Military_card_series = @MilitarySeries,
+        Military_card_number = @MilitaryNumber,
 
-    Weight_kg = @Weight,
-    Height_cm = @Height,
+        Weight_kg = @Weight,
+        Height_cm = @Height,
 
-    Criminal_record = @CriminalRecord,
+        Criminal_record = @CriminalRecord,
 
-    License_series = @LicenseSeries,
-    License_number = @LicenseNumber,
-    Validity_period = @LicenseValidity,
+        License_series = @LicenseSeries,
+        License_number = @LicenseNumber,
+        Validity_period = @LicenseValidity,
 
-    Token_series = @TokenSeries,
-    Token_number = @TokenNumber,
+        Token_series = @TokenSeries,
+        Token_number = @TokenNumber,
 
-    Service_start_date = @ServiceStartDate
+        Service_start_date = @ServiceStartDate
 
-WHERE Employee_id = @EmployeeId;
-";
+    WHERE Employee_id = @EmployeeId;
+    ";
 
             NpgsqlCommand command =
                 new NpgsqlCommand(
@@ -1302,13 +1326,13 @@ WHERE Employee_id = @EmployeeId;
 
             string userQuery =
 @"
-UPDATE App_user
-SET
-    User_role_id = @UserRoleId,
-    Login_ = @Login,
-    Email = @Email
-WHERE Employee_id = @EmployeeId;
-";
+    UPDATE App_user
+    SET
+        User_role_id = @UserRoleId,
+        Login_ = @Login,
+        Email = @Email
+    WHERE Employee_id = @EmployeeId;
+    ";
 
             NpgsqlCommand userCommand =
                 new NpgsqlCommand(
@@ -1337,19 +1361,19 @@ WHERE Employee_id = @EmployeeId;
 
             string historyQuery =
 @"
-INSERT INTO Personnel_history
-(
-    employee_id,
-    event_type,
-    event_description
-)
-VALUES
-(
-    @EmployeeId,
-    @EventType,
-    @Description
-);
-";
+    INSERT INTO Personnel_history
+    (
+        employee_id,
+        event_type,
+        event_description
+    )
+    VALUES
+    (
+        @EmployeeId,
+        @EventType,
+        @Description
+    );
+    ";
 
             NpgsqlCommand historyCommand =
                 new NpgsqlCommand(
@@ -1371,6 +1395,5 @@ VALUES
 
             historyCommand.ExecuteNonQuery();
         }
-        }
+    }
 }
-

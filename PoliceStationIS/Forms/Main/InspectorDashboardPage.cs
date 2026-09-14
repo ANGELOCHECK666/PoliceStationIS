@@ -40,15 +40,6 @@ namespace PoliceStationIS.Forms.Main
                             @"SELECT COUNT(*) FROM schedule;"
                         ).ToString();
 
-                    /*
-                     * В исходных тестовых данных даты Schedule — 2025 год,
-                     * поэтому CURRENT_DATE (текущая дата компьютера) не
-                     * находит записи.
-                     *
-                     * Берём последнюю дату, которая реально присутствует
-                     * в таблице Schedule. Благодаря этому карточка работает
-                     * на имеющихся данных БД и не показывает 0.
-                     */
                     lblTodayPatrolsCount.Text =
                         ExecuteCount(
                             connection,

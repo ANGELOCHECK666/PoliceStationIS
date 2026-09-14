@@ -1,14 +1,12 @@
-﻿using System;
+﻿using Npgsql;
+using PoliceStationIS.Database;
+using PoliceStationIS.Services;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-
-using Npgsql;
-
-using PoliceStationIS.Database;
-using PoliceStationIS.Services;
 
 namespace PoliceStationIS.Forms.Protocols
 {
@@ -53,6 +51,8 @@ namespace PoliceStationIS.Forms.Protocols
         // ИНИЦИАЛИЗАЦИЯ СТРАНИЦЫ
         //============================================================
 
+        // Начальная загрузка справочников и списка протоколов.
+        // Подключение к PostgreSQL централизовано в DatabaseConnection.
         private void InitializePage()
         {
             try
@@ -371,6 +371,8 @@ namespace PoliceStationIS.Forms.Protocols
         // ЗАГРУЗКА ПРОТОКОЛОВ
         //============================================================
 
+        // Загружаем протоколы постранично: сначала получаем количество
+        // подходящих записей, затем запрашиваем только текущую страницу.
         private void LoadProtocols()
         {
             try
@@ -587,6 +589,8 @@ namespace PoliceStationIS.Forms.Protocols
         // УСЛОВИЯ ПОИСКА
         //============================================================
 
+        // Формируем SQL-условия фильтрации. Все значения фильтров
+        // передаются через параметры NpgsqlCommand.
         private string BuildSearchConditions()
         {
             string conditions =
@@ -1668,6 +1672,7 @@ namespace PoliceStationIS.Forms.Protocols
         // ПОИСК
         //============================================================
 
+        // При новом поиске начинаем с первой страницы.
         private void BtnSearch_Click(
             object sender,
             EventArgs e)
@@ -1853,6 +1858,8 @@ namespace PoliceStationIS.Forms.Protocols
         // СОЗДАТЬ
         //============================================================
 
+        // Создание выполняется отдельной формой. После сохранения
+        // перечитываем данные, чтобы новый протокол сразу появился в списке.
         private void BtnCreateProtocol_Click(
             object sender,
             EventArgs e)

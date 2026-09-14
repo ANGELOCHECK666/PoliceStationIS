@@ -19,6 +19,7 @@ namespace PoliceStationIS.Forms.Squads
 
         private Button btnAddSquad;
         private Button btnEditSquad;
+        private Button btnAddEvent;
         private PictureBox picAddSquadIcon;
         private PictureBox picEditSquadIcon;
 
@@ -203,10 +204,10 @@ namespace PoliceStationIS.Forms.Squads
                 "Добавить наряд");
 
             btnAddSquad.Location =
-                new Point(850, 28);
+                new Point(660, 28);
 
             btnAddSquad.Size =
-                new Size(210, 42);
+                new Size(200, 42);
 
             btnAddSquad.TextAlign =
                 ContentAlignment.MiddleLeft;
@@ -242,7 +243,7 @@ namespace PoliceStationIS.Forms.Squads
 
             picAddSquadIcon.Location =
                 new Point(
-                    862,
+                    672,
                     38);
 
 
@@ -252,10 +253,10 @@ namespace PoliceStationIS.Forms.Squads
                 "Редактировать наряд");
 
             btnEditSquad.Location =
-                new Point(1070, 28);
+                new Point(870, 28);
 
             btnEditSquad.Size =
-                new Size(210, 42);
+                new Size(200, 42);
 
             btnEditSquad.TextAlign =
                 ContentAlignment.MiddleLeft;
@@ -266,6 +267,21 @@ namespace PoliceStationIS.Forms.Squads
                     0,
                     10,
                     0);
+
+
+            // ADD EVENT BUTTON
+
+            btnAddEvent = CreateHeaderButton(
+                "Добавить событие");
+
+            btnAddEvent.Location =
+                new Point(1080, 28);
+
+            btnAddEvent.Size =
+                new Size(200, 42);
+
+            btnAddEvent.TextAlign =
+                ContentAlignment.MiddleCenter;
 
 
             // EDIT BUTTON ICON
@@ -291,7 +307,7 @@ namespace PoliceStationIS.Forms.Squads
 
             picEditSquadIcon.Location =
                 new Point(
-                    1082,
+                    882,
                     38);
 
 
@@ -306,6 +322,7 @@ namespace PoliceStationIS.Forms.Squads
 
             pnlHeader.Controls.Add(btnEditSquad);
             pnlHeader.Controls.Add(picEditSquadIcon);
+            pnlHeader.Controls.Add(btnAddEvent);
 
             picAddSquadIcon.BringToFront();
             picEditSquadIcon.BringToFront();

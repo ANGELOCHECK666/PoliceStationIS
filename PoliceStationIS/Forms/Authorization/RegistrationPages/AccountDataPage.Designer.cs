@@ -234,8 +234,6 @@ namespace PoliceStationIS.Forms.Authorization.RegistrationPages
             this.txtEmail.BorderStyle =
                 System.Windows.Forms.BorderStyle.FixedSingle;
 
-            this.txtEmail.Text =
-                "example@mail.ru";
 
 
             // ======================================

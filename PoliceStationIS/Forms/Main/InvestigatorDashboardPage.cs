@@ -1,4 +1,5 @@
 ﻿using Npgsql;
+using PoliceStationIS.Database;
 using PoliceStationIS.Forms.Cases;
 using PoliceStationIS.Forms.Citizens;
 using PoliceStationIS.Forms.Protocols;
@@ -9,15 +10,10 @@ namespace PoliceStationIS.Forms.Main
 {
     public partial class InvestigatorDashboardPage : UserControl
     {
-        private readonly string connectionString =
-            @"Host=localhost;
-              Port=5432;
-              Database=PoliceStation;
-              Username=postgres;
-              Password=1234567890";
-
         public InvestigatorDashboardPage()
         {
+            // При открытии панели загружаем актуальные данные из базы данных.
+
             InitializeComponent();
 
             LoadStatistics();
@@ -32,12 +28,13 @@ namespace PoliceStationIS.Forms.Main
         // СТАТИСТИКА
         // ============================================================
 
+        // Загрузка основных показателей панели.
         private void LoadStatistics()
         {
             try
             {
                 using (NpgsqlConnection connection =
-                    new NpgsqlConnection(connectionString))
+                    DatabaseConnection.GetConnection())
                 {
                     connection.Open();
 
@@ -98,6 +95,7 @@ namespace PoliceStationIS.Forms.Main
             }
         }
 
+        // Выполнение COUNT-запроса на уже открытом соединении.
         private int ExecuteCount(
             NpgsqlConnection connection,
             string query)
@@ -114,6 +112,7 @@ namespace PoliceStationIS.Forms.Main
         // ПОСЛЕДНИЕ СОБЫТИЯ
         // ============================================================
 
+        // Загрузка последних событий по делам, протоколам, экспертизам и гражданам.
         private void LoadRecentEvents()
         {
             try
@@ -121,7 +120,7 @@ namespace PoliceStationIS.Forms.Main
                 dgvEvents.Rows.Clear();
 
                 using (NpgsqlConnection connection =
-                    new NpgsqlConnection(connectionString))
+                    DatabaseConnection.GetConnection())
                 {
                     connection.Open();
 
